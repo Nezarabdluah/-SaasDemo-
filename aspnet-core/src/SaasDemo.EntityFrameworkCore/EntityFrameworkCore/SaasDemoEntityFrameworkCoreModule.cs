@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.Uow;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
@@ -12,6 +12,8 @@ using Volo.Abp.OpenIddict.EntityFrameworkCore;
 using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
+using Volo.Blogging.EntityFrameworkCore;
+using Volo.CmsKit.EntityFrameworkCore;
 
 namespace SaasDemo.EntityFrameworkCore;
 
@@ -27,7 +29,9 @@ namespace SaasDemo.EntityFrameworkCore;
     typeof(AbpTenantManagementEntityFrameworkCoreModule),
     typeof(AbpFeatureManagementEntityFrameworkCoreModule)
     )]
-public class SaasDemoEntityFrameworkCoreModule : AbpModule
+[DependsOn(typeof(BloggingEntityFrameworkCoreModule))]
+    [DependsOn(typeof(CmsKitEntityFrameworkCoreModule))]
+    public class SaasDemoEntityFrameworkCoreModule : AbpModule
 {
     public override void PreConfigureServices(ServiceConfigurationContext context)
     {

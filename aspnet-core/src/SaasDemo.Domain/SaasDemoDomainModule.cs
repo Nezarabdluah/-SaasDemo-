@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using SaasDemo.MultiTenancy;
 using Volo.Abp.AuditLogging;
@@ -14,6 +14,8 @@ using Volo.Abp.PermissionManagement.Identity;
 using Volo.Abp.PermissionManagement.OpenIddict;
 using Volo.Abp.SettingManagement;
 using Volo.Abp.TenantManagement;
+using Volo.Blogging;
+using Volo.CmsKit;
 
 namespace SaasDemo;
 
@@ -30,7 +32,9 @@ namespace SaasDemo;
     typeof(AbpTenantManagementDomainModule),
     typeof(AbpEmailingModule)
 )]
-public class SaasDemoDomainModule : AbpModule
+[DependsOn(typeof(BloggingDomainModule))]
+    [DependsOn(typeof(CmsKitDomainModule))]
+    public class SaasDemoDomainModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {

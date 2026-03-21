@@ -12,6 +12,8 @@ using Volo.Abp.SettingManagement;
 using Volo.Abp.TenantManagement;
 using Volo.Abp.Validation.Localization;
 using Volo.Abp.VirtualFileSystem;
+using Volo.Blogging;
+using Volo.CmsKit;
 
 namespace SaasDemo;
 
@@ -25,7 +27,9 @@ namespace SaasDemo;
     typeof(AbpSettingManagementDomainSharedModule),
     typeof(AbpTenantManagementDomainSharedModule)    
     )]
-public class SaasDemoDomainSharedModule : AbpModule
+[DependsOn(typeof(BloggingDomainSharedModule))]
+    [DependsOn(typeof(CmsKitDomainSharedModule))]
+    public class SaasDemoDomainSharedModule : AbpModule
 {
     public override void PreConfigureServices(ServiceConfigurationContext context)
     {
