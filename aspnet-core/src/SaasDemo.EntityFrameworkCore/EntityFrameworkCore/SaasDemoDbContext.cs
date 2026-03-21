@@ -57,6 +57,11 @@ public class SaasDemoDbContext :
 
     #endregion
     public DbSet<BlogPost> BlogPosts { get; set; }
+    public DbSet<BlogTag> BlogTags { get; set; }
+    public DbSet<BlogPostTag> BlogPostTags { get; set; }
+    public DbSet<BlogCategory> BlogCategories { get; set; }
+    public DbSet<BlogPostCategory> BlogPostCategories { get; set; }
+
 
     public SaasDemoDbContext(DbContextOptions<SaasDemoDbContext> options)
         : base(options)
@@ -95,9 +100,43 @@ public class SaasDemoDbContext :
         {
             b.ToTable(SaasDemoConsts.DbTablePrefix + "BlogPosts", SaasDemoConsts.DbSchema);
             b.ConfigureByConvention(); 
-            
+        });
 
-            /* Configure more properties here */
+        builder.Entity<BlogCategory>(b =>
+        {
+            b.ToTable(SaasDemoConsts.DbTablePrefix + "BlogCategories", SaasDemoConsts.DbSchema);
+            b.ConfigureByConvention();
+        });
+
+        builder.Entity<BlogPostCategory>(b =>
+        {
+            b.ToTable(SaasDemoConsts.DbTablePrefix + "BlogPostCategories", SaasDemoConsts.DbSchema);
+            b.ConfigureByConvention();
+            
+            // Define Composite Key for Many-to-Many strict relation
+            b.HasKey(x => new { x.BlogPostId, x.BlogCategoryId });
+            
+            b.HasOne<BlogPost>().WithMany().HasForeignKey(x => x.BlogPostId).IsRequired();
+            b.HasOne<BlogCategory>().WithMany().HasForeignKey(x => x.BlogCategoryId).IsRequired();
+            
+            b.HasIndex(x => new { x.BlogPostId, x.BlogCategoryId });
+        });
+
+        builder.Entity<BlogTag>(b =>
+        {
+            b.ToTable(SaasDemoConsts.DbTablePrefix + "BlogTags", SaasDemoConsts.DbSchema);
+            b.ConfigureByConvention();
+        });
+
+        builder.Entity<BlogPostTag>(b =>
+        {
+            b.ToTable(SaasDemoConsts.DbTablePrefix + "BlogPostTags", SaasDemoConsts.DbSchema);
+            b.ConfigureByConvention();
+            
+            b.HasKey(x => new { x.BlogPostId, x.BlogTagId });
+            b.HasOne<BlogPost>().WithMany().HasForeignKey(x => x.BlogPostId).IsRequired();
+            b.HasOne<BlogTag>().WithMany().HasForeignKey(x => x.BlogTagId).IsRequired();
+            b.HasIndex(x => new { x.BlogPostId, x.BlogTagId });
         });
         }
 }

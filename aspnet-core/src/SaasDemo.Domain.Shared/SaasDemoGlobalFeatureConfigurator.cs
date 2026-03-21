@@ -14,7 +14,11 @@ public static class SaasDemoGlobalFeatureConfigurator
         {
             GlobalFeatureManager.Instance.Modules.CmsKit(cmsKit =>
             {
-                cmsKit.EnableAll();
+                cmsKit.Comments.Enable();
+                cmsKit.Reactions.Enable();
+                cmsKit.Tags.Enable();
+                cmsKit.Pages.Enable();
+                cmsKit.Ratings.Enable();
             });
         });
     }

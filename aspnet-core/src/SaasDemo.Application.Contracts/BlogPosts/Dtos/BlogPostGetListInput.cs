@@ -15,5 +15,9 @@ public class BlogPostGetListInput : PagedAndSortedResultRequestDto
 
     public string? ShortDescription { get; set; }
 
-    public bool? IsPublished { get; set; }
+    public PublishStatus? Status { get; set; }
+
+    public DateTime? PublishedAt { get; set; }
+
+    public string? FeaturedImageUrl { get; set; }
 }

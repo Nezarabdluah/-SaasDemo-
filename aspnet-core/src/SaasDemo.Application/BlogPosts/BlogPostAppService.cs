@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Volo.Abp.Domain.Repositories;
 using SaasDemo.Permissions;
 using SaasDemo.BlogPosts.Dtos;
 using Volo.Abp.Application.Services;
@@ -19,10 +21,14 @@ public class BlogPostAppService : CrudAppService<BlogPost, BlogPostDto, Guid, Bl
     protected override string? DeletePolicyName { get; set; } = SaasDemoPermissions.BlogPost.Delete;
 
     private readonly IBlogPostRepository _repository;
+    private readonly IRepository<BlogPostCategory, Guid> _blogPostCategoryRepository;
 
-    public BlogPostAppService(IBlogPostRepository repository) : base(repository)
+    public BlogPostAppService(
+        IBlogPostRepository repository,
+        IRepository<BlogPostCategory, Guid> blogPostCategoryRepository) : base(repository)
     {
         _repository = repository;
+        _blogPostCategoryRepository = blogPostCategoryRepository;
 
         LocalizationResource = typeof(SaasDemoResource);
         ObjectMapperContext = typeof(SaasDemoApplicationModule);
@@ -30,13 +36,12 @@ public class BlogPostAppService : CrudAppService<BlogPost, BlogPostDto, Guid, Bl
 
     protected override async Task<IQueryable<BlogPost>> CreateFilteredQueryAsync(BlogPostGetListInput input)
     {
-        // TODO: AbpHelper generated
         return (await base.CreateFilteredQueryAsync(input))
-            .WhereIf(!input.Title.IsNullOrWhiteSpace(), x => x.Title.Contains(input.Title))
-            .WhereIf(!input.Slug.IsNullOrWhiteSpace(), x => x.Slug.Contains(input.Slug))
-            .WhereIf(!input.Content.IsNullOrWhiteSpace(), x => x.Content.Contains(input.Content))
-            .WhereIf(!input.ShortDescription.IsNullOrWhiteSpace(), x => x.ShortDescription.Contains(input.ShortDescription))
-            .WhereIf(input.IsPublished != null, x => x.IsPublished == input.IsPublished)
+            .WhereIf(!string.IsNullOrWhiteSpace(input.Title), x => x.Title.Contains(input.Title!))
+            .WhereIf(!string.IsNullOrWhiteSpace(input.Slug), x => x.Slug.Contains(input.Slug!))
+            .WhereIf(!string.IsNullOrWhiteSpace(input.Content), x => x.Content.Contains(input.Content!))
+            .WhereIf(!string.IsNullOrWhiteSpace(input.ShortDescription), x => x.ShortDescription != null && x.ShortDescription.Contains(input.ShortDescription!))
+            .WhereIf(input.Status != null, x => x.Status == input.Status)
             ;
     }
 
@@ -50,10 +55,21 @@ public class BlogPostAppService : CrudAppService<BlogPost, BlogPostDto, Guid, Bl
             input.Slug,
             input.Content,
             input.ShortDescription,
-            input.IsPublished
+            input.Status,
+            input.FeaturedImageUrl,
+            input.PublishedAt
         );
 
         await _repository.InsertAsync(entity);
+
+        if (input.CategoryIds != null && input.CategoryIds.Any())
+        {
+            foreach (var categoryId in input.CategoryIds)
+            {
+                await _blogPostCategoryRepository.InsertAsync(
+                    new BlogPostCategory(GuidGenerator.Create(), entity.Id, categoryId));
+            }
+        }
 
         return await MapToGetOutputDtoAsync(entity);
     }
@@ -69,11 +85,45 @@ public class BlogPostAppService : CrudAppService<BlogPost, BlogPostDto, Guid, Bl
             input.Slug,
             input.Content,
             input.ShortDescription,
-            input.IsPublished
+            input.Status,
+            input.FeaturedImageUrl,
+            input.PublishedAt
         );
 
         await _repository.UpdateAsync(entity);
 
+        if (input.CategoryIds != null)
+        {
+            var oldCategories = await _blogPostCategoryRepository.GetListAsync(x => x.BlogPostId == entity.Id);
+            
+            // Remove unselected categories
+            foreach (var oldCategory in oldCategories)
+            {
+                if (!input.CategoryIds.Contains(oldCategory.BlogCategoryId))
+                {
+                    await _blogPostCategoryRepository.DeleteAsync(oldCategory);
+                }
+            }
+
+            // Add newly selected categories
+            foreach (var newCategoryId in input.CategoryIds)
+            {
+                if (!oldCategories.Any(x => x.BlogCategoryId == newCategoryId))
+                {
+                    await _blogPostCategoryRepository.InsertAsync(
+                        new BlogPostCategory(GuidGenerator.Create(), entity.Id, newCategoryId));
+                }
+            }
+        }
+
         return await MapToGetOutputDtoAsync(entity);
+    }
+
+    protected override async Task<BlogPostDto> MapToGetOutputDtoAsync(BlogPost entity)
+    {
+        var dto = await base.MapToGetOutputDtoAsync(entity);
+        var categories = await _blogPostCategoryRepository.GetListAsync(x => x.BlogPostId == entity.Id);
+        dto.CategoryIds = categories.Select(x => x.BlogCategoryId).ToList();
+        return dto;
     }
 }

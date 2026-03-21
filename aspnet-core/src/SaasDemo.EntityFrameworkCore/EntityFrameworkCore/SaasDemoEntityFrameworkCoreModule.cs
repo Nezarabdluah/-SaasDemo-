@@ -47,6 +47,7 @@ namespace SaasDemo.EntityFrameworkCore;
                  * default repositories only for aggregate roots */
             options.AddDefaultRepositories(includeAllEntities: true);
             options.AddRepository<BlogPost, BlogPostRepository>();
+            options.AddRepository<BlogCategory, BlogCategoryRepository>();
         });
 
         Configure<AbpDbContextOptions>(options =>

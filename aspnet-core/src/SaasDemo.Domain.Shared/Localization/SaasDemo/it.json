@@ -20,6 +20,15 @@
     "EditBlogPost": "EditBlogPost",
     "BlogPostDeletionConfirmationMessage": "Are you sure to delete the blogPost {0}?",
     "SuccessfullyDeleted": "Successfully deleted",
-    "TableFilter": "TableFilter"
+    "TableFilter": "TableFilter",
+    "Permission:BlogCategory": "BlogCategory",
+    "Menu:BlogCategory": "MenuBlogCategory",
+    "BlogCategory": "BlogCategory",
+    "BlogCategoryName": "BlogCategoryName",
+    "BlogCategorySlug": "BlogCategorySlug",
+    "BlogCategoryDescription": "BlogCategoryDescription",
+    "CreateBlogCategory": "CreateBlogCategory",
+    "EditBlogCategory": "EditBlogCategory",
+    "BlogCategoryDeletionConfirmationMessage": "Are you sure to delete the blogCategory {0}?"
   }
 }

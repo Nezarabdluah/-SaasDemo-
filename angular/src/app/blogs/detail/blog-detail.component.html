@@ -8,13 +8,19 @@
   </div>
 
   <div class="card" *ngIf="post">
+    <img *ngIf="post.featuredImageUrl" [src]="post.featuredImageUrl" class="card-img-top" [alt]="post.title" style="max-height: 400px; object-fit: cover;">
     <div class="card-body">
       <h5>{{ post.title }}</h5>
       <p class="text-muted mb-4 pb-2 border-bottom">
         Slug: {{ post.slug }} | 
-        Status: <span class="badge" [ngClass]="post.isPublished ? 'bg-success' : 'bg-warning'">
-          {{ post.isPublished ? 'Published' : 'Draft' }}
+        Status: <span class="badge" [ngClass]="{
+                  'bg-success': post.status === 1,
+                  'bg-warning': post.status === 0,
+                  'bg-info': post.status === 2
+                }">
+          {{ post.status === 1 ? 'Published' : post.status === 2 ? 'Scheduled' : 'Draft' }}
         </span>
+        <span *ngIf="post.publishedAt"> | Published Date: {{ post.publishedAt | date:'short' }}</span>
       </p>
       
       <h6>Short Description:</h6>

@@ -230,6 +230,18 @@ Infrastructure Layer (DbContext, External APIs, Repository Implementations)
 
 1. يتم طلب الوكيل (أنت) لبناء `Entity.cs` نظيف في طبقة الـ `Domain`.
 2. يتم تشغيل `AbpHelper` عبر الـ Terminal لتوليد كود الـ CRUD كاملاً.
+
+**⚠️ تحذير صارم: AbpHelper + DbContext**
+─────────────────────────────────
+بعد كل `abphelper generate crud` نفذه المستخدم، كوكيل ذكي: **افتح `SaasDemoDbContext.cs` فوراً** وتحقق من الآتي:
+1. `DbSet<Entity>` أُضيف في المكان الصحيح (وليس مكرراً).
+2. لا يوجد كود `builder.Entity` مرمي بعشوائية داخل قسم הـ DbSets.
+3. لا يوجد علامات اقتباس مفتوحة أو تعليقات `///` مكسورة.
+4. تأكد بعينك أن `dotnet build` يجب أن ينجح قبل الـ Migration.
+
+*إذا وجدت خربشة — احذفها فوراً وبصمت قبل فعل أي خطوة أخرى!*
+─────────────────────────────────
+
 3. يُطلب من الوكيل (أنت) معالجة أي تعارض أو خطأ بعد التوليد.
 4. يُطلب من الوكيل تخصيص أو بناء واجهات الـ Angular UI بشكل نهائي.
 5. يُطلب من الوكيل إضافة الـ Business Logic المُخصص.
@@ -239,7 +251,29 @@ Infrastructure Layer (DbContext, External APIs, Repository Implementations)
 ## 14. 🛑 قواعد تصميم الكيانات (Entity Strict Rules)
 
 1. استخدم دائماً `FullAuditedAggregateRoot<Guid>`.
-2. جميع الخصائص يجب أن تمتلك `private set` فقط.
+
+**قاعدة ثابتة — private set دائماً**
+────────────────────────────────────
+كل Entity تستخدم private set
+بعد كل abphelper generate crud
+Antigravity يتدخل ويكتب UpdateAsync
+يدوياً بدل AutoMapper
+
+النمط الثابت:
+```csharp
+public async Task<EntityDto> UpdateAsync(
+    Guid id, UpdateEntityDto input)
+{
+    var entity = await _repository.GetAsync(id);
+    entity.Update(input.Name, input.Slug); // Custom parameters based on entity
+    
+    // AutoSave is managed by UnitOfWork or Explicit Update
+    await _repository.UpdateAsync(entity, autoSave: true);
+    return ObjectMapper.Map<Entity, EntityDto>(entity);
+}
+```
+────────────────────────────────────
+
 3. قم دائماً بتوفير منشئ افتراضي مغلق (`protected` أو `private`) للـ ORM.
 4. قم دائماً ببناء `public static Create(...)` Factory Method لإنشاء الكائن.
 5. استخدم الدالة `Check.NotNullOrWhiteSpace` من إطار ABP لجميع نصوص الـ Validation الأساسية.

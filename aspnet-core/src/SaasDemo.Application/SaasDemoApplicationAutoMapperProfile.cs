@@ -13,5 +13,7 @@ public class SaasDemoApplicationAutoMapperProfile : Profile
          * into multiple profile classes for a better organization. */
         CreateMap<BlogPost, BlogPostDto>();
         CreateMap<CreateUpdateBlogPostDto, BlogPost>(MemberList.Source);
+        CreateMap<BlogCategory, BlogCategoryDto>();
+        CreateMap<CreateUpdateBlogCategoryDto, BlogCategory>(MemberList.Source);
     }
 }

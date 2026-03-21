@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { RestService } from '@abp/ng.core';
@@ -11,7 +11,7 @@ import { PageModule } from '@abp/ng.components/page';
   imports: [CommonModule, ReactiveFormsModule, RouterModule, PageModule],
   templateUrl: './blog-create.component.html',
 })
-export class BlogCreateComponent {
+export class BlogCreateComponent implements OnInit {
   private fb = inject(FormBuilder);
   private restService = inject(RestService);
   private router = inject(Router);
@@ -19,13 +19,27 @@ export class BlogCreateComponent {
   form: FormGroup;
   isSaving = false;
 
+  categories: any[] = [];
+
   constructor() {
     this.form = this.fb.group({
       title: ['', [Validators.required, Validators.maxLength(256)]],
       slug: ['', [Validators.required, Validators.maxLength(256)]],
       content: ['', [Validators.required]],
       shortDescription: ['', [Validators.maxLength(512)]],
-      isPublished: [false]
+      status: [0],
+      publishedAt: [null],
+      featuredImageUrl: [null],
+      categoryIds: [[]]
+    });
+  }
+
+  ngOnInit() {
+    this.restService.request<any, any>({
+      method: 'GET',
+      url: '/api/app/blog-category?maxResultCount=1000'
+    }).subscribe(response => {
+      this.categories = response.items || [];
     });
   }
 

@@ -24,8 +24,12 @@
               <td>{{ item.title }}</td>
               <td>{{ item.slug }}</td>
               <td>
-                <span class="badge" [ngClass]="item.isPublished ? 'bg-success' : 'bg-warning'">
-                  {{ item.isPublished ? 'Published' : 'Draft' }}
+                <span class="badge" [ngClass]="{
+                  'bg-success': item.status === 1,
+                  'bg-warning': item.status === 0,
+                  'bg-info': item.status === 2
+                }">
+                  {{ item.status === 1 ? 'Published' : item.status === 2 ? 'Scheduled' : 'Draft' }}
                 </span>
               </td>
               <td>

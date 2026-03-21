@@ -32,9 +32,35 @@
           </div>
         </div>
 
-        <div class="mb-3 form-check">
-          <input type="checkbox" class="form-check-input" id="isPublished" formControlName="isPublished">
-          <label class="form-check-label" for="isPublished">Publish immediately</label>
+        <div class="mb-3">
+          <label class="form-label" for="categoryIds">Categories</label>
+          <select id="categoryIds" class="form-select" formControlName="categoryIds" multiple style="min-height: 100px;">
+            <option *ngFor="let category of categories" [ngValue]="category.id">
+              {{ category.name }}
+            </option>
+          </select>
+          <small class="text-muted">Hold Ctrl (Windows) or Command (Mac) to select multiple categories.</small>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <label class="form-label" for="status">Status</label>
+            <select id="status" class="form-select" formControlName="status">
+              <option [ngValue]="0">Draft</option>
+              <option [ngValue]="1">Published</option>
+              <option [ngValue]="2">Scheduled</option>
+            </select>
+          </div>
+
+          <div class="col-md-4 mb-3" *ngIf="form.get('status')?.value === 2">
+            <label class="form-label" for="publishedAt">Publish Date</label>
+            <input type="datetime-local" id="publishedAt" class="form-control" formControlName="publishedAt" />
+          </div>
+
+          <div class="col-md-4 mb-3">
+            <label class="form-label" for="featuredImageUrl">Featured Image URL</label>
+            <input type="url" id="featuredImageUrl" class="form-control" formControlName="featuredImageUrl" />
+          </div>
         </div>
 
         <div class="mt-4 pt-2 border-top">
