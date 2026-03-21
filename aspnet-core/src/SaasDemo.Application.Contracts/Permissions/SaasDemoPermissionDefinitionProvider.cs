@@ -1,4 +1,4 @@
-﻿using SaasDemo.Localization;
+using SaasDemo.Localization;
 using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.Localization;
 
@@ -11,6 +11,11 @@ public class SaasDemoPermissionDefinitionProvider : PermissionDefinitionProvider
         var myGroup = context.AddGroup(SaasDemoPermissions.GroupName);
         //Define your own permissions here. Example:
         //myGroup.AddPermission(SaasDemoPermissions.MyPermission1, L("Permission:MyPermission1"));
+
+        var blogPostPermission = myGroup.AddPermission(SaasDemoPermissions.BlogPost.Default, L("Permission:BlogPost"));
+        blogPostPermission.AddChild(SaasDemoPermissions.BlogPost.Create, L("Permission:Create"));
+        blogPostPermission.AddChild(SaasDemoPermissions.BlogPost.Update, L("Permission:Update"));
+        blogPostPermission.AddChild(SaasDemoPermissions.BlogPost.Delete, L("Permission:Delete"));
     }
 
     private static LocalizableString L(string name)

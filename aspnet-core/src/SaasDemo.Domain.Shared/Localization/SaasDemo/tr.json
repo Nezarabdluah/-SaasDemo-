@@ -4,6 +4,22 @@
     "AppName": "SaasDemo",
     "Menu:Home": "Ana sayfa",
     "Welcome": "Hoşgeldiniz",
-    "LongWelcomeMessage": "Uygulamaya hoşgeldiniz. Bu, ABP framework'ü üzerine bina edilmiş bir başlangıç projesidir. Daha fazla bilgi için abp.io adresini ziyaret edebilirsiniz."
+    "LongWelcomeMessage": "Uygulamaya hoşgeldiniz. Bu, ABP framework'ü üzerine bina edilmiş bir başlangıç projesidir. Daha fazla bilgi için abp.io adresini ziyaret edebilirsiniz.",
+    "Permission:BlogPost": "BlogPost",
+    "Permission:Create": "Create",
+    "Permission:Update": "Update",
+    "Permission:Delete": "Delete",
+    "Menu:BlogPost": "MenuBlogPost",
+    "BlogPost": "BlogPost",
+    "BlogPostTitle": "BlogPostTitle",
+    "BlogPostSlug": "BlogPostSlug",
+    "BlogPostContent": "BlogPostContent",
+    "BlogPostShortDescription": "BlogPostShortDescription",
+    "BlogPostIsPublished": "BlogPostIsPublished",
+    "CreateBlogPost": "CreateBlogPost",
+    "EditBlogPost": "EditBlogPost",
+    "BlogPostDeletionConfirmationMessage": "Are you sure to delete the blogPost {0}?",
+    "SuccessfullyDeleted": "Successfully deleted",
+    "TableFilter": "TableFilter"
   }
 }

@@ -4,6 +4,22 @@
     "AppName": "SaasDemo",
     "Menu:Home": "الصفحة الرئيسية",
     "Welcome": "مرحباً",
-    "LongWelcomeMessage": "مرحبا بكم في التطبيق. هذا مشروع بدء تشغيل يعتمد على إطار عمل ABP. لمزيد من المعلومات ، يرجى زيارة abp.io."
+    "LongWelcomeMessage": "مرحبا بكم في التطبيق. هذا مشروع بدء تشغيل يعتمد على إطار عمل ABP. لمزيد من المعلومات ، يرجى زيارة abp.io.",
+    "Permission:BlogPost": "BlogPost",
+    "Permission:Create": "Create",
+    "Permission:Update": "Update",
+    "Permission:Delete": "Delete",
+    "Menu:BlogPost": "MenuBlogPost",
+    "BlogPost": "BlogPost",
+    "BlogPostTitle": "BlogPostTitle",
+    "BlogPostSlug": "BlogPostSlug",
+    "BlogPostContent": "BlogPostContent",
+    "BlogPostShortDescription": "BlogPostShortDescription",
+    "BlogPostIsPublished": "BlogPostIsPublished",
+    "CreateBlogPost": "CreateBlogPost",
+    "EditBlogPost": "EditBlogPost",
+    "BlogPostDeletionConfirmationMessage": "Are you sure to delete the blogPost {0}?",
+    "SuccessfullyDeleted": "Successfully deleted",
+    "TableFilter": "TableFilter"
   }
 }

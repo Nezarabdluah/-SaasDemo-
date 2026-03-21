@@ -14,6 +14,8 @@ using Volo.Abp.TenantManagement;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
 using Volo.Blogging.EntityFrameworkCore;
 using Volo.CmsKit.EntityFrameworkCore;
+using SaasDemo.BlogPosts;
+using Volo.Abp.EntityFrameworkCore.Modeling;
 
 namespace SaasDemo.EntityFrameworkCore;
 
@@ -54,6 +56,7 @@ public class SaasDemoDbContext :
     public DbSet<TenantConnectionString> TenantConnectionStrings { get; set; }
 
     #endregion
+    public DbSet<BlogPost> BlogPosts { get; set; }
 
     public SaasDemoDbContext(DbContextOptions<SaasDemoDbContext> options)
         : base(options)
@@ -86,5 +89,15 @@ public class SaasDemoDbContext :
         //});
         builder.ConfigureBlogging();
             builder.ConfigureCmsKit();
+
+
+        builder.Entity<BlogPost>(b =>
+        {
+            b.ToTable(SaasDemoConsts.DbTablePrefix + "BlogPosts", SaasDemoConsts.DbSchema);
+            b.ConfigureByConvention(); 
+            
+
+            /* Configure more properties here */
+        });
         }
 }

@@ -4,6 +4,22 @@
     "AppName": "SaasDemo",
     "Menu:Home": "घर",
     "Welcome": "स्वागत हे",
-    "LongWelcomeMessage": "आवेदन करने के लिए आपका स्वागत है। यह एबीपी ढांचे पर आधारित एक स्टार्टअप परियोजना है। अधिक जानकारी के लिए, abp.io पर जाएं।"
+    "LongWelcomeMessage": "आवेदन करने के लिए आपका स्वागत है। यह एबीपी ढांचे पर आधारित एक स्टार्टअप परियोजना है। अधिक जानकारी के लिए, abp.io पर जाएं।",
+    "Permission:BlogPost": "BlogPost",
+    "Permission:Create": "Create",
+    "Permission:Update": "Update",
+    "Permission:Delete": "Delete",
+    "Menu:BlogPost": "MenuBlogPost",
+    "BlogPost": "BlogPost",
+    "BlogPostTitle": "BlogPostTitle",
+    "BlogPostSlug": "BlogPostSlug",
+    "BlogPostContent": "BlogPostContent",
+    "BlogPostShortDescription": "BlogPostShortDescription",
+    "BlogPostIsPublished": "BlogPostIsPublished",
+    "CreateBlogPost": "CreateBlogPost",
+    "EditBlogPost": "EditBlogPost",
+    "BlogPostDeletionConfirmationMessage": "Are you sure to delete the blogPost {0}?",
+    "SuccessfullyDeleted": "Successfully deleted",
+    "TableFilter": "TableFilter"
   }
 }

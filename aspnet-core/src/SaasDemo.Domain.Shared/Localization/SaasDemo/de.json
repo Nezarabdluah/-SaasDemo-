@@ -4,6 +4,22 @@
     "AppName": "SaasDemo",
     "Menu:Home": "Home",
     "Welcome": "Willkommen",
-    "LongWelcomeMessage": "Willkommen bei der Anwendung. Dies ist ein Startup-Projekt, das auf dem ABP-Framework basiert. Weitere Informationen finden Sie unter abp.io."
+    "LongWelcomeMessage": "Willkommen bei der Anwendung. Dies ist ein Startup-Projekt, das auf dem ABP-Framework basiert. Weitere Informationen finden Sie unter abp.io.",
+    "Permission:BlogPost": "BlogPost",
+    "Permission:Create": "Create",
+    "Permission:Update": "Update",
+    "Permission:Delete": "Delete",
+    "Menu:BlogPost": "MenuBlogPost",
+    "BlogPost": "BlogPost",
+    "BlogPostTitle": "BlogPostTitle",
+    "BlogPostSlug": "BlogPostSlug",
+    "BlogPostContent": "BlogPostContent",
+    "BlogPostShortDescription": "BlogPostShortDescription",
+    "BlogPostIsPublished": "BlogPostIsPublished",
+    "CreateBlogPost": "CreateBlogPost",
+    "EditBlogPost": "EditBlogPost",
+    "BlogPostDeletionConfirmationMessage": "Are you sure to delete the blogPost {0}?",
+    "SuccessfullyDeleted": "Successfully deleted",
+    "TableFilter": "TableFilter"
   }
 }

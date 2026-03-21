@@ -1,3 +1,4 @@
+using SaasDemo.BlogPosts;
 using System;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.Uow;
@@ -45,6 +46,7 @@ namespace SaasDemo.EntityFrameworkCore;
                 /* Remove "includeAllEntities: true" to create
                  * default repositories only for aggregate roots */
             options.AddDefaultRepositories(includeAllEntities: true);
+            options.AddRepository<BlogPost, BlogPostRepository>();
         });
 
         Configure<AbpDbContextOptions>(options =>

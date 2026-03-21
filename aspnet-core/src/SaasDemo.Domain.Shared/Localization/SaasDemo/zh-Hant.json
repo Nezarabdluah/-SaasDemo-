@@ -1,9 +1,25 @@
 {
-    "culture": "zh-Hant",
-    "texts": {
-      "AppName": "SaasDemo",
-      "Menu:Home": "首頁",
-      "Welcome": "歡迎",
-      "LongWelcomeMessage": "歡迎來到此應用程式. 這是一個基於ABP框架的起始專案. 有關更多訊息, 請瀏覽 abp.io."
-    }
+  "culture": "zh-Hant",
+  "texts": {
+    "AppName": "SaasDemo",
+    "Menu:Home": "首頁",
+    "Welcome": "歡迎",
+    "LongWelcomeMessage": "歡迎來到此應用程式. 這是一個基於ABP框架的起始專案. 有關更多訊息, 請瀏覽 abp.io.",
+    "Permission:BlogPost": "BlogPost",
+    "Permission:Create": "Create",
+    "Permission:Update": "Update",
+    "Permission:Delete": "Delete",
+    "Menu:BlogPost": "MenuBlogPost",
+    "BlogPost": "BlogPost",
+    "BlogPostTitle": "BlogPostTitle",
+    "BlogPostSlug": "BlogPostSlug",
+    "BlogPostContent": "BlogPostContent",
+    "BlogPostShortDescription": "BlogPostShortDescription",
+    "BlogPostIsPublished": "BlogPostIsPublished",
+    "CreateBlogPost": "CreateBlogPost",
+    "EditBlogPost": "EditBlogPost",
+    "BlogPostDeletionConfirmationMessage": "Are you sure to delete the blogPost {0}?",
+    "SuccessfullyDeleted": "Successfully deleted",
+    "TableFilter": "TableFilter"
   }
+}
