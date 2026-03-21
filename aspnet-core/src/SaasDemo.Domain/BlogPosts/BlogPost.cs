@@ -36,4 +36,16 @@ public class BlogPost : FullAuditedAggregateRoot<Guid>
     {
         return new BlogPost(id, title, slug, content, shortDescription, isPublished);
     }
+
+    /// <summary>
+    /// DDD Update method to encapsulate property changes.
+    /// </summary>
+    public void Update(string title, string slug, string content, string shortDescription, bool isPublished)
+    {
+        Title = Check.NotNullOrWhiteSpace(title, nameof(title));
+        Slug = Check.NotNullOrWhiteSpace(slug, nameof(slug));
+        Content = Check.NotNullOrWhiteSpace(content, nameof(content));
+        ShortDescription = shortDescription;
+        IsPublished = isPublished;
+    }
 }

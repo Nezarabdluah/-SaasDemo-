@@ -39,4 +39,41 @@ public class BlogPostAppService : CrudAppService<BlogPost, BlogPostDto, Guid, Bl
             .WhereIf(input.IsPublished != null, x => x.IsPublished == input.IsPublished)
             ;
     }
+
+    public override async Task<BlogPostDto> CreateAsync(CreateUpdateBlogPostDto input)
+    {
+        await CheckCreatePolicyAsync();
+
+        var entity = BlogPost.Create(
+            GuidGenerator.Create(),
+            input.Title,
+            input.Slug,
+            input.Content,
+            input.ShortDescription,
+            input.IsPublished
+        );
+
+        await _repository.InsertAsync(entity);
+
+        return await MapToGetOutputDtoAsync(entity);
+    }
+
+    public override async Task<BlogPostDto> UpdateAsync(Guid id, CreateUpdateBlogPostDto input)
+    {
+        await CheckUpdatePolicyAsync();
+
+        var entity = await _repository.GetAsync(id);
+
+        entity.Update(
+            input.Title,
+            input.Slug,
+            input.Content,
+            input.ShortDescription,
+            input.IsPublished
+        );
+
+        await _repository.UpdateAsync(entity);
+
+        return await MapToGetOutputDtoAsync(entity);
+    }
 }
