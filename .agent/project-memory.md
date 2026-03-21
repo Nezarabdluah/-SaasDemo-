@@ -8,7 +8,9 @@
 
 ## Module Registry
 - **Completed:** Identity, Account, Tenant Management, Feature Management, Setting Management.
-- **In Progress:** CmsKit configuration.
+- **Completed:** Volo.CmsKit ✅ مثبت
+- **Completed:** BlogPost Entity + Backend CRUD ✅ منجز
+- **Completed:** BlogPost Angular UI ✅ منجز وتعمل الواجهات بسلاسة مع الـ DB
 - **Pending:** [to be filled]
 
 ## Key Commands

@@ -4,7 +4,7 @@ using Xunit;
 
 namespace SaasDemo.BlogPosts;
 
-public class BlogPostDomainTests : SaasDemoDomainTestBase
+public class BlogPostDomainTests : SaasDemoDomainTestBase<SaasDemoDomainTestModule>
 {
     public BlogPostDomainTests()
     {

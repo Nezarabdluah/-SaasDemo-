@@ -36,24 +36,4 @@ public class BlogPost : FullAuditedAggregateRoot<Guid>
     {
         return new BlogPost(id, title, slug, content, shortDescription, isPublished);
     }
-
-    protected BlogPost()
-    {
-    }
-
-    public BlogPost(
-        Guid id,
-        string title,
-        string slug,
-        string content,
-        string shortDescription,
-        bool isPublished
-    ) : base(id)
-    {
-        Title = title;
-        Slug = slug;
-        Content = content;
-        ShortDescription = shortDescription;
-        IsPublished = isPublished;
-    }
 }

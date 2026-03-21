@@ -1,0 +1,50 @@
+<abp-page title="Create New Blog Post">
+  <div class="card">
+    <div class="card-body">
+      <form [formGroup]="form" (ngSubmit)="save()">
+        
+        <div class="mb-3">
+          <label class="form-label" for="title">Title <span class="text-danger">*</span></label>
+          <input type="text" id="title" class="form-control" formControlName="title" />
+          <div *ngIf="form.get('title')?.invalid && form.get('title')?.touched" class="text-danger mt-1">
+            Title is required.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="slug">Slug <span class="text-danger">*</span></label>
+          <input type="text" id="slug" class="form-control" formControlName="slug" />
+          <div *ngIf="form.get('slug')?.invalid && form.get('slug')?.touched" class="text-danger mt-1">
+            Slug is required.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="shortDescription">Short Description</label>
+          <textarea id="shortDescription" class="form-control" formControlName="shortDescription" rows="2"></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="content">Content <span class="text-danger">*</span></label>
+          <textarea id="content" class="form-control" formControlName="content" rows="6"></textarea>
+          <div *ngIf="form.get('content')?.invalid && form.get('content')?.touched" class="text-danger mt-1">
+            Content is required.
+          </div>
+        </div>
+
+        <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="isPublished" formControlName="isPublished">
+          <label class="form-check-label" for="isPublished">Publish immediately</label>
+        </div>
+
+        <div class="mt-4 pt-2 border-top">
+          <a routerLink="/blogs" class="btn btn-secondary me-2">Cancel</a>
+          <button type="submit" class="btn btn-primary" [disabled]="form.invalid || isSaving">
+            <i class="fa fa-save me-1"></i> Save
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</abp-page>

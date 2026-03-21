@@ -203,4 +203,48 @@ Infrastructure Layer (DbContext, External APIs, Repository Implementations)
 
 ---
 
+## 12. 🛠️ استراتيجية وأدوار الأدوات (Tools Strategy & Roles)
+
+### 1. ABP CLI الرسمي
+*   **الدور:** إضافة `Volo modules` الجاهزة فقط.
+*   **أمثلة:** `abp add-module Volo.CmsKit`
+*   **القاعدة الذهبية:** يُمنع استبداله بكتابة أكواد التثبيت يدوياً أو تعديل الـ `.csproj` لإضافة حزم Volo.
+
+### 2. AbpHelper CLI
+*   **الدور:** توليد الـ CRUD الكلي بناءً على ملف الكيان (Entity).
+*   **الشرط:** يجب بناء `Entity.cs` أولاً.
+*   **أمثلة:** `abphelper generate crud BlogPost -d .`
+*   **الناتج التلقائي:** `Repository, AppService, DTOs, Controller, Permissions, Migration, Angular components`. لا تقم ببناء هذه الملفات يدوياً.
+
+### 3. Antigravity (وكيل الذكاء الاصطناعي - أنت)
+*   **المهام العظمى:**
+    1. إنشاء الـ `Entity.cs` باحترافية (Clean Architecture/DDD) **قبل** استخدام `AbpHelper`.
+    2. إصلاح أي أخطاء `Compilation` تظهر بعد توليد `AbpHelper`.
+    3. بناء أو تخصيص الـ `Angular Standalone Components`.
+    4. بناء وكتابة الأعمال المنطقية المعقدة (Business Logic).
+*   **تحذير:** لا تقم أبداً بكتابة أو توليد ما يمكن للأداتين السابقتين توليده.
+
+---
+
+## 13. 📋 مسار عمل أي ميزة جديدة (New Feature Workflow)
+
+1. يتم طلب الوكيل (أنت) لبناء `Entity.cs` نظيف في طبقة الـ `Domain`.
+2. يتم تشغيل `AbpHelper` عبر الـ Terminal لتوليد كود الـ CRUD كاملاً.
+3. يُطلب من الوكيل (أنت) معالجة أي تعارض أو خطأ بعد التوليد.
+4. يُطلب من الوكيل تخصيص أو بناء واجهات الـ Angular UI بشكل نهائي.
+5. يُطلب من الوكيل إضافة الـ Business Logic المُخصص.
+
+---
+
+## 14. 🛑 قواعد تصميم الكيانات (Entity Strict Rules)
+
+1. استخدم دائماً `FullAuditedAggregateRoot<Guid>`.
+2. جميع الخصائص يجب أن تمتلك `private set` فقط.
+3. قم دائماً بتوفير منشئ افتراضي مغلق (`protected` أو `private`) للـ ORM.
+4. قم دائماً ببناء `public static Create(...)` Factory Method لإنشاء الكائن.
+5. استخدم الدالة `Check.NotNullOrWhiteSpace` من إطار ABP لجميع نصوص الـ Validation الأساسية.
+6. اقرأ البيانات دائماً في الـ AppServices عبر `.AsNoTracking()`.
+
+---
+
 *آخر تحديث: 2026-03-21*

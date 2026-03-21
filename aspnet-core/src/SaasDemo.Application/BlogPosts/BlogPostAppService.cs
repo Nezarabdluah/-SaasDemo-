@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using SaasDemo.Permissions;
 using SaasDemo.BlogPosts.Dtos;
 using Volo.Abp.Application.Services;
+using SaasDemo.Localization;
 
 namespace SaasDemo.BlogPosts;
 

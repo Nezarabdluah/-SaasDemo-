@@ -1,0 +1,59 @@
+<abp-page title="Blog Posts">
+  <div class="row">
+    <div class="col-12 mb-3 text-end">
+      <a routerLink="/blogs/new" class="btn btn-primary">
+        <i class="fa fa-plus me-1"></i> New Blog Post
+      </a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Slug</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of items">
+              <td>{{ item.title }}</td>
+              <td>{{ item.slug }}</td>
+              <td>
+                <span class="badge" [ngClass]="item.isPublished ? 'bg-success' : 'bg-warning'">
+                  {{ item.isPublished ? 'Published' : 'Draft' }}
+                </span>
+              </td>
+              <td>
+                <a [routerLink]="['/blogs', item.id]" class="btn btn-sm btn-info me-1">
+                  <i class="fa fa-eye"></i> View
+                </a>
+                <button (click)="item.id && delete(item.id)" class="btn btn-sm btn-danger">
+                  <i class="fa fa-trash"></i> Delete
+                </button>
+              </td>
+            </tr>
+            <tr *ngIf="items.length === 0">
+              <td colspan="4" class="text-center">No blog posts found.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <!-- Basic Pagination Controls -->
+      <div class="d-flex justify-content-between align-items-center mt-3" *ngIf="totalCount > 0">
+        <div>
+          Showing {{ skipCount + 1 }} to {{ skipCount + items.length }} of {{ totalCount }} entries
+        </div>
+        <div>
+          <button class="btn btn-outline-secondary btn-sm me-2" [disabled]="skipCount === 0" (click)="prevPage()">Previous</button>
+          <button class="btn btn-outline-secondary btn-sm" [disabled]="skipCount + maxResultCount >= totalCount" (click)="nextPage()">Next</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</abp-page>
