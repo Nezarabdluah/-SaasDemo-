@@ -27,7 +27,7 @@
       <p>{{ post.shortDescription || 'No description provided.' }}</p>
       
       <h6 class="mt-4">Content:</h6>
-      <div class="p-3 bg-light rounded" style="white-space: pre-wrap;">{{ post.content }}</div>
+      <div class="p-3 bg-light rounded ql-editor" [innerHTML]="post.content"></div>
     </div>
   </div>
 

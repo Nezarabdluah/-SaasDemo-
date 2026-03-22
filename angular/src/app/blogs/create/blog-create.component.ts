@@ -4,11 +4,12 @@ import { Router, RouterModule } from '@angular/router';
 import { RestService } from '@abp/ng.core';
 import { CommonModule } from '@angular/common';
 import { PageModule } from '@abp/ng.components/page';
+import { QuillModule } from 'ngx-quill';
 
 @Component({
   selector: 'app-blog-create',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterModule, PageModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule, PageModule, QuillModule],
   templateUrl: './blog-create.component.html',
 })
 export class BlogCreateComponent implements OnInit {
@@ -21,6 +22,20 @@ export class BlogCreateComponent implements OnInit {
 
   categories: any[] = [];
   tags: any[] = [];
+
+  // إعدادات شريط أدوات Quill
+  quillModules = {
+    toolbar: [
+      [{ header: [1, 2, 3, 4, false] }],
+      ['bold', 'italic', 'underline', 'strike'],
+      [{ color: [] }, { background: [] }],
+      [{ list: 'ordered' }, { list: 'bullet' }],
+      [{ align: [] }],
+      ['blockquote', 'code-block'],
+      ['link', 'image'],
+      ['clean']
+    ]
+  };
 
   constructor() {
     this.form = this.fb.group({
