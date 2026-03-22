@@ -20,7 +20,8 @@ namespace SaasDemo;
     typeof(AbpPermissionManagementApplicationModule),
     typeof(AbpTenantManagementApplicationModule),
     typeof(AbpFeatureManagementApplicationModule),
-    typeof(AbpSettingManagementApplicationModule)
+    typeof(AbpSettingManagementApplicationModule),
+    typeof(AbpAutoMapperModule)
     )]
 [DependsOn(typeof(BloggingApplicationModule))]
     [DependsOn(typeof(BloggingAdminApplicationModule))]
@@ -31,7 +32,7 @@ namespace SaasDemo;
     {
         Configure<AbpAutoMapperOptions>(options =>
         {
-            options.AddMaps<SaasDemoApplicationModule>();
+            options.AddMaps<SaasDemoApplicationModule>(validate: false);
         });
     }
 }

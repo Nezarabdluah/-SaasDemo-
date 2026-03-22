@@ -63,6 +63,7 @@ public class SaasDemoDbContext :
     public DbSet<BlogPostCategory> BlogPostCategories { get; set; }
 
 
+
     public SaasDemoDbContext(DbContextOptions<SaasDemoDbContext> options)
         : base(options)
     {
@@ -138,5 +139,7 @@ public class SaasDemoDbContext :
             b.HasOne<BlogTag>().WithMany().HasForeignKey(x => x.BlogTagId).IsRequired();
             b.HasIndex(x => new { x.BlogPostId, x.BlogTagId });
         });
+
+
         }
 }

@@ -21,4 +21,6 @@ public class CreateUpdateBlogPostDto
     public string? FeaturedImageUrl { get; set; }
 
     public List<Guid>? CategoryIds { get; set; }
+
+    public List<Guid>? TagIds { get; set; }
 }

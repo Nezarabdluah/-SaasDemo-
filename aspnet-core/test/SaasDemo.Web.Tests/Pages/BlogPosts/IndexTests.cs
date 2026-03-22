@@ -14,7 +14,7 @@ public class Index_Tests : SaasDemoWebTestBase
         // Arrange
 
         // Act
-        var response = await GetResponseAsStringAsync("/BlogCategory");
+        var response = await GetResponseAsStringAsync("/BlogTag");
 
         // Assert
         response.ShouldNotBeNull();

@@ -14,4 +14,5 @@ export interface BlogPostDto {
   publishedAt?: string;
   featuredImageUrl?: string;
   categoryIds?: string[];
+  tagIds?: string[];
 }

@@ -20,6 +20,7 @@ export class BlogCreateComponent implements OnInit {
   isSaving = false;
 
   categories: any[] = [];
+  tags: any[] = [];
 
   constructor() {
     this.form = this.fb.group({
@@ -30,7 +31,8 @@ export class BlogCreateComponent implements OnInit {
       status: [0],
       publishedAt: [null],
       featuredImageUrl: [null],
-      categoryIds: [[]]
+      categoryIds: [[]],
+      tagIds: [[]]
     });
   }
 
@@ -40,6 +42,13 @@ export class BlogCreateComponent implements OnInit {
       url: '/api/app/blog-category?maxResultCount=1000'
     }).subscribe(response => {
       this.categories = response.items || [];
+    });
+
+    this.restService.request<any, any>({
+      method: 'GET',
+      url: '/api/app/blog-tag?maxResultCount=1000'
+    }).subscribe(response => {
+      this.tags = response.items || [];
     });
   }
 

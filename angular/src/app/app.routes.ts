@@ -28,4 +28,8 @@ export const appRoutes: Routes = [
     path: 'blogs',
     loadChildren: () => import('./blogs/blogs.routes').then(m => m.blogRoutes),
   },
+  {
+    path: 'blog-tags',
+    loadChildren: () => import('./blog-tags/blog-tags.routes').then(m => m.blogTagsRoutes),
+  },
 ];

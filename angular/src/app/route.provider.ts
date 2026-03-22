@@ -22,6 +22,13 @@ function configureRoutes(routesService: RoutesService) {
         order: 2,
         layout: eLayoutType.application,
       },
+      {
+        path: '/blog-tags',
+        name: 'Blog Tags',
+        iconClass: 'fas fa-tags',
+        order: 3,
+        layout: eLayoutType.application,
+      },
     ]);
   };
 }

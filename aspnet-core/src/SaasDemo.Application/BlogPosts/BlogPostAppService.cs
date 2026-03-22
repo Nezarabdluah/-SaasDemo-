@@ -22,16 +22,18 @@ public class BlogPostAppService : CrudAppService<BlogPost, BlogPostDto, Guid, Bl
 
     private readonly IBlogPostRepository _repository;
     private readonly IRepository<BlogPostCategory, Guid> _blogPostCategoryRepository;
+    private readonly IRepository<BlogPostTag, Guid> _blogPostTagRepository;
 
     public BlogPostAppService(
         IBlogPostRepository repository,
-        IRepository<BlogPostCategory, Guid> blogPostCategoryRepository) : base(repository)
+        IRepository<BlogPostCategory, Guid> blogPostCategoryRepository,
+        IRepository<BlogPostTag, Guid> blogPostTagRepository) : base(repository)
     {
         _repository = repository;
         _blogPostCategoryRepository = blogPostCategoryRepository;
+        _blogPostTagRepository = blogPostTagRepository;
 
         LocalizationResource = typeof(SaasDemoResource);
-        ObjectMapperContext = typeof(SaasDemoApplicationModule);
     }
 
     protected override async Task<IQueryable<BlogPost>> CreateFilteredQueryAsync(BlogPostGetListInput input)
@@ -71,6 +73,15 @@ public class BlogPostAppService : CrudAppService<BlogPost, BlogPostDto, Guid, Bl
             }
         }
 
+        if (input.TagIds != null && input.TagIds.Any())
+        {
+            foreach (var tagId in input.TagIds)
+            {
+                await _blogPostTagRepository.InsertAsync(
+                    new BlogPostTag(GuidGenerator.Create(), entity.Id, tagId));
+            }
+        }
+
         return await MapToGetOutputDtoAsync(entity);
     }
 
@@ -96,7 +107,6 @@ public class BlogPostAppService : CrudAppService<BlogPost, BlogPostDto, Guid, Bl
         {
             var oldCategories = await _blogPostCategoryRepository.GetListAsync(x => x.BlogPostId == entity.Id);
             
-            // Remove unselected categories
             foreach (var oldCategory in oldCategories)
             {
                 if (!input.CategoryIds.Contains(oldCategory.BlogCategoryId))
@@ -105,7 +115,6 @@ public class BlogPostAppService : CrudAppService<BlogPost, BlogPostDto, Guid, Bl
                 }
             }
 
-            // Add newly selected categories
             foreach (var newCategoryId in input.CategoryIds)
             {
                 if (!oldCategories.Any(x => x.BlogCategoryId == newCategoryId))
@@ -116,14 +125,68 @@ public class BlogPostAppService : CrudAppService<BlogPost, BlogPostDto, Guid, Bl
             }
         }
 
+        if (input.TagIds != null)
+        {
+            var oldTags = await _blogPostTagRepository.GetListAsync(x => x.BlogPostId == entity.Id);
+            
+            foreach (var oldTag in oldTags)
+            {
+                if (!input.TagIds.Contains(oldTag.BlogTagId))
+                {
+                    await _blogPostTagRepository.DeleteAsync(oldTag);
+                }
+            }
+
+            foreach (var newTagId in input.TagIds)
+            {
+                if (!oldTags.Any(x => x.BlogTagId == newTagId))
+                {
+                    await _blogPostTagRepository.InsertAsync(
+                        new BlogPostTag(GuidGenerator.Create(), entity.Id, newTagId));
+                }
+            }
+        }
+
         return await MapToGetOutputDtoAsync(entity);
     }
 
     protected override async Task<BlogPostDto> MapToGetOutputDtoAsync(BlogPost entity)
     {
-        var dto = await base.MapToGetOutputDtoAsync(entity);
+        var dto = MapToDto(entity);
+
         var categories = await _blogPostCategoryRepository.GetListAsync(x => x.BlogPostId == entity.Id);
         dto.CategoryIds = categories.Select(x => x.BlogCategoryId).ToList();
+        
+        var tags = await _blogPostTagRepository.GetListAsync(x => x.BlogPostId == entity.Id);
+        dto.TagIds = tags.Select(x => x.BlogTagId).ToList();
+
         return dto;
+    }
+
+    protected override Task<BlogPostDto> MapToGetListOutputDtoAsync(BlogPost entity)
+    {
+        return Task.FromResult(MapToDto(entity));
+    }
+
+    /// <summary>
+    /// Manual mapping — bypasses broken ObjectMapper DI resolution.
+    /// </summary>
+    private static BlogPostDto MapToDto(BlogPost entity)
+    {
+        return new BlogPostDto
+        {
+            Id = entity.Id,
+            Title = entity.Title,
+            Slug = entity.Slug,
+            Content = entity.Content,
+            ShortDescription = entity.ShortDescription,
+            Status = entity.Status,
+            PublishedAt = entity.PublishedAt,
+            FeaturedImageUrl = entity.FeaturedImageUrl,
+            CreationTime = entity.CreationTime,
+            CreatorId = entity.CreatorId,
+            LastModificationTime = entity.LastModificationTime,
+            LastModifierId = entity.LastModifierId,
+        };
     }
 }

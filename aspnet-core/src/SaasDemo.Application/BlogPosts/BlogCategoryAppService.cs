@@ -10,7 +10,8 @@ namespace SaasDemo.BlogPosts;
 
 
 /// <summary>
-/// Domain entity representing a category specifically for Blog Posts.Isolated from E-commerce or general categories to maintain Bounded Contexts.
+/// Domain entity representing a category specifically for Blog Posts.
+/// Isolated from E-commerce or general categories to maintain Bounded Contexts.
 /// </summary>
 public class BlogCategoryAppService : CrudAppService<BlogCategory, BlogCategoryDto, Guid, BlogCategoryGetListInput, CreateUpdateBlogCategoryDto, CreateUpdateBlogCategoryDto>,
     IBlogCategoryAppService
@@ -28,12 +29,10 @@ public class BlogCategoryAppService : CrudAppService<BlogCategory, BlogCategoryD
         _repository = repository;
 
         LocalizationResource = typeof(SaasDemoResource);
-        ObjectMapperContext = typeof(SaasDemoApplicationModule);
     }
 
     protected override async Task<IQueryable<BlogCategory>> CreateFilteredQueryAsync(BlogCategoryGetListInput input)
     {
-        // TODO: AbpHelper generated
         return (await base.CreateFilteredQueryAsync(input))
             .WhereIf(!input.Name.IsNullOrWhiteSpace(), x => x.Name.Contains(input.Name!))
             .WhereIf(!input.Slug.IsNullOrWhiteSpace(), x => x.Slug.Contains(input.Slug!))
@@ -53,7 +52,7 @@ public class BlogCategoryAppService : CrudAppService<BlogCategory, BlogCategoryD
         );
 
         await _repository.InsertAsync(entity, autoSave: true);
-        return await MapToGetOutputDtoAsync(entity);
+        return MapToDto(entity);
     }
 
     public override async Task<BlogCategoryDto> UpdateAsync(Guid id, CreateUpdateBlogCategoryDto input)
@@ -65,6 +64,34 @@ public class BlogCategoryAppService : CrudAppService<BlogCategory, BlogCategoryD
         entity.Update(input.Name, input.Slug, input.Description);
 
         await _repository.UpdateAsync(entity, autoSave: true);
-        return await MapToGetOutputDtoAsync(entity);
+        return MapToDto(entity);
+    }
+
+    protected override Task<BlogCategoryDto> MapToGetOutputDtoAsync(BlogCategory entity)
+    {
+        return Task.FromResult(MapToDto(entity));
+    }
+
+    protected override Task<BlogCategoryDto> MapToGetListOutputDtoAsync(BlogCategory entity)
+    {
+        return Task.FromResult(MapToDto(entity));
+    }
+
+    /// <summary>
+    /// Manual mapping — bypasses broken ObjectMapper DI resolution.
+    /// </summary>
+    private static BlogCategoryDto MapToDto(BlogCategory entity)
+    {
+        return new BlogCategoryDto
+        {
+            Id = entity.Id,
+            Name = entity.Name,
+            Slug = entity.Slug,
+            Description = entity.Description,
+            CreationTime = entity.CreationTime,
+            CreatorId = entity.CreatorId,
+            LastModificationTime = entity.LastModificationTime,
+            LastModifierId = entity.LastModifierId,
+        };
     }
 }

@@ -21,6 +21,11 @@ public class SaasDemoPermissionDefinitionProvider : PermissionDefinitionProvider
         blogCategoryPermission.AddChild(SaasDemoPermissions.BlogCategory.Create, L("Permission:Create"));
         blogCategoryPermission.AddChild(SaasDemoPermissions.BlogCategory.Update, L("Permission:Update"));
         blogCategoryPermission.AddChild(SaasDemoPermissions.BlogCategory.Delete, L("Permission:Delete"));
+
+        var blogTagPermission = myGroup.AddPermission(SaasDemoPermissions.BlogTag.Default, L("Permission:BlogTag"));
+        blogTagPermission.AddChild(SaasDemoPermissions.BlogTag.Create, L("Permission:Create"));
+        blogTagPermission.AddChild(SaasDemoPermissions.BlogTag.Update, L("Permission:Update"));
+        blogTagPermission.AddChild(SaasDemoPermissions.BlogTag.Delete, L("Permission:Delete"));
     }
 
     private static LocalizableString L(string name)

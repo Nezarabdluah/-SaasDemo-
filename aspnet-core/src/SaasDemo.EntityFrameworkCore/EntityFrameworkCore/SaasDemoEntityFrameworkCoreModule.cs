@@ -48,6 +48,7 @@ namespace SaasDemo.EntityFrameworkCore;
             options.AddDefaultRepositories(includeAllEntities: true);
             options.AddRepository<BlogPost, BlogPostRepository>();
             options.AddRepository<BlogCategory, BlogCategoryRepository>();
+            options.AddRepository<BlogTag, BlogTagRepository>();
         });
 
         Configure<AbpDbContextOptions>(options =>

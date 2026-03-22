@@ -32,14 +32,26 @@
           </div>
         </div>
 
-        <div class="mb-3">
-          <label class="form-label" for="categoryIds">Categories</label>
-          <select id="categoryIds" class="form-select" formControlName="categoryIds" multiple style="min-height: 100px;">
-            <option *ngFor="let category of categories" [ngValue]="category.id">
-              {{ category.name }}
-            </option>
-          </select>
-          <small class="text-muted">Hold Ctrl (Windows) or Command (Mac) to select multiple categories.</small>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label class="form-label" for="categoryIds">Categories</label>
+            <select id="categoryIds" class="form-select" formControlName="categoryIds" multiple style="min-height: 100px;">
+              <option *ngFor="let category of categories" [ngValue]="category.id">
+                {{ category.name }}
+              </option>
+            </select>
+            <small class="text-muted">Hold Ctrl/Command to select multiple.</small>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label class="form-label" for="tagIds">Tags</label>
+            <select id="tagIds" class="form-select" formControlName="tagIds" multiple style="min-height: 100px;">
+              <option *ngFor="let tag of tags" [ngValue]="tag.id">
+                {{ tag.name }}
+              </option>
+            </select>
+            <small class="text-muted">Hold Ctrl/Command to select multiple.</small>
+          </div>
         </div>
 
         <div class="row">

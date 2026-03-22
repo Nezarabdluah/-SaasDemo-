@@ -24,4 +24,14 @@ public static class SaasDemoPermissions
         public const string Create = Default + ".Create";
         public const string Delete = Default + ".Delete";
     }
+    /// <summary>
+    /// Domain entity representing a Tag specifically for Blog Posts.
+    /// </summary>
+    public class BlogTag
+    {
+        public const string Default = GroupName + ".BlogTag";
+        public const string Update = Default + ".Update";
+        public const string Create = Default + ".Create";
+        public const string Delete = Default + ".Delete";
+    }
 }
