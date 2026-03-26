@@ -26,9 +26,11 @@ public class BlogPost : FullAuditedAggregateRoot<Guid>
     /// <summary>
     /// Private constructor for ORM (Entity Framework Core) and DDD standard.
     /// </summary>
+#pragma warning disable CS8618 // EF Core constructor
     private BlogPost()
     {
     }
+#pragma warning restore CS8618
 
     private BlogPost(
         Guid id,

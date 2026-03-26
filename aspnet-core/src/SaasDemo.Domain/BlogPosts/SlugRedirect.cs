@@ -14,6 +14,7 @@ public class SlugRedirect : CreationAuditedEntity<Guid>
     public string OldSlug { get; private set; }
     public Guid BlogPostId { get; private set; }
 
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
     protected SlugRedirect()
     {
     }

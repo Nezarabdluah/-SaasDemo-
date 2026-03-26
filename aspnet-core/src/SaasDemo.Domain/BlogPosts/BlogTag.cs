@@ -11,9 +11,11 @@ public class BlogTag : FullAuditedAggregateRoot<Guid>
 {
     public string Name { get; private set; }
 
+#pragma warning disable CS8618 // EF Core constructor
     protected BlogTag()
     {
     }
+#pragma warning restore CS8618
 
     public BlogTag(
         Guid id,

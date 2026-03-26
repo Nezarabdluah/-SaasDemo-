@@ -16,6 +16,7 @@ using Volo.Abp.SettingManagement;
 using Volo.Abp.TenantManagement;
 using Volo.Blogging;
 using Volo.CmsKit;
+using Volo.CmsKit.Comments;
 
 namespace SaasDemo;
 
@@ -63,6 +64,13 @@ namespace SaasDemo;
         Configure<AbpMultiTenancyOptions>(options =>
         {
             options.IsEnabled = MultiTenancyConsts.IsEnabled;
+        });
+
+        Configure<CmsKitCommentOptions>(options =>
+        {
+            options.EntityTypes.Add(new CommentEntityTypeDefinition(
+                SaasDemoConsts.DbTablePrefix + "BlogPost" // Equivalent to "AppBlogPost" or whatever you prefer as EntityType
+            ));
         });
 
 #if DEBUG

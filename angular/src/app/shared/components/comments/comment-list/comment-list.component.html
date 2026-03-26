@@ -1,0 +1,47 @@
+<div class="comments-section bg-white p-4 rounded shadow-sm mt-4">
+  <h4 class="mb-4 d-flex align-items-center">
+    <i class="fa fa-comments text-primary me-2"></i>
+    التعليقات ({{ totalCount }})
+  </h4>
+
+  <!-- New Root Comment Form -->
+  <div class="mb-5 border-bottom pb-4" *ngIf="isAuthenticated">
+    <h6 class="mb-3">إضافة تعليق جديد</h6>
+    <app-comment-form
+      [entityType]="entityType"
+      [entityId]="entityId"
+      (commentSaved)="loadComments()"
+    ></app-comment-form>
+  </div>
+
+  <div *ngIf="!isAuthenticated" class="alert alert-info py-2" role="alert">
+    يجب تسجيل الدخول لإضافة تعليقات والمشاركة في النقاش.
+  </div>
+
+  <!-- Loading State -->
+  <div class="text-center my-4 text-muted" *ngIf="isLoading">
+    <i class="fa fa-spinner fa-spin fa-2x"></i>
+    <div class="mt-2">جاري تحميل التعليقات...</div>
+  </div>
+
+  <!-- Comment Tree Rendering -->
+  <div *ngIf="!isLoading">
+    <ng-container *ngIf="commentTree.length > 0; else noComments">
+      <div *ngFor="let node of commentTree" class="mb-4">
+        <app-comment-item
+          [comment]="node"
+          [entityType]="entityType"
+          [entityId]="entityId"
+          (commentChanged)="loadComments()"
+        ></app-comment-item>
+      </div>
+    </ng-container>
+
+    <ng-template #noComments>
+      <div class="text-center text-muted my-5">
+        <i class="fa fa-comment-slash fa-3x mb-3 opacity-25"></i>
+        <p>لا توجد تعليقات حتى الآن. كن أول من يشارك رأيه!</p>
+      </div>
+    </ng-template>
+  </div>
+</div>

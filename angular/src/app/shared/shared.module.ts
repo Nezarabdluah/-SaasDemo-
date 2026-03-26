@@ -4,8 +4,16 @@ import { NgModule } from '@angular/core';
 import { ThemeSharedModule } from '@abp/ng.theme.shared';
 import { NgxValidateCoreModule } from '@ngx-validate/core';
 
+import { CommentListComponent } from './components/comments/comment-list/comment-list.component';
+import { CommentItemComponent } from './components/comments/comment-item/comment-item.component';
+import { CommentFormComponent } from './components/comments/comment-form/comment-form.component';
+
 @NgModule({
-  declarations: [],
+  declarations: [
+    CommentListComponent,
+    CommentItemComponent,
+    CommentFormComponent
+  ],
   imports: [
     CoreModule,
     ThemeSharedModule,
@@ -16,7 +24,10 @@ import { NgxValidateCoreModule } from '@ngx-validate/core';
     CoreModule,
     ThemeSharedModule,
     NgbDropdownModule,
-    NgxValidateCoreModule
+    NgxValidateCoreModule,
+    CommentListComponent,
+    CommentItemComponent,
+    CommentFormComponent
   ],
   providers: []
 })

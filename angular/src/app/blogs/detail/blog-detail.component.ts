@@ -4,11 +4,12 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 import { RestService } from '@abp/ng.core';
 import { BlogPostDto } from '../models/blog-post.dto';
 import { PageModule } from '@abp/ng.components/page';
+import { SharedModule } from '../../shared/shared.module';
 
 @Component({
   selector: 'app-blog-detail',
   standalone: true,
-  imports: [CommonModule, RouterModule, PageModule],
+  imports: [CommonModule, RouterModule, PageModule, SharedModule],
   templateUrl: './blog-detail.component.html',
 })
 export class BlogDetailComponent implements OnInit {

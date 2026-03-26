@@ -17,9 +17,8 @@
 
 ## 📦 المرحلة 1: نظام المحتوى الاحترافي (CMS + SEO)
 ### الأسبوع 1–3 | ~90 ساعة
-
 ### المقرر سابقاً ✅
-- [ ] Comments UI كاملة (Nested Replies)
+- [x] Comments UI كاملة (Nested Replies)
 - [x] SEO Layer: MetaTitle, MetaDesc, OgImage
 - [ ] Angular SSR
 - [ ] sitemap.xml و robots.txt ديناميكياً

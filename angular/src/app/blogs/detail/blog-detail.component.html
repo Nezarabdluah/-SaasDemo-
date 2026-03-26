@@ -28,6 +28,9 @@
       
       <h6 class="mt-4">Content:</h6>
       <div class="p-3 bg-light rounded ql-editor" [innerHTML]="post.content"></div>
+      
+      <!-- Comments Section -->
+      <app-comment-list [entityType]="'AppBlogPost'" [entityId]="post.id"></app-comment-list>
     </div>
   </div>
 

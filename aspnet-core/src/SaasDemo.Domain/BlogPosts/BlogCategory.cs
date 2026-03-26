@@ -14,9 +14,10 @@ public class BlogCategory : FullAuditedAggregateRoot<Guid>
     public string Slug { get; private set; }
     public string? Description { get; private set; }
 
+#pragma warning disable CS8618 // EF Core constructor
     private BlogCategory()
-    {
-    }
+    { }
+#pragma warning restore CS8618
 
     private BlogCategory(Guid id, string name, string slug, string? description) : base(id)
     {
