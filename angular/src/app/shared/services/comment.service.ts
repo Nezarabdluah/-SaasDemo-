@@ -27,6 +27,7 @@ export interface CreateCommentInput {
   entityId: string;
   text: string;
   repliedCommentId?: string;
+  idempotencyToken: string;
 }
 
 export interface UpdateCommentInput {
@@ -47,6 +48,10 @@ export class CommentService {
   }
 
   create(entityType: string, entityId: string, input: CreateCommentInput): Observable<CommentDto> {
+    // Auto-generate idempotencyToken if not provided
+    if (!input.idempotencyToken) {
+      input.idempotencyToken = crypto.randomUUID();
+    }
     return this.restService.request<CreateCommentInput, CommentDto>({
       method: 'POST',
       url: `/api/cms-kit-public/comments/${entityType}/${entityId}`,

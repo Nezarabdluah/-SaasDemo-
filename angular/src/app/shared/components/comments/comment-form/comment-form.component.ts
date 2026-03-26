@@ -43,7 +43,8 @@ export class CommentFormComponent implements OnInit {
           entityType: this.entityType,
           entityId: this.entityId,
           text,
-          repliedCommentId: this.repliedCommentId
+          repliedCommentId: this.repliedCommentId,
+          idempotencyToken: crypto.randomUUID()
         });
 
     request.subscribe({
