@@ -24,6 +24,7 @@ public class BlogPostAppService : CrudAppService<BlogPost, BlogPostDto, Guid, Bl
     private readonly IRepository<BlogPostCategory, Guid> _blogPostCategoryRepository;
     private readonly IRepository<BlogPostTag, Guid> _blogPostTagRepository;
     private readonly IRepository<SlugRedirect, Guid> _slugRedirectRepository;
+    private readonly IRepository<BlogPostVersion, Guid> _versionRepository;
     private readonly SlugGenerator _slugGenerator;
 
     public BlogPostAppService(
@@ -31,12 +32,14 @@ public class BlogPostAppService : CrudAppService<BlogPost, BlogPostDto, Guid, Bl
         IRepository<BlogPostCategory, Guid> blogPostCategoryRepository,
         IRepository<BlogPostTag, Guid> blogPostTagRepository,
         IRepository<SlugRedirect, Guid> slugRedirectRepository,
+        IRepository<BlogPostVersion, Guid> versionRepository,
         SlugGenerator slugGenerator) : base(repository)
     {
         _repository = repository;
         _blogPostCategoryRepository = blogPostCategoryRepository;
         _blogPostTagRepository = blogPostTagRepository;
         _slugRedirectRepository = slugRedirectRepository;
+        _versionRepository = versionRepository;
         _slugGenerator = slugGenerator;
 
         LocalizationResource = typeof(SaasDemoResource);
@@ -105,6 +108,11 @@ public class BlogPostAppService : CrudAppService<BlogPost, BlogPostDto, Guid, Bl
 
         var entity = await _repository.GetAsync(id);
         var oldSlug = entity.Slug;
+
+        // *** Auto-snapshot: save current state before applying changes ***
+        var latestVersionNumber = await _repository.GetLatestVersionNumberAsync(id);
+        var snapshot = BlogPostVersion.CreateFromPost(entity, latestVersionNumber + 1);
+        await _versionRepository.InsertAsync(snapshot);
 
         // Generate new slug if changed or auto-generate from title
         string newSlug;
@@ -219,6 +227,70 @@ public class BlogPostAppService : CrudAppService<BlogPost, BlogPostDto, Guid, Bl
     {
         var entity = await _repository.GetAsync(id);
         entity.IncrementViewCount();
+        await _repository.UpdateAsync(entity);
+    }
+
+    public async Task<List<BlogPostVersionListDto>> GetVersionsAsync(Guid postId)
+    {
+        var versions = await _repository.GetVersionsAsync(postId);
+
+        return versions.Select(v => new BlogPostVersionListDto
+        {
+            Id = v.Id,
+            VersionNumber = v.VersionNumber,
+            Title = v.Title,
+            ChangeNote = v.ChangeNote,
+            CreationTime = v.CreationTime
+        }).ToList();
+    }
+
+    public async Task<BlogPostVersionDto> GetVersionAsync(Guid versionId)
+    {
+        var v = await _repository.GetVersionAsync(versionId)
+            ?? throw new Volo.Abp.BusinessException("Version not found.");
+
+        return new BlogPostVersionDto
+        {
+            Id = v.Id,
+            BlogPostId = v.BlogPostId,
+            VersionNumber = v.VersionNumber,
+            Title = v.Title,
+            Content = v.Content,
+            Slug = v.Slug,
+            ShortDescription = v.ShortDescription,
+            ChangeNote = v.ChangeNote,
+            MetaTitle = v.MetaTitle,
+            MetaDescription = v.MetaDescription,
+            OgImageUrl = v.OgImageUrl,
+            CreationTime = v.CreationTime
+        };
+    }
+
+    public async Task RestoreVersionAsync(Guid postId, Guid versionId)
+    {
+        var entity = await _repository.GetAsync(postId);
+        var version = await _repository.GetVersionAsync(versionId)
+            ?? throw new Volo.Abp.BusinessException("Version not found.");
+
+        // Save current state as a new version before restoring
+        var latestVersionNumber = await _repository.GetLatestVersionNumberAsync(postId);
+        var snapshotBeforeRestore = BlogPostVersion.CreateFromPost(entity, latestVersionNumber + 1, "Auto-saved before restore");
+        await _versionRepository.InsertAsync(snapshotBeforeRestore);
+
+        // Restore entity from the chosen version
+        entity.Update(
+            version.Title,
+            version.Slug,
+            version.Content,
+            version.ShortDescription,
+            entity.Status,
+            entity.FeaturedImageUrl,
+            entity.PublishedAt,
+            version.MetaTitle,
+            version.MetaDescription,
+            version.OgImageUrl
+        );
+
         await _repository.UpdateAsync(entity);
     }
 

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -37,5 +38,36 @@ public class BlogPostRepository : EfCoreRepository<SaasDemoDbContext, BlogPost, 
         return await dbSet
             .AsNoTracking()
             .FirstOrDefaultAsync(x => x.Slug == slug, GetCancellationToken(cancellationToken));
+    }
+
+    public async Task<List<BlogPostVersion>> GetVersionsAsync(Guid blogPostId, CancellationToken cancellationToken = default)
+    {
+        var dbContext = await GetDbContextAsync();
+
+        return await dbContext.BlogPostVersions
+            .AsNoTracking()
+            .Where(x => x.BlogPostId == blogPostId)
+            .OrderByDescending(x => x.VersionNumber)
+            .ToListAsync(GetCancellationToken(cancellationToken));
+    }
+
+    public async Task<BlogPostVersion?> GetVersionAsync(Guid versionId, CancellationToken cancellationToken = default)
+    {
+        var dbContext = await GetDbContextAsync();
+
+        return await dbContext.BlogPostVersions
+            .AsNoTracking()
+            .FirstOrDefaultAsync(x => x.Id == versionId, GetCancellationToken(cancellationToken));
+    }
+
+    public async Task<int> GetLatestVersionNumberAsync(Guid blogPostId, CancellationToken cancellationToken = default)
+    {
+        var dbContext = await GetDbContextAsync();
+
+        var max = await dbContext.BlogPostVersions
+            .Where(x => x.BlogPostId == blogPostId)
+            .MaxAsync(x => (int?)x.VersionNumber, GetCancellationToken(cancellationToken));
+
+        return max ?? 0;
     }
 }

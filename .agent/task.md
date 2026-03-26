@@ -36,9 +36,9 @@
 - [x] View Counter بدون تأثير على الأداء (Fire & Forget pattern)
 
 **Content Versioning:**
-- [ ] حفظ كل نسخة عند التعديل (Audit History للمحتوى)
-- [ ] استعادة نسخة قديمة بضغطة زر
-- [ ] مقارنة نسختين جنباً إلى جنب (Diff View)
+- [x] حفظ كل نسخة عند التعديل (Audit History للمحتوى)
+- [x] استعادة نسخة قديمة بضغطة زر
+- [x] مقارنة نسختين جنباً إلى جنب (Diff View)
 
 **Media Library:**
 - [ ] مكتبة صور مركزية مربوطة بـ Azure Blob Storage

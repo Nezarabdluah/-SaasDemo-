@@ -62,6 +62,7 @@ public class SaasDemoDbContext :
     public DbSet<BlogCategory> BlogCategories { get; set; }
     public DbSet<BlogPostCategory> BlogPostCategories { get; set; }
     public DbSet<SlugRedirect> SlugRedirects { get; set; }
+    public DbSet<BlogPostVersion> BlogPostVersions { get; set; }
 
 
 
@@ -143,6 +144,16 @@ public class SaasDemoDbContext :
             b.ConfigureByConvention();
             b.HasIndex(x => x.OldSlug).IsUnique();
             b.HasOne<BlogPost>().WithMany().HasForeignKey(x => x.BlogPostId).IsRequired();
+        });
+
+        builder.Entity<BlogPostVersion>(b =>
+        {
+            b.ToTable(SaasDemoConsts.DbTablePrefix + "BlogPostVersions", SaasDemoConsts.DbSchema);
+            b.ConfigureByConvention();
+            b.HasIndex(x => new { x.BlogPostId, x.VersionNumber }).IsUnique();
+            b.HasOne<BlogPost>().WithMany().HasForeignKey(x => x.BlogPostId).IsRequired();
+            b.Property(x => x.MetaTitle).HasMaxLength(70);
+            b.Property(x => x.MetaDescription).HasMaxLength(160);
         });
 
     }
