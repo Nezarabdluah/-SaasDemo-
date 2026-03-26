@@ -17,6 +17,8 @@ using Volo.Abp.TenantManagement;
 using Volo.Blogging;
 using Volo.CmsKit;
 using Volo.CmsKit.Comments;
+using SaasDemo.BlogPosts;
+using Volo.Abp.BlobStoring;
 
 namespace SaasDemo;
 
@@ -31,10 +33,11 @@ namespace SaasDemo;
     typeof(AbpPermissionManagementDomainIdentityModule),
     typeof(AbpSettingManagementDomainModule),
     typeof(AbpTenantManagementDomainModule),
-    typeof(AbpEmailingModule)
+    typeof(AbpEmailingModule),
+    typeof(BloggingDomainModule),
+    typeof(CmsKitDomainModule),
+    typeof(AbpBlobStoringModule)
 )]
-[DependsOn(typeof(BloggingDomainModule))]
-    [DependsOn(typeof(CmsKitDomainModule))]
     public class SaasDemoDomainModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)

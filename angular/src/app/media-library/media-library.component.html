@@ -1,0 +1,71 @@
+<div class="card shadow-sm">
+  <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+    <h3 class="card-title m-0">مكتبة الوسائط (Media Library)</h3>
+    <span class="badge bg-light text-dark fw-bold px-3 py-2 rounded-pill">{{ totalCount }} ملف</span>
+  </div>
+
+  <div class="card-body">
+
+    <!-- Upload Section -->
+    <div class="row align-items-end mb-4 border-bottom pb-4">
+      <div class="col-md-4">
+        <label class="form-label">اختر ملف للرفع</label>
+        <input type="file" class="form-control" (change)="onFileSelected($event)">
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">المجلد (اختياري)</label>
+        <input type="text" class="form-control" placeholder="blog/2026" [(ngModel)]="uploadFolder">
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">النص البديل Alt Text</label>
+        <input type="text" class="form-control" placeholder="وصف الصورة" [(ngModel)]="uploadAltText">
+      </div>
+      <div class="col-md-2">
+        <button class="btn btn-success w-100" [disabled]="!selectedFile || isUploading" (click)="uploadFile()">
+          <i class="fa fa-upload me-1"></i>
+          {{ isUploading ? 'جاري الرفع...' : 'رفع الملف' }}
+        </button>
+      </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <input type="text" class="form-control" placeholder="ابحث بالاسم..." [(ngModel)]="filter" (keyup.enter)="loadMedia()">
+      </div>
+      <div class="col-md-4">
+        <input type="text" class="form-control" placeholder="تصفية بالمجلد..." [(ngModel)]="folderPath" (keyup.enter)="loadMedia()">
+      </div>
+      <div class="col-md-2">
+        <button class="btn btn-outline-primary w-100" (click)="loadMedia()">تطبيق الفلتر</button>
+      </div>
+    </div>
+
+    <!-- Grid -->
+    <div class="row g-3">
+      <div *ngFor="let file of mediaFiles" class="col-md-3 col-sm-6">
+        <div class="card h-100 border overflow-hidden position-relative">
+          <!-- Direct Media URL using the MediaController we built -->
+          <img [src]="getMediaUrl(file.id)" class="card-img-top" style="height: 150px; object-fit: cover;" [alt]="file.altText || file.fileName">
+          
+          <div class="card-body p-2 text-center" style="font-size: 0.85rem;">
+            <p class="text-truncate fw-bold mb-1" [title]="file.fileName">{{ file.fileName }}</p>
+            <p class="text-muted mb-0">{{ file.contentType }} | {{ (file.fileSize / 1024).toFixed(1) }} KB</p>
+            <p *ngIf="file.folderPath" class="badge bg-secondary mb-0 mt-1">{{ file.folderPath }}</p>
+          </div>
+          
+          <div class="card-footer p-2 bg-white text-center border-top-0 d-flex justify-content-between">
+            <button class="btn btn-sm btn-outline-danger" (click)="deleteFile(file.id)">حذف</button>
+            <a class="btn btn-sm btn-outline-primary" [href]="getMediaUrl(file.id)" target="_blank">رابط</a>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="mediaFiles.length === 0" class="col-12 text-center p-5 text-muted">
+        <i class="fa fa-image fa-3x mb-3 text-light"></i>
+        <h5>لا يوجد ملفات مطابقة</h5>
+      </div>
+    </div>
+
+  </div>
+</div>

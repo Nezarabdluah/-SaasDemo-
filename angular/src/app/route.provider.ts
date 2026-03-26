@@ -24,11 +24,20 @@ function configureRoutes(routesService: RoutesService) {
       },
       {
         path: '/blog-tags',
-        name: 'Blog Tags',
+        name: '::Menu:BlogTags',
+        parentName: '::Menu:Blogging',
         iconClass: 'fas fa-tags',
         order: 3,
         layout: eLayoutType.application,
+        requiredPolicy: 'SaasDemo.BlogTag',
       },
-    ]);
+      {
+        path: '/media-library',
+        name: 'مكتبة الوسائط',
+        iconClass: 'fas fa-photo-video',
+        order: 4,
+        layout: eLayoutType.application,
+        // requiredPolicy: 'SaasDemo.MediaLibrary', // Uncomment when ready
+      }]);
   };
 }

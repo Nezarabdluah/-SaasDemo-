@@ -1,10 +1,25 @@
 # Current Context
 
+## ⏳ Current Phase: Phase 1 (CMS + SEO Core)
 - **Session Date:** 2026-03-26
-- **Status:** 🟢 Phase 1 Batches 1-3 — COMPLETED
-- **Current Focus:** Moving to Phase 1 Batch 4 (Media Library or Angular SSR).
-- **Last Accomplishments:**
-  - Batch 1: Slug System + SEO Fields + ReadingTime + ViewCount (32 tests)
-  - Batch 2: Comments UI with Nested Replies (CmsKit integration + Angular components)
-  - Batch 3: Content Versioning (auto-snapshot on update, restore, diff view API)
-- **Next Steps:** Media Library (Azure Blob Storage) or Angular SSR or sitemap/robots.txt.
+- **Status**: 🟢 Batches 1–4 Completed (Slug, SEO, Comments, Versioning, Media Library)
+- **Focus**: Media Library integration (Copy URL, Cover Image Picker, Quill Image Insert)
+- **Remaining in Phase 1**: Angular SSR, sitemap.xml/robots.txt, Media Library Integration
+- **Next Phase**: Phase 2 (Site Settings + Email Templates Engine)
+
+## 📊 Phase 1 Progress
+| Batch | Feature | Status |
+|-------|---------|--------|
+| 1 | Slug System + SEO Fields + ReadingTime + ViewCount | ✅ Done |
+| 2 | Comments UI (Nested Replies via CmsKit) | ✅ Done |
+| 3 | Content Versioning (Auto-Snapshot, Restore, Diff) | ✅ Done |
+| 4 | Media Library (Backend + Angular UI) | ✅ Done |
+| 4.5 | Media Library Integration (Cover Picker, Quill, Copy URL) | 🔲 Next |
+| 5 | Angular SSR + sitemap.xml + robots.txt | 🔲 Pending |
+
+## 🐛 Known Issues / Lessons Learned
+1. **ABP Permissions**: New permissions need `DbMigrator` to seed into DB, otherwise 403 Forbidden.
+2. **Swashbuckle + IFormFile**: Cannot use individual `[FromForm]` params. Must use a model class.
+3. **BlobStoring Path**: Use `ContentRootPath` for local dev. `D:\` may lack write permissions.
+4. **Angular Image URLs**: Must prefix with backend API URL from `EnvironmentService`.
+5. **ABP Auto-API vs Custom Controller**: Use `[RemoteService(IsEnabled = false)]` on AppService methods that have custom controllers.

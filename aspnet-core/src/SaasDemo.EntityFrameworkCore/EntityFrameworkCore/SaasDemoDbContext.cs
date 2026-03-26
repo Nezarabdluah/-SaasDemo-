@@ -63,6 +63,7 @@ public class SaasDemoDbContext :
     public DbSet<BlogPostCategory> BlogPostCategories { get; set; }
     public DbSet<SlugRedirect> SlugRedirects { get; set; }
     public DbSet<BlogPostVersion> BlogPostVersions { get; set; }
+    public DbSet<SaasDemo.MediaLibrary.MediaFile> MediaFiles { get; set; }
 
 
 
@@ -154,6 +155,16 @@ public class SaasDemoDbContext :
             b.HasOne<BlogPost>().WithMany().HasForeignKey(x => x.BlogPostId).IsRequired();
             b.Property(x => x.MetaTitle).HasMaxLength(70);
             b.Property(x => x.MetaDescription).HasMaxLength(160);
+        });
+
+        builder.Entity<SaasDemo.MediaLibrary.MediaFile>(b =>
+        {
+            b.ToTable(SaasDemoConsts.DbTablePrefix + "MediaFiles", SaasDemoConsts.DbSchema);
+            b.ConfigureByConvention();
+            b.Property(x => x.FileName).IsRequired().HasMaxLength(256);
+            b.Property(x => x.ContentType).IsRequired().HasMaxLength(128);
+            b.Property(x => x.BlobName).IsRequired().HasMaxLength(256);
+            b.HasIndex(x => x.BlobName).IsUnique();
         });
 
     }

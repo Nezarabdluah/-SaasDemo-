@@ -20,9 +20,13 @@ export const appRoutes: Routes = [
       import('@abp/ng.tenant-management').then(m => m.createRoutes()),
   },
   {
+    path: 'media-library',
+    loadComponent: () => import('./media-library/media-library.component').then(m => m.MediaLibraryComponent),
+  },
+  {
     path: 'setting-management',
     loadChildren: () =>
-      import('@abp/ng.setting-management').then(m => m.createRoutes()),
+      import('@abp/ng.setting-management').then((m) => m.createRoutes()),
   },
   {
     path: 'blogs',
