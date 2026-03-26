@@ -23,13 +23,14 @@ export class MediaLibraryComponent implements OnInit {
   uploadFolder = '';
   uploadAltText = '';
 
+  copiedId: string | null = null; // For "Copied!" visual feedback
+
   private apiUrl = '';
 
   constructor(
     private mediaService: MediaService,
     private environment: EnvironmentService
   ) {
-    // Get the backend API base URL from ABP environment config
     this.apiUrl = this.environment.getEnvironment()?.apis?.default?.url || '';
   }
 
@@ -58,8 +59,7 @@ export class MediaLibraryComponent implements OnInit {
 
     this.isUploading = true;
     this.mediaService.upload(this.selectedFile, this.uploadFolder, this.uploadAltText).subscribe({
-      next: (result) => {
-        // Refresh grid
+      next: () => {
         this.loadMedia();
         this.isUploading = false;
         this.selectedFile = null;
@@ -83,5 +83,13 @@ export class MediaLibraryComponent implements OnInit {
 
   getMediaUrl(id: string) {
     return `${this.apiUrl}/api/app/media/${id}/content`;
+  }
+
+  copyUrl(id: string) {
+    const url = this.getMediaUrl(id);
+    navigator.clipboard.writeText(url).then(() => {
+      this.copiedId = id;
+      setTimeout(() => this.copiedId = null, 2000);
+    });
   }
 }

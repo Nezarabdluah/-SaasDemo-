@@ -53,8 +53,10 @@
 | `CommentItemComponent` | shared/components/comments/ | Recursive single comment with reply/edit/delete |
 | `CommentFormComponent` | shared/components/comments/ | Add/edit comment form with idempotencyToken |
 | `CommentService` | shared/services/ | CmsKit public API integration (CRUD) |
-| `MediaLibraryComponent` | media-library/ | Standalone. Upload form + Grid view + Filter + Delete |
+| `MediaLibraryComponent` | media-library/ | Standalone. Upload + Grid + Filter + Delete + Copy URL |
 | `MediaService` | shared/services/ | Upload (FormData), GetList, Delete, UpdateMetadata |
+| `MediaPickerModalComponent` | shared/components/media-picker-modal/ | Reusable modal: select image from library or upload new |
+| `BlogCreateComponent` | blogs/create/ | Blog creation form with Cover Image Picker + Quill integration |
 
 ## Angular Routing
 | Path | Component | Menu Label |
@@ -63,11 +65,11 @@
 | `/media-library` | MediaLibraryComponent | مكتبة الوسائط |
 
 ## Permissions
-| Permission Key | Description |
-|---|---|
-| `SaasDemo.BlogPost` | Blog Posts CRUD |
-| `SaasDemo.BlogCategory` | Blog Categories CRUD |
-| `SaasDemo.BlogTag` | Blog Tags CRUD |
-| `SaasDemo.MediaLibrary.Default` | Media Library Read (NOT seeded yet) |
-| `SaasDemo.MediaLibrary.Create` | Media Library Upload (NOT seeded yet) |
-| `SaasDemo.MediaLibrary.Delete` | Media Library Delete (NOT seeded yet) |
+| Permission Key | Description | Seeded? |
+|---|---|---|
+| `SaasDemo.BlogPost` | Blog Posts CRUD | ✅ Yes |
+| `SaasDemo.BlogCategory` | Blog Categories CRUD | ✅ Yes |
+| `SaasDemo.BlogTag` | Blog Tags CRUD | ✅ Yes |
+| `SaasDemo.MediaLibrary.Default` | Media Library Read | ❌ Need DbMigrator |
+| `SaasDemo.MediaLibrary.Create` | Media Library Upload | ❌ Need DbMigrator |
+| `SaasDemo.MediaLibrary.Delete` | Media Library Delete | ❌ Need DbMigrator |

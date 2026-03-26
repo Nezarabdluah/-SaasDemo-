@@ -45,7 +45,6 @@
     <div class="row g-3">
       <div *ngFor="let file of mediaFiles" class="col-md-3 col-sm-6">
         <div class="card h-100 border overflow-hidden position-relative">
-          <!-- Direct Media URL using the MediaController we built -->
           <img [src]="getMediaUrl(file.id)" class="card-img-top" style="height: 150px; object-fit: cover;" [alt]="file.altText || file.fileName">
           
           <div class="card-body p-2 text-center" style="font-size: 0.85rem;">
@@ -54,9 +53,14 @@
             <p *ngIf="file.folderPath" class="badge bg-secondary mb-0 mt-1">{{ file.folderPath }}</p>
           </div>
           
-          <div class="card-footer p-2 bg-white text-center border-top-0 d-flex justify-content-between">
-            <button class="btn btn-sm btn-outline-danger" (click)="deleteFile(file.id)">حذف</button>
-            <a class="btn btn-sm btn-outline-primary" [href]="getMediaUrl(file.id)" target="_blank">رابط</a>
+          <div class="card-footer p-2 bg-white border-top-0 d-flex justify-content-between">
+            <button class="btn btn-sm btn-outline-danger" (click)="deleteFile(file.id)">
+              <i class="fa fa-trash me-1"></i>حذف
+            </button>
+            <button class="btn btn-sm" [class]="copiedId === file.id ? 'btn-success' : 'btn-outline-primary'" (click)="copyUrl(file.id)">
+              <i class="fa me-1" [class.fa-check]="copiedId === file.id" [class.fa-copy]="copiedId !== file.id"></i>
+              {{ copiedId === file.id ? 'تم النسخ!' : 'نسخ الرابط' }}
+            </button>
           </div>
         </div>
       </div>

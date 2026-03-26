@@ -7,20 +7,19 @@
 **Architecture Style:** Clean Architecture (DDD, CQRS)
 
 ## Module Registry
-- **Completed:** Identity, Account, Tenant Management, Feature Management, Setting Management.
-- **Completed:** Volo.CmsKit ✅ مثبت (Comments system)
+- **Completed:** Identity, Account, Tenant Management, Feature Management, Setting Management ✅
+- **Completed:** Volo.CmsKit (Comments system) ✅
 - **Completed:** BlogPost Entity + Backend CRUD + Angular UI ✅
-- **Completed:** BlogCategory Entity + Backend (Custom DDD AppService) + Linked to BlogPost UI ✅
-- **Completed:** BlogTag Entity + Backend CRUD ✅
+- **Completed:** BlogCategory + BlogTag Entities + Backend + UI ✅
 - **Completed:** Content Versioning (BlogPostVersion) ✅
 - **Completed:** Media Library (MediaFile + BlobStoring + Upload/Grid/Delete) ✅
-- **In Progress:** Media Library Integration (Cover Picker, Quill Insert, Copy URL)
+- **Completed:** Media Library Integration (Copy URL + Cover Picker + Quill Image Insert) ✅
 - **Pending:** Angular SSR, Sitemap, Robots.txt
 
 ## Key Commands
-- Backend: `dotnet run --project src\SaasDemo.HttpApi.Host` (or run via Visual Studio / IIS Express)
+- Backend: `dotnet run --project src\SaasDemo.HttpApi.Host`
 - Frontend: `npm start` (in `angular`)
-- Build: `dotnet build src\SaasDemo.HttpApi.Host`
+- Build: `dotnet build src\SaasDemo.HttpApi.Host` / `npm run build` (angular)
 - Migrations: `dotnet run --project src\SaasDemo.DbMigrator` -> **CRITICAL:** Use this to re-seed Permissions after creating new entities/permissions, to avoid 403 Forbidden issues.
 
 ## Storage Configuration
@@ -29,8 +28,9 @@
 - **Future:** Can swap to Azure Blob Storage by changing provider config only.
 
 ## Critical Patterns & Gotchas
-1. **Swashbuckle + IFormFile**: NEVER use individual `[FromForm] IFormFile` params in controllers. Always create a Model class (e.g. `MediaUploadForm`) and bind with `[FromForm] ModelClass form`.
-2. **ABP Auto-API Disabling**: When creating custom controllers for AppService methods, add `[RemoteService(IsEnabled = false)]` to the AppService interface method to prevent ABP from generating a conflicting API route.
-3. **[AllowAnonymous] vs [Authorize]**: Never put `[AllowAnonymous]` on a class level and `[Authorize]` on a method level — causes ASP0026 warning and Swagger crash.
-4. **Permission Seeding**: After adding new permissions in `SaasDemoPermissions.cs` and `SaasDemoPermissionDefinitionProvider.cs`, MUST run `DbMigrator` to seed them into the database. Until then, all policy-based `[Authorize]` will return 403.
-5. **Angular Image URLs**: For `<img src>` tags, always prefix with the ABP Environment API base URL via `EnvironmentService`, since Angular dev server (port 4200) != Backend (port 44368).
+1. **Swashbuckle + IFormFile**: NEVER use individual `[FromForm] IFormFile` params. Always create a Model class (e.g. `MediaUploadForm`).
+2. **ABP Auto-API Disabling**: Use `[RemoteService(IsEnabled = false)]` on AppService methods that have custom controllers.
+3. **[AllowAnonymous] vs [Authorize]**: Never put both on conflicting levels — causes ASP0026 and Swagger crash.
+4. **Permission Seeding**: Run `DbMigrator` after adding new permissions. Until then, policy-based `[Authorize]` returns 403.
+5. **Angular Image URLs**: Prefix with ABP `EnvironmentService` API base URL for `<img src>`, since dev server port ≠ backend port.
+6. **Quill Image Handler Override**: Use `quillModules.toolbar.handlers.image` function to open custom UI instead of default prompt.

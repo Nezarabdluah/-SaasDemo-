@@ -75,8 +75,17 @@
           </div>
 
           <div class="col-md-4 mb-3">
-            <label class="form-label" for="featuredImageUrl">Featured Image URL</label>
-            <input type="url" id="featuredImageUrl" class="form-control" formControlName="featuredImageUrl" />
+            <label class="form-label">صورة الغلاف (Featured Image)</label>
+            <div class="input-group">
+              <input type="url" class="form-control" formControlName="featuredImageUrl" placeholder="URL الصورة..." />
+              <button type="button" class="btn btn-outline-primary" (click)="showCoverPicker = true">
+                <i class="fa fa-images me-1"></i>اختر من المكتبة
+              </button>
+            </div>
+            <!-- Preview -->
+            <div *ngIf="form.get('featuredImageUrl')?.value" class="mt-2">
+              <img [src]="form.get('featuredImageUrl')?.value" class="img-thumbnail" style="max-height: 120px;" alt="Cover Preview">
+            </div>
           </div>
         </div>
 
@@ -91,3 +100,17 @@
     </div>
   </div>
 </abp-page>
+
+<!-- Cover Image Picker Modal -->
+<app-media-picker-modal
+  [isOpen]="showCoverPicker"
+  (closed)="showCoverPicker = false"
+  (imageSelected)="onCoverImageSelected($event)">
+</app-media-picker-modal>
+
+<!-- Quill Image Insert Modal -->
+<app-media-picker-modal
+  [isOpen]="showQuillPicker"
+  (closed)="showQuillPicker = false"
+  (imageSelected)="onQuillImageSelected($event)">
+</app-media-picker-modal>
