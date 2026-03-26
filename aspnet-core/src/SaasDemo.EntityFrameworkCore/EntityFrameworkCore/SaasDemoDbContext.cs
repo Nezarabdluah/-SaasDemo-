@@ -61,6 +61,7 @@ public class SaasDemoDbContext :
     public DbSet<BlogPostTag> BlogPostTags { get; set; }
     public DbSet<BlogCategory> BlogCategories { get; set; }
     public DbSet<BlogPostCategory> BlogPostCategories { get; set; }
+    public DbSet<SlugRedirect> SlugRedirects { get; set; }
 
 
 
@@ -87,20 +88,16 @@ public class SaasDemoDbContext :
 
         /* Configure your own tables/entities inside here */
 
-        //builder.Entity<YourEntity>(b =>
-        //{
-        //    b.ToTable(SaasDemoConsts.DbTablePrefix + "YourEntities", SaasDemoConsts.DbSchema);
-        //    b.ConfigureByConvention(); //auto configure for the base class props
-        //    //...
-        //});
         builder.ConfigureBlogging();
-            builder.ConfigureCmsKit();
-
+        builder.ConfigureCmsKit();
 
         builder.Entity<BlogPost>(b =>
         {
             b.ToTable(SaasDemoConsts.DbTablePrefix + "BlogPosts", SaasDemoConsts.DbSchema);
-            b.ConfigureByConvention(); 
+            b.ConfigureByConvention();
+            b.HasIndex(x => x.Slug).IsUnique();
+            b.Property(x => x.MetaTitle).HasMaxLength(70);
+            b.Property(x => x.MetaDescription).HasMaxLength(160);
         });
 
         builder.Entity<BlogCategory>(b =>
@@ -140,6 +137,13 @@ public class SaasDemoDbContext :
             b.HasIndex(x => new { x.BlogPostId, x.BlogTagId });
         });
 
+        builder.Entity<SlugRedirect>(b =>
+        {
+            b.ToTable(SaasDemoConsts.DbTablePrefix + "SlugRedirects", SaasDemoConsts.DbSchema);
+            b.ConfigureByConvention();
+            b.HasIndex(x => x.OldSlug).IsUnique();
+            b.HasOne<BlogPost>().WithMany().HasForeignKey(x => x.BlogPostId).IsRequired();
+        });
 
-        }
+    }
 }

@@ -8,7 +8,10 @@ public class CreateUpdateBlogPostDto
 {
     public string Title { get; set; }
 
-    public string Slug { get; set; }
+    /// <summary>
+    /// Optional — if empty or null, slug is auto-generated from Title.
+    /// </summary>
+    public string? Slug { get; set; }
 
     public string Content { get; set; }
 
@@ -19,6 +22,11 @@ public class CreateUpdateBlogPostDto
     public DateTime? PublishedAt { get; set; }
 
     public string? FeaturedImageUrl { get; set; }
+
+    // SEO Fields
+    public string? MetaTitle { get; set; }
+    public string? MetaDescription { get; set; }
+    public string? OgImageUrl { get; set; }
 
     public List<Guid>? CategoryIds { get; set; }
 

@@ -21,6 +21,15 @@ public class BlogPostDto : FullAuditedEntityDto<Guid>
 
     public string? FeaturedImageUrl { get; set; }
 
+    // SEO Fields
+    public string? MetaTitle { get; set; }
+    public string? MetaDescription { get; set; }
+    public string? OgImageUrl { get; set; }
+
+    // Content Stats
+    public int ReadingTimeMinutes { get; set; }
+    public long ViewCount { get; set; }
+
     public List<Guid> CategoryIds { get; set; } = new();
 
     public List<Guid> TagIds { get; set; } = new();

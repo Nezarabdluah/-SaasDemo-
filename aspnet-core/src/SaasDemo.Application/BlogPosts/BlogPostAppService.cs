@@ -23,15 +23,21 @@ public class BlogPostAppService : CrudAppService<BlogPost, BlogPostDto, Guid, Bl
     private readonly IBlogPostRepository _repository;
     private readonly IRepository<BlogPostCategory, Guid> _blogPostCategoryRepository;
     private readonly IRepository<BlogPostTag, Guid> _blogPostTagRepository;
+    private readonly IRepository<SlugRedirect, Guid> _slugRedirectRepository;
+    private readonly SlugGenerator _slugGenerator;
 
     public BlogPostAppService(
         IBlogPostRepository repository,
         IRepository<BlogPostCategory, Guid> blogPostCategoryRepository,
-        IRepository<BlogPostTag, Guid> blogPostTagRepository) : base(repository)
+        IRepository<BlogPostTag, Guid> blogPostTagRepository,
+        IRepository<SlugRedirect, Guid> slugRedirectRepository,
+        SlugGenerator slugGenerator) : base(repository)
     {
         _repository = repository;
         _blogPostCategoryRepository = blogPostCategoryRepository;
         _blogPostTagRepository = blogPostTagRepository;
+        _slugRedirectRepository = slugRedirectRepository;
+        _slugGenerator = slugGenerator;
 
         LocalizationResource = typeof(SaasDemoResource);
     }
@@ -51,15 +57,23 @@ public class BlogPostAppService : CrudAppService<BlogPost, BlogPostDto, Guid, Bl
     {
         await CheckCreatePolicyAsync();
 
+        // Auto-generate slug from title if not provided
+        var slug = string.IsNullOrWhiteSpace(input.Slug)
+            ? await _slugGenerator.GenerateUniqueSlugAsync(input.Title)
+            : await _slugGenerator.GenerateUniqueSlugAsync(input.Slug);
+
         var entity = BlogPost.Create(
             GuidGenerator.Create(),
             input.Title,
-            input.Slug,
+            slug,
             input.Content,
             input.ShortDescription,
             input.Status,
             input.FeaturedImageUrl,
-            input.PublishedAt
+            input.PublishedAt,
+            input.MetaTitle,
+            input.MetaDescription,
+            input.OgImageUrl
         );
 
         await _repository.InsertAsync(entity);
@@ -90,15 +104,37 @@ public class BlogPostAppService : CrudAppService<BlogPost, BlogPostDto, Guid, Bl
         await CheckUpdatePolicyAsync();
 
         var entity = await _repository.GetAsync(id);
+        var oldSlug = entity.Slug;
+
+        // Generate new slug if changed or auto-generate from title
+        string newSlug;
+        if (string.IsNullOrWhiteSpace(input.Slug))
+        {
+            newSlug = await _slugGenerator.GenerateUniqueSlugAsync(input.Title, id);
+        }
+        else
+        {
+            newSlug = await _slugGenerator.GenerateUniqueSlugAsync(input.Slug, id);
+        }
+
+        // Save old slug as redirect if it changed
+        if (!string.Equals(oldSlug, newSlug, StringComparison.OrdinalIgnoreCase))
+        {
+            await _slugRedirectRepository.InsertAsync(
+                new SlugRedirect(GuidGenerator.Create(), oldSlug, entity.Id));
+        }
 
         entity.Update(
             input.Title,
-            input.Slug,
+            newSlug,
             input.Content,
             input.ShortDescription,
             input.Status,
             input.FeaturedImageUrl,
-            input.PublishedAt
+            input.PublishedAt,
+            input.MetaTitle,
+            input.MetaDescription,
+            input.OgImageUrl
         );
 
         await _repository.UpdateAsync(entity);
@@ -150,6 +186,42 @@ public class BlogPostAppService : CrudAppService<BlogPost, BlogPostDto, Guid, Bl
         return await MapToGetOutputDtoAsync(entity);
     }
 
+    /// <summary>
+    /// Gets a BlogPost by its slug. Also checks SlugRedirects for old slugs.
+    /// Returns null if neither found.
+    /// </summary>
+    public async Task<BlogPostDto?> GetBySlugAsync(string slug)
+    {
+        var entity = await _repository.FindBySlugAsync(slug);
+
+        if (entity != null)
+        {
+            return await MapToGetOutputDtoAsync(entity);
+        }
+
+        // Check if it's an old slug that was redirected
+        var redirect = await _slugRedirectRepository.FirstOrDefaultAsync(x => x.OldSlug == slug);
+        if (redirect != null)
+        {
+            entity = await _repository.GetAsync(redirect.BlogPostId);
+            var dto = await MapToGetOutputDtoAsync(entity);
+            dto.Slug = entity.Slug; // Return the current slug so frontend can redirect
+            return dto;
+        }
+
+        return null;
+    }
+
+    /// <summary>
+    /// Increments the view count for a blog post. Designed for Fire & Forget usage.
+    /// </summary>
+    public async Task IncrementViewCountAsync(Guid id)
+    {
+        var entity = await _repository.GetAsync(id);
+        entity.IncrementViewCount();
+        await _repository.UpdateAsync(entity);
+    }
+
     protected override async Task<BlogPostDto> MapToGetOutputDtoAsync(BlogPost entity)
     {
         var dto = MapToDto(entity);
@@ -183,6 +255,11 @@ public class BlogPostAppService : CrudAppService<BlogPost, BlogPostDto, Guid, Bl
             Status = entity.Status,
             PublishedAt = entity.PublishedAt,
             FeaturedImageUrl = entity.FeaturedImageUrl,
+            MetaTitle = entity.MetaTitle,
+            MetaDescription = entity.MetaDescription,
+            OgImageUrl = entity.OgImageUrl,
+            ReadingTimeMinutes = entity.ReadingTimeMinutes,
+            ViewCount = entity.ViewCount,
             CreationTime = entity.CreationTime,
             CreatorId = entity.CreatorId,
             LastModificationTime = entity.LastModificationTime,
