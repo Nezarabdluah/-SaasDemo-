@@ -1,12 +1,10 @@
 # Current Context
 
 - **Session Date:** 2026-03-26
-- **Status:** 🟢 Phase 1 Batch 2 — COMPLETED
-- **Current Focus:** Comments UI (Nested Replies) via CmsKit — Implemented & Verified.
+- **Status:** 🟢 Phase 1 Batches 1-3 — COMPLETED
+- **Current Focus:** Moving to Phase 1 Batch 4 (Media Library or Angular SSR).
 - **Last Accomplishments:**
-  - Enabled CmsKit Comments globally in `SaasDemoGlobalFeatureConfigurator.cs`.
-  - Registered `BlogPost` entity to receive comments in `SaasDemoDomainModule.cs`.
-  - Built Angular `CommentService` for CRUD operations via `CmsKitPublic` API.
-  - Built `CommentListComponent`, `CommentItemComponent` (Recursive for Nested Replies), and `CommentFormComponent` in Angular `SharedModule`.
-  - Integrated the Comments UI directly into the `BlogDetailComponent` Page.
-- **Next Steps:** Phase 1 Batch 3 (Angular SSR, Sitemap/Robots, Content Versioning, or Media Library).
+  - Batch 1: Slug System + SEO Fields + ReadingTime + ViewCount (32 tests)
+  - Batch 2: Comments UI with Nested Replies (CmsKit integration + Angular components)
+  - Batch 3: Content Versioning (auto-snapshot on update, restore, diff view API)
+- **Next Steps:** Media Library (Azure Blob Storage) or Angular SSR or sitemap/robots.txt.
