@@ -1,0 +1,49 @@
+.upload-zone {
+  border: 2px dashed #0d6efd;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  background-color: #f8f9fa;
+  
+  &:hover {
+    background-color: #e9ecef;
+    border-color: #0b5ed7;
+  }
+
+  &.drag-over {
+    border-color: #198754;
+    background-color: #d1e7dd;
+    transform: scale(1.02);
+    box-shadow: 0 0 15px rgba(25, 135, 84, 0.3);
+    
+    i {
+      color: #198754 !important;
+      transform: translateY(-5px);
+      transition: transform 0.2s ease-in-out;
+    }
+  }
+
+  .z-index-1 {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Make sure clicks pass through the container to the file input if needed, 
+     but since we have a dedicated button and input we just let them be clickable */
+}
+
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+    
+    .card-img-top {
+      filter: brightness(0.9);
+    }
+  }
+
+  .card-img-top {
+    transition: filter 0.3s ease;
+  }
+}

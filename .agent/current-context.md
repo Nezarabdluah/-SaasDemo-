@@ -13,7 +13,7 @@
 | 2 | Comments UI (Nested Replies via CmsKit) | ✅ Done |
 | 3 | Content Versioning (Auto-Snapshot, Restore, Diff) | ✅ Done |
 | 4 | Media Library (Backend + Angular UI) | ✅ Done |
-| 4.5 | Media Library Integration (Cover Picker, Quill, Copy URL) | ✅ Done |
+| 4.5 | Media Library Integration (Cover Picker, Quill, Copy URL, Drag & Drop) | ✅ Done |
 | 5.1 | Article Statistics (Views, Comments, Reactions) | ✅ Done |
 | 5.2 | Angular SSR + sitemap.xml + robots.txt | 🔲 Pending |
 

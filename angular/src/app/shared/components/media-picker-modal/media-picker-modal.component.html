@@ -12,22 +12,30 @@
 
       <div class="modal-body">
         
-        <!-- Quick Upload -->
-        <div class="d-flex align-items-center gap-2 mb-3 pb-3 border-bottom">
-          <input type="file" class="form-control form-control-sm" style="max-width: 300px;" (change)="onFileSelected($event)">
+        <!-- Quick Upload (Drag & Drop Zone) -->
+        <div class="upload-zone d-flex align-items-center gap-2 mb-3 p-3 border-dashed rounded bg-light" 
+             appDragDrop (fileDropped)="onFileDropped($event)">
+          <div class="me-3 text-primary">
+            <i class="fa fa-cloud-upload fa-2x"></i>
+          </div>
+          <div class="flex-grow-1">
+            <h6 class="mb-1">اسحب الصورة هنا للرفع السريع</h6>
+            <input type="file" class="form-control form-control-sm d-inline-block w-auto" (change)="onFileSelected($event)">
+            <span *ngIf="selectedFile" class="ms-2 badge bg-success">{{ selectedFile.name }}</span>
+          </div>
           <button class="btn btn-sm btn-success" [disabled]="!selectedFile || isUploading" (click)="uploadAndSelect()">
             <i class="fa fa-upload me-1"></i>
             {{ isUploading ? 'جاري...' : 'رفع واختيار' }}
           </button>
-          <div class="ms-auto">
-            <input type="text" class="form-control form-control-sm" style="width: 200px;" placeholder="ابحث..." [(ngModel)]="filter" (keyup.enter)="loadMedia()">
+          <div class="ms-auto ps-3 border-start">
+            <input type="text" class="form-control form-control-sm" style="width: 200px;" placeholder="بحث السريع..." [(ngModel)]="filter" (keyup.enter)="loadMedia()">
           </div>
         </div>
 
         <!-- Image Grid -->
         <div class="row g-2">
           <div *ngFor="let file of mediaFiles" class="col-md-2 col-sm-4 col-6">
-            <div class="card border overflow-hidden cursor-pointer" style="cursor: pointer;" (click)="selectImage(file)"
+            <div class="card media-card overflow-hidden cursor-pointer" style="cursor: pointer;" (click)="selectImage(file)"
                  [class.border-primary]="false" [class.shadow-sm]="true">
               <img [src]="getMediaUrl(file.id)" class="card-img-top" style="height: 100px; object-fit: cover;" [alt]="file.altText || file.fileName">
               <div class="card-body p-1 text-center" style="font-size: 0.75rem;">
