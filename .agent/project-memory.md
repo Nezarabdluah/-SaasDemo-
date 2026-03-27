@@ -15,7 +15,9 @@
 - **Completed:** Media Library (MediaFile + BlobStoring + Upload/Grid/Delete) ✅
 - **Completed:** Media Library Integration (Copy URL + Cover Picker + Quill Image Insert + Drag & Drop) ✅
 - **Completed:** Article Statistics (Views, Comments, Reactions via CmsKit) ✅
-- **Pending:** Angular SSR, Sitemap, Robots.txt
+- **Completed:** SEO Meta Tags (Title + OG:title + OG:description + OG:image) in BlogDetailComponent ✅
+- **Blocked:** Angular SSR ⛔ (ABP Lepton-X غير متوافق — DOM manipulation in DI)
+- **Pending:** Sitemap.xml, Robots.txt
 
 ## Key Commands
 - Backend: `dotnet run --project src\SaasDemo.HttpApi.Host`
@@ -37,3 +39,4 @@
 6. **Quill Image Handler Override**: Use `quillModules.toolbar.handlers.image` function to open custom UI instead of default prompt.
 7. **CmsKit Cross-Module Integration**: Use `IReadOnlyRepository<Comment, Guid>` instead of `ICommentRepository` for aggregate root counting to access LINQ querying extensions securely without adding properties to the Domain Entity.
 8. **Native Angular Drag & Drop**: Build a custom `@Directive('[appDragDrop]')` listening to `dragover`, `dragleave`, and `drop` events instead of relying on heavy third-party libraries for simple file uploads.
+9. **ABP Lepton-X ≠ Angular SSR**: ABP's Lepton-X theme (v4.3) directly manipulates the DOM (`document.createElement`, `document.body.dir`, `document.location.href`) during DI initialization, making it fundamentally incompatible with Angular SSR. Use CSR + dynamic Meta Tags instead (Googlebot executes JS).

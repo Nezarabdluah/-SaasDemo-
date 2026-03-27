@@ -34,7 +34,6 @@ export const appConfig: ApplicationConfig = {
     provideFeatureManagementConfig(),
     provideAnimations(),
     provideLogo(withEnvironmentOptions(environment)), importProvidersFrom(ThemeLeptonXModule.forRoot(), SideMenuLayoutModule.forRoot(), AccountLayoutModule.forRoot(), ThemeSharedModule), provideAbpThemeShared(withValidationBluePrint({
-        wrongPassword: 'Please choose 1q2w3E*'
     }))
 ],
 };
