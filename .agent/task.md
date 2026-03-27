@@ -20,7 +20,8 @@
 ### المقرر سابقاً ✅
 - [x] Comments UI كاملة (Nested Replies)
 - [x] SEO Layer: MetaTitle, MetaDesc, OgImage
-- [ ] Angular SSR
+- [x] SEO Meta Tags (Title + OG:image + OG:description) في BlogDetailComponent
+- ~~[ ] Angular SSR~~ ⛔ محظور — ABP Lepton-X غير متوافق مع SSR
 - [ ] sitemap.xml و robots.txt ديناميكياً
 
 ### 🆕 الإضافات الاحترافية

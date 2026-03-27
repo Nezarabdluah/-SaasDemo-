@@ -1,4 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
+import { Title, Meta } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { RestService } from '@abp/ng.core';
@@ -15,6 +16,8 @@ import { SharedModule } from '../../shared/shared.module';
 export class BlogDetailComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private restService = inject(RestService);
+  private titleService = inject(Title);
+  private metaService = inject(Meta);
 
   post?: BlogPostDto;
 
@@ -32,8 +35,29 @@ export class BlogDetailComponent implements OnInit {
     }).subscribe({
       next: (data) => {
         this.post = data;
+        this.updateSeoTags(this.post);
       },
       error: (err) => console.error(err)
     });
+  }
+
+  updateSeoTags(post: BlogPostDto) {
+    // 1. Title
+    this.titleService.setTitle(`${post.title} | SaasDemo Blog`);
+    
+    // 2. Meta Description
+    if (post.shortDescription) {
+      this.metaService.updateTag({ name: 'description', content: post.shortDescription });
+      this.metaService.updateTag({ property: 'og:description', content: post.shortDescription });
+    }
+    
+    // 3. Open Graph Metadata
+    this.metaService.updateTag({ property: 'og:title', content: post.title || '' });
+    this.metaService.updateTag({ property: 'og:type', content: 'article' });
+    
+    if (post.featuredImageUrl) {
+      // Assuming featuredImageUrl is a complete relative URL like /api/app/media/...
+      this.metaService.updateTag({ property: 'og:image', content: post.featuredImageUrl });
+    }
   }
 }
