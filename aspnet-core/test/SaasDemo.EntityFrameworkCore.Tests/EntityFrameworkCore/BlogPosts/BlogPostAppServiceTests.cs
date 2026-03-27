@@ -137,4 +137,31 @@ public class BlogPostAppServiceTests : SaasDemoEntityFrameworkCoreTestBase
 
         result.Slug.ShouldBe("duplicate-title-2");
     }
+
+    [Fact]
+    public async Task Should_Return_Stats_With_Zero_Comments_For_New_Post()
+    {
+        var created = await WithUnitOfWorkAsync(async () =>
+        {
+            return await _blogPostAppService.CreateAsync(new CreateUpdateBlogPostDto
+            {
+                Title = "Stats Test Post",
+                Slug = "stats-test-post",
+                Content = "Content for stats testing.",
+                Status = PublishStatus.Draft
+            });
+        });
+
+        var stats = await WithUnitOfWorkAsync(async () =>
+        {
+            return await _blogPostAppService.GetStatsAsync(created.Id);
+        });
+
+        stats.ShouldNotBeNull();
+        stats.Id.ShouldBe(created.Id);
+        stats.CommentCount.ShouldBe(0);
+        stats.ReactionCount.ShouldBe(0);
+        stats.ViewCount.ShouldBe(0);
+        stats.ReadingTimeMinutes.ShouldBeGreaterThan(0);
+    }
 }

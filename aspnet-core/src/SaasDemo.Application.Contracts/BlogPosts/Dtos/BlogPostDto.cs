@@ -29,6 +29,8 @@ public class BlogPostDto : FullAuditedEntityDto<Guid>
     // Content Stats
     public int ReadingTimeMinutes { get; set; }
     public long ViewCount { get; set; }
+    public int CommentCount { get; set; }
+    public int ReactionCount { get; set; }
 
     public List<Guid> CategoryIds { get; set; } = new();
 
