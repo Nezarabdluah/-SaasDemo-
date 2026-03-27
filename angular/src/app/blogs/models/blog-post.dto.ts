@@ -15,4 +15,8 @@ export interface BlogPostDto {
   featuredImageUrl?: string;
   categoryIds?: string[];
   tagIds?: string[];
+  viewCount?: number;
+  commentCount?: number;
+  reactionCount?: number;
+  readingTimeMinutes?: number;
 }

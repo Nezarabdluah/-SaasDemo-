@@ -12,7 +12,7 @@
     <div class="card-body">
       <h5>{{ post.title }}</h5>
       <p class="text-muted mb-4 pb-2 border-bottom">
-        Slug: {{ post.slug }} | 
+        <i class="fa fa-link"></i> {{ post.slug }} | 
         Status: <span class="badge" [ngClass]="{
                   'bg-success': post.status === 1,
                   'bg-warning': post.status === 0,
@@ -20,7 +20,14 @@
                 }">
           {{ post.status === 1 ? 'Published' : post.status === 2 ? 'Scheduled' : 'Draft' }}
         </span>
-        <span *ngIf="post.publishedAt"> | Published Date: {{ post.publishedAt | date:'short' }}</span>
+        <span *ngIf="post.publishedAt"> | <i class="fa fa-calendar"></i> {{ post.publishedAt | date:'short' }}</span>
+        <br>
+        <span class="d-inline-block mt-2">
+          <i class="fa fa-eye ms-2"></i> {{ post.viewCount || 0 }} Views
+          <i class="fa fa-comments ms-3"></i> {{ post.commentCount || 0 }} Comments
+          <i class="fa fa-thumbs-up ms-3"></i> {{ post.reactionCount || 0 }} Reactions
+          <i class="fa fa-clock-o ms-3"></i> {{ post.readingTimeMinutes || 0 }} Min Read
+        </span>
       </p>
       
       <h6>Short Description:</h6>

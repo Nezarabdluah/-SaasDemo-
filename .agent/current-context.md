@@ -14,7 +14,8 @@
 | 3 | Content Versioning (Auto-Snapshot, Restore, Diff) | ✅ Done |
 | 4 | Media Library (Backend + Angular UI) | ✅ Done |
 | 4.5 | Media Library Integration (Cover Picker, Quill, Copy URL) | ✅ Done |
-| 5 | Angular SSR + sitemap.xml + robots.txt | 🔲 Pending |
+| 5.1 | Article Statistics (Views, Comments, Reactions) | ✅ Done |
+| 5.2 | Angular SSR + sitemap.xml + robots.txt | 🔲 Pending |
 
 ## 🐛 Known Issues / Lessons Learned
 1. **ABP Permissions**: New permissions need `DbMigrator` to seed into DB, otherwise 403 Forbidden.
@@ -23,3 +24,4 @@
 4. **Angular Image URLs**: Must prefix with backend API URL from `EnvironmentService`.
 5. **ABP Auto-API vs Custom Controller**: Use `[RemoteService(IsEnabled = false)]` on AppService methods that have custom controllers.
 6. **Quill Image Handler**: Override via `quillModules.toolbar.handlers.image` function to open custom UI.
+7. **CmsKit Integration**: `ICommentRepository.GetCountAsync()` does not have an `(entityType, entityId)` overload. To count comments/reactions, use `IReadOnlyRepository<Comment, Guid>` with `GetQueryableAsync()` and `AsyncExecuter.CountAsync`.

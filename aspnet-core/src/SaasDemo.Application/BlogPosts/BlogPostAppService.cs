@@ -7,6 +7,8 @@ using SaasDemo.Permissions;
 using SaasDemo.BlogPosts.Dtos;
 using Volo.Abp.Application.Services;
 using SaasDemo.Localization;
+using Volo.CmsKit.Comments;
+using Volo.CmsKit.Reactions;
 
 namespace SaasDemo.BlogPosts;
 
@@ -26,6 +28,14 @@ public class BlogPostAppService : CrudAppService<BlogPost, BlogPostDto, Guid, Bl
     private readonly IRepository<SlugRedirect, Guid> _slugRedirectRepository;
     private readonly IRepository<BlogPostVersion, Guid> _versionRepository;
     private readonly SlugGenerator _slugGenerator;
+    private readonly IReadOnlyRepository<Comment, Guid> _commentRepository;
+    private readonly IReadOnlyRepository<UserReaction, Guid> _reactionRepository;
+
+    /// <summary>
+    /// The CmsKit entity type string used when creating comments for blog posts.
+    /// Must match the value used in Angular: 'AppBlogPost'.
+    /// </summary>
+    private const string CmsKitEntityType = "AppBlogPost";
 
     public BlogPostAppService(
         IBlogPostRepository repository,
@@ -33,7 +43,9 @@ public class BlogPostAppService : CrudAppService<BlogPost, BlogPostDto, Guid, Bl
         IRepository<BlogPostTag, Guid> blogPostTagRepository,
         IRepository<SlugRedirect, Guid> slugRedirectRepository,
         IRepository<BlogPostVersion, Guid> versionRepository,
-        SlugGenerator slugGenerator) : base(repository)
+        SlugGenerator slugGenerator,
+        IReadOnlyRepository<Comment, Guid> commentRepository,
+        IReadOnlyRepository<UserReaction, Guid> reactionRepository) : base(repository)
     {
         _repository = repository;
         _blogPostCategoryRepository = blogPostCategoryRepository;
@@ -41,6 +53,8 @@ public class BlogPostAppService : CrudAppService<BlogPost, BlogPostDto, Guid, Bl
         _slugRedirectRepository = slugRedirectRepository;
         _versionRepository = versionRepository;
         _slugGenerator = slugGenerator;
+        _commentRepository = commentRepository;
+        _reactionRepository = reactionRepository;
 
         LocalizationResource = typeof(SaasDemoResource);
     }
@@ -294,6 +308,27 @@ public class BlogPostAppService : CrudAppService<BlogPost, BlogPostDto, Guid, Bl
         await _repository.UpdateAsync(entity);
     }
 
+    /// <summary>
+    /// Returns only statistics for a single post — lightweight alternative to GetAsync.
+    /// </summary>
+    public async Task<GetArticleStatsDto> GetStatsAsync(Guid id)
+    {
+        var entity = await _repository.GetAsync(id);
+        var entityIdStr = id.ToString();
+
+        var commentCount = await GetCommentCountAsync(entityIdStr);
+        var reactionCount = await GetReactionCountAsync(entityIdStr);
+
+        return new GetArticleStatsDto
+        {
+            Id = entity.Id,
+            ViewCount = entity.ViewCount,
+            CommentCount = commentCount,
+            ReactionCount = reactionCount,
+            ReadingTimeMinutes = entity.ReadingTimeMinutes
+        };
+    }
+
     protected override async Task<BlogPostDto> MapToGetOutputDtoAsync(BlogPost entity)
     {
         var dto = MapToDto(entity);
@@ -304,12 +339,44 @@ public class BlogPostAppService : CrudAppService<BlogPost, BlogPostDto, Guid, Bl
         var tags = await _blogPostTagRepository.GetListAsync(x => x.BlogPostId == entity.Id);
         dto.TagIds = tags.Select(x => x.BlogTagId).ToList();
 
+        // Populate CmsKit stats
+        var entityIdStr = entity.Id.ToString();
+        dto.CommentCount = await GetCommentCountAsync(entityIdStr);
+        dto.ReactionCount = await GetReactionCountAsync(entityIdStr);
+
         return dto;
     }
 
-    protected override Task<BlogPostDto> MapToGetListOutputDtoAsync(BlogPost entity)
+    protected override async Task<BlogPostDto> MapToGetListOutputDtoAsync(BlogPost entity)
     {
-        return Task.FromResult(MapToDto(entity));
+        var dto = MapToDto(entity);
+
+        // Populate CmsKit stats for list view
+        var entityIdStr = entity.Id.ToString();
+        dto.CommentCount = await GetCommentCountAsync(entityIdStr);
+        dto.ReactionCount = await GetReactionCountAsync(entityIdStr);
+
+        return dto;
+    }
+
+    /// <summary>
+    /// Counts comments from CmsKit for a given blog post.
+    /// </summary>
+    private async Task<int> GetCommentCountAsync(string entityId)
+    {
+        var queryable = await _commentRepository.GetQueryableAsync();
+        return await AsyncExecuter.CountAsync(
+            queryable.Where(c => c.EntityType == CmsKitEntityType && c.EntityId == entityId));
+    }
+
+    /// <summary>
+    /// Counts reactions from CmsKit for a given blog post.
+    /// </summary>
+    private async Task<int> GetReactionCountAsync(string entityId)
+    {
+        var queryable = await _reactionRepository.GetQueryableAsync();
+        return await AsyncExecuter.CountAsync(
+            queryable.Where(r => r.EntityType == CmsKitEntityType && r.EntityId == entityId));
     }
 
     /// <summary>
@@ -332,6 +399,8 @@ public class BlogPostAppService : CrudAppService<BlogPost, BlogPostDto, Guid, Bl
             OgImageUrl = entity.OgImageUrl,
             ReadingTimeMinutes = entity.ReadingTimeMinutes,
             ViewCount = entity.ViewCount,
+            CommentCount = 0, // Default; overridden by MapToGetOutputDtoAsync
+            ReactionCount = 0, // Default; overridden by MapToGetOutputDtoAsync
             CreationTime = entity.CreationTime,
             CreatorId = entity.CreatorId,
             LastModificationTime = entity.LastModificationTime,

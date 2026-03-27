@@ -14,6 +14,7 @@
 - **Completed:** Content Versioning (BlogPostVersion) ✅
 - **Completed:** Media Library (MediaFile + BlobStoring + Upload/Grid/Delete) ✅
 - **Completed:** Media Library Integration (Copy URL + Cover Picker + Quill Image Insert) ✅
+- **Completed:** Article Statistics (Views, Comments, Reactions via CmsKit) ✅
 - **Pending:** Angular SSR, Sitemap, Robots.txt
 
 ## Key Commands
@@ -34,3 +35,4 @@
 4. **Permission Seeding**: Run `DbMigrator` after adding new permissions. Until then, policy-based `[Authorize]` returns 403.
 5. **Angular Image URLs**: Prefix with ABP `EnvironmentService` API base URL for `<img src>`, since dev server port ≠ backend port.
 6. **Quill Image Handler Override**: Use `quillModules.toolbar.handlers.image` function to open custom UI instead of default prompt.
+7. **CmsKit Cross-Module Integration**: Use `IReadOnlyRepository<Comment, Guid>` instead of `ICommentRepository` for aggregate root counting to access LINQ querying extensions securely without adding properties to the Domain Entity.

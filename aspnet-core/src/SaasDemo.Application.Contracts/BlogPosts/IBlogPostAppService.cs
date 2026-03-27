@@ -19,4 +19,5 @@ public interface IBlogPostAppService :
     Task<List<BlogPostVersionListDto>> GetVersionsAsync(Guid postId);
     Task<BlogPostVersionDto> GetVersionAsync(Guid versionId);
     Task RestoreVersionAsync(Guid postId, Guid versionId);
+    Task<GetArticleStatsDto> GetStatsAsync(Guid id);
 }

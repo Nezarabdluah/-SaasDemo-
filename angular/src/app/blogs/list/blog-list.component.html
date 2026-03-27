@@ -16,6 +16,7 @@
               <th>Title</th>
               <th>Slug</th>
               <th>Status</th>
+              <th>Stats</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -31,6 +32,13 @@
                 }">
                   {{ item.status === 1 ? 'Published' : item.status === 2 ? 'Scheduled' : 'Draft' }}
                 </span>
+              </td>
+              <td>
+                <small class="text-muted d-block">
+                  <i class="fa fa-eye me-1"></i>{{ item.viewCount || 0 }} 
+                  <i class="fa fa-comments ms-2 me-1"></i>{{ item.commentCount || 0 }}
+                  <i class="fa fa-thumbs-up ms-2 me-1"></i>{{ item.reactionCount || 0 }}
+                </small>
               </td>
               <td>
                 <a [routerLink]="['/blogs', item.id]" class="btn btn-sm btn-info me-1">
