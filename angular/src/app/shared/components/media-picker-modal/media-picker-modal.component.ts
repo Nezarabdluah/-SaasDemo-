@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { EnvironmentService } from '@abp/ng.core';
 import { MediaService, MediaFileDto, MediaFileGetListInput } from '../../services/media.service';
+import { SharedModule } from '../../shared.module';
 
 @Component({
   selector: 'app-media-picker-modal',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, SharedModule],
   templateUrl: './media-picker-modal.component.html',
+  styleUrls: ['./media-picker-modal.component.scss']
 })
 export class MediaPickerModalComponent implements OnChanges {
   @Input() isOpen = false;
@@ -60,6 +62,12 @@ export class MediaPickerModalComponent implements OnChanges {
 
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0] as File;
+  }
+
+  onFileDropped(files: FileList) {
+    if (files && files.length > 0) {
+      this.selectedFile = files[0];
+    }
   }
 
   uploadAndSelect() {

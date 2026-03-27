@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { EnvironmentService } from '@abp/ng.core';
 import { MediaService, MediaFileDto, MediaFileGetListInput } from '../shared/services/media.service';
+import { SharedModule } from '../shared/shared.module';
 
 @Component({
   selector: 'app-media-library',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, SharedModule],
   templateUrl: './media-library.component.html',
   styleUrls: ['./media-library.component.scss']
 })
@@ -52,6 +53,12 @@ export class MediaLibraryComponent implements OnInit {
 
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0] as File;
+  }
+
+  onFileDropped(files: FileList) {
+    if (files && files.length > 0) {
+      this.selectedFile = files[0];
+    }
   }
 
   uploadFile() {

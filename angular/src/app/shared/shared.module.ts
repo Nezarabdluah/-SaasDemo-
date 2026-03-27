@@ -7,12 +7,14 @@ import { NgxValidateCoreModule } from '@ngx-validate/core';
 import { CommentListComponent } from './components/comments/comment-list/comment-list.component';
 import { CommentItemComponent } from './components/comments/comment-item/comment-item.component';
 import { CommentFormComponent } from './components/comments/comment-form/comment-form.component';
+import { DragDropDirective } from './directives/drag-drop.directive';
 
 @NgModule({
   declarations: [
     CommentListComponent,
     CommentItemComponent,
-    CommentFormComponent
+    CommentFormComponent,
+    DragDropDirective
   ],
   imports: [
     CoreModule,
@@ -27,7 +29,8 @@ import { CommentFormComponent } from './components/comments/comment-form/comment
     NgxValidateCoreModule,
     CommentListComponent,
     CommentItemComponent,
-    CommentFormComponent
+    CommentFormComponent,
+    DragDropDirective
   ],
   providers: []
 })
