@@ -30,13 +30,22 @@
 - **Current Path:** `{ContentRootPath}/MediaStorage` (relative to HttpApi.Host project root)
 - **Future:** Can swap to Azure Blob Storage by changing provider config only.
 
-## Critical Patterns & Gotchas
-1. **Swashbuckle + IFormFile**: NEVER use individual `[FromForm] IFormFile` params. Always create a Model class (e.g. `MediaUploadForm`).
+## Critical Patterns & Gotchas | الأنماط الحرجة والمشاكل الشائعة
+1. **Swashbuckle + IFormFile**: NEVER use individual `[FromForm] IFormFile` params. Always create a Model class.
+   *(لا تستخدم `[FromForm] IFormFile` بشكل مفرد في Swagger أبداً. قم بإنشاء كلاس Model مخصص.)*
 2. **ABP Auto-API Disabling**: Use `[RemoteService(IsEnabled = false)]` on AppService methods that have custom controllers.
+   *(لإلغاء دوال الـ API التلقائية من ABP، استخدم `[RemoteService(IsEnabled = false)]` لتلك الدوال.)*
 3. **[AllowAnonymous] vs [Authorize]**: Never put both on conflicting levels — causes ASP0026 and Swagger crash.
-4. **Permission Seeding**: Run `DbMigrator` after adding new permissions. Until then, policy-based `[Authorize]` returns 403.
-5. **Angular Image URLs**: Prefix with ABP `EnvironmentService` API base URL for `<img src>`, since dev server port ≠ backend port.
-6. **Quill Image Handler Override**: Use `quillModules.toolbar.handlers.image` function to open custom UI instead of default prompt.
-7. **CmsKit Cross-Module Integration**: Use `IReadOnlyRepository<Comment, Guid>` instead of `ICommentRepository` for aggregate root counting to access LINQ querying extensions securely without adding properties to the Domain Entity.
-8. **Native Angular Drag & Drop**: Build a custom `@Directive('[appDragDrop]')` listening to `dragover`, `dragleave`, and `drop` events instead of relying on heavy third-party libraries for simple file uploads.
-9. **ABP Lepton-X ≠ Angular SSR**: ABP's Lepton-X theme (v4.3) directly manipulates the DOM (`document.createElement`, `document.body.dir`, `document.location.href`) during DI initialization, making it fundamentally incompatible with Angular SSR. Use CSR + dynamic Meta Tags instead (Googlebot executes JS).
+   *(لا تضع `[AllowAnonymous]` و `[Authorize]` معاً في مستويات متعارضة حتى لا يتوقف Swagger عن العمل.)*
+4. **Permission Seeding**: Run `DbMigrator` after adding new permissions. Until then, you get 403.
+   *(شغّل `DbMigrator` بعد إضافة أي صلاحيات جديدة في الكود، وإلا ستحصل على خطأ 403.)*
+5. **Angular Image URLs**: Prefix with ABP `EnvironmentService` API base URL for `<img src>`.
+   *(ضع رابط الـ API الخاص بـ `EnvironmentService` قبل أي رابط صورة `<img src>` في Angular.)*
+6. **Quill Image Handler Override**: Use `quillModules.toolbar.handlers.image` to open custom UI.
+   *(لتجاوز رفع الصور في Quill، استخدم الخاصية `handlers.image` لربطها بواجهتك.)*
+7. **CmsKit Cross-Module Integration**: Use `IReadOnlyRepository<Comment, Guid>` for aggregations.
+   *(استخدم `IReadOnlyRepository<Comment, Guid>` للحصول على استعلامات أفضل من الـ `ICommentRepository`.)*
+8. **Native Angular Drag & Drop**: Build a custom `@Directive('[appDragDrop]')` instead of heavy libraries.
+   *(اصنع `@Directive('[appDragDrop]')` مخصص بدلاً من استخدام مكتبات ثقيلة لأجل رفع الملفات.)*
+9. **ABP Lepton-X ≠ Angular SSR**: Uses DOM directly. Workaround: CSR + Meta Tags.
+   *(ثيم ABP Lepton-X لا يدعم الـ SSR بسبب تعامله المباشر مع הـ DOM. استخدم CSR مع صفحات Meta Tags بدلاً منه.)*

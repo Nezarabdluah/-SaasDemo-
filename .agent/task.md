@@ -6,7 +6,7 @@
 
 ---
 
-## ✅ ما تم إنجازه (Pre-GSoC Foundation)
+## ✅ Pre-GSoC Foundation | ما تم إنجازه
 - [x] هيكل Clean Architecture + DDD كامل
 - [x] نظام BlogPost (Status, Cover, Tags, Categories)
 - [x] Manual Mapping بديل AutoMapper
@@ -15,16 +15,16 @@
 
 ---
 
-## 📦 المرحلة 1: نظام المحتوى الاحترافي (CMS + SEO)
+## 📦 Phase 1: Professional CMS & SEO | المرحلة 1: نظام المحتوى الاحترافي
 ### الأسبوع 1–3 | ~90 ساعة
-### المقرر سابقاً ✅
+### Planned Features | المقرر سابقاً ✅
 - [x] Comments UI كاملة (Nested Replies)
 - [x] SEO Layer: MetaTitle, MetaDesc, OgImage
 - [x] SEO Meta Tags (Title + OG:image + OG:description) في BlogDetailComponent
 - ~~[ ] Angular SSR~~ ⛔ محظور — ABP Lepton-X غير متوافق مع SSR
 - [ ] sitemap.xml و robots.txt ديناميكياً
 
-### 🆕 الإضافات الاحترافية
+### Pro Additions | الإضافات الاحترافية 🆕
 
 **Slug System احترافي:**
 - [x] توليد URL Slug تلقائي من العنوان (`my-post-title`)
@@ -57,16 +57,16 @@
 
 ---
 
-## 📦 المرحلة 2: محرك الإعدادات والهوية البصرية
+## 📦 Phase 2: Settings Engine & Theme | المرحلة 2: محرك الإعدادات والهوية البصرية
 ### الأسبوع 4–5 | ~60 ساعة
 
-### المقرر سابقاً ✅
+### Planned Features | المقرر سابقاً ✅
 - [ ] SiteSettings Entity (اسم، ألوان، شعار)
 - [ ] SocialLinks + EmailSettings
 - [ ] Dynamic Footer
 - [ ] Theme Token System بـ CSS Variables
 
-### 🆕 الإضافات الاحترافية
+### Pro Additions | الإضافات الاحترافية 🆕
 
 **Email Template Engine:**
 - [ ] نظام قوالب بريد إلكتروني قابل للتخصيص

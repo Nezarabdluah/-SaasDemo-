@@ -19,15 +19,27 @@
 | 5.2 | Angular SSR | ⛔ Blocked (ABP Lepton-X غير متوافق) |
 | 5.3 | SEO Meta Tags (Title + OG) | ✅ Done |
 
-## 🐛 Known Issues / Lessons Learned
+## 🐛 Known Issues / Lessons Learned | المشاكل المعروفة والدروس المستفادة
 1. **ABP Permissions**: New permissions need `DbMigrator` to seed into DB, otherwise 403 Forbidden.
+   *(صلاحيات ABP: أي صلاحية جديدة تحتاج تشغيل `DbMigrator` لزرعها في قاعدة البيانات، وإلا ستظهر مشكلة 403 Forbidden.)*
 2. **Swashbuckle + IFormFile**: Cannot use individual `[FromForm]` params. Must use a model class (`MediaUploadForm`).
+   *(لا يمكن استخدام `[FromForm]` مفرد مع رفع الملفات في Swagger، يجب وضعها داخل كلاس `MediaUploadForm`.)*
 3. **BlobStoring Path**: Use `ContentRootPath` for local dev. `D:\` may lack write permissions.
+   *(مسار التخزين: استخدم `ContentRootPath` في التطوير المحلي لأن بعض الأقراص قد تفتقر لصلاحيات الكتابة.)*
 4. **Angular Image URLs**: Must prefix with backend API URL from `EnvironmentService`.
+   *(روابط الصور في Angular: يجب وضع رابط الـ API قبلها باستخدام `EnvironmentService`.)*
 5. **ABP Auto-API vs Custom Controller**: Use `[RemoteService(IsEnabled = false)]` on AppService methods that have custom controllers.
+   *(إلغاء الـ Auto-API: استخدم `[RemoteService(IsEnabled = false)]` على دوال الـ AppService التي لها Controller مخصص.)*
 6. **Quill Image Handler**: Override via `quillModules.toolbar.handlers.image` function to open custom UI.
-7. **CmsKit Integration**: `ICommentRepository.GetCountAsync()` does not have an `(entityType, entityId)` overload. To count comments/reactions, use `IReadOnlyRepository<Comment, Guid>` with `GetQueryableAsync()` and `AsyncExecuter.CountAsync`.
-8. **ABP Lepton-X ≠ Angular SSR**: ABP Lepton-X v4.3 directly uses `document.createElement`, `document.body.dir`, `document.location.href` during Angular DI initialization → fundamentally breaks SSR. Workaround: CSR + Meta Tags.
-9. **Webpack Import Hoisting**: `import` statements are hoisted above all inline code → polyfills in `server.ts` execute after vendor modules. Solution: external launcher script.
-10. **Node.js v24 fetch ≠ NODE_TLS_REJECT_UNAUTHORIZED**: Node's built-in `fetch` (undici) ignores `process.env.NODE_TLS_REJECT_UNAUTHORIZED` set inside JS. Must set via OS env variable before process starts.
-11. **Angular 20 CommonEngine**: Requires explicit `allowedHosts` in constructor. `ng build` only builds browser; `ng run ProjectName:server` is needed for server bundle.
+   *(محرر Quill: لتغيير رفع الصور، قم بعمل Override عبر دالة `handlers.image` لفتح واجهتك المخصصة.)*
+7. **CmsKit Integration**: To count comments/reactions, use `IReadOnlyRepository<Comment, Guid>` with `GetQueryableAsync()`.
+   *(التكامل مع CmsKit: لعد التعليقات، استخدم `IReadOnlyRepository<Comment, Guid>` بدلاً من `ICommentRepository` المعزول.)*
+8. **ABP Lepton-X ≠ Angular SSR**: ABP Lepton-X v4.3 directly uses DOM APIs (`document.createElement`) during Angular DI. Workaround: CSR + Meta Tags.
+   *(عدم توافق ABP SSR: ثيم Lepton-X يستخدم أوامر المتصفح مباشرة للوصول للـ DOM مما يعطل الـ SSR. الحل البديل هو CSR مع Meta Tags.)*
+9. **Webpack Import Hoisting**: `import` statements are hoisted. Solution for polyfills: external launcher script.
+   *(الـ Hoisting في Webpack: الـ imports تُنفذ دائماً أولاً. الحل للـ Polyfills هو سكريبت خارجي.)*
+10. **Node.js v24 fetch**: Built-in `fetch` ignores `NODE_TLS_REJECT_UNAUTHORIZED` inside JS. Set via OS env variable.
+    *(دالة fetch في Node 24: تتجاهل إعدادات SSL من داخل الكود. يجب تمريرها كمتغير بيئة من الـ Terminal.)*
+11. **Angular 20 CommonEngine**: Requires `allowedHosts` in constructor. `ng build` only builds browser.
+    *(نجاح הـ SSR يتطلب `allowedHosts`، وأمر البناء العادي يبني المتصفح فقط.)*
+

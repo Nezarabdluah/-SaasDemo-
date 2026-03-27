@@ -2,75 +2,106 @@
 description: Universal Pre-deployment Testing Checklist | قائمة التحقق العامة قبل النشر لأي مشروع
 ---
 
-# ✅ قائمة التحقق | Universal Testing Checklist
+# ✅ Universal Testing Checklist | قائمة التحقق
 
 > [!NOTE]
-> هذا الملف عام ولا يعتمد على لغة برمجة أو إطار عمل محدد (Framework Agnostic). يجب الالتزام بهذه المعايير قبل دمج أي كود (Merge) أو نشره في بيئة الإنتاج (Production).
+> This file is framework-agnostic. These standards must be met before merging any code or deploying to production.
+> *(هذا الملف عام ولا يعتمد على لغة برمجة أو إطار عمل محدد. يجب الالتزام بهذه المعايير قبل دمج أي كود أو نشره في بيئة الإنتاج.)*
 
 ---
 
-## 🔧 قبل كل Commit (قواعد المستودع - Repo Rules)
+## 🔧 Before Every Commit (Repo Rules) | قبل كل Commit (قواعد المستودع)
 
-### الكود والبناء (Code & Build)
-- [ ] عملية البناء (Build) تنجح تماماً بدون أي أخطاء.
-- [ ] لا يوجد أي تحذيرات (Warnings) جديدة تم إضافتها في هذا البول ريكويست (PR).
-- [ ] جميع الاختبارات الآلية (Unit/Integration Tests) تعمل بنجاح (100% Pass).
-- [ ] لا يوجد تعليقات برمجية مهجورة أو عبارات `// TODO: FIX` متروكة في الكود المكتوب.
-- [ ] لا يوجد جمل الطباعة المخصصة للاختبار (مثل `console.log` أو `print`) متروكة في الكود النهائي.
-
----
-
-## 🆕 قبل إضافة ميزة أو كائن جديد (Feature / Entity)
-
-### الأساسيات المعمارية (Architecture Basics)
-- [ ] التقيد بهيكلية المشروع المعتمدة (Clean Architecture, MVC، الخ).
-- [ ] وجود ملفات الـ Data Transfer Objects (DTOs) للفصل الاستيعابي بين واجهات الـ API وقواعد البيانات.
-- [ ] توثيق الدوال (Functions/Methods) المعقدة بالشكل السليم.
-
-### قواعد البيانات والبيانات (Database & Data)
-- [ ] تم إنشاء ملف التهجير (Migration) الخاص بالميزة إن لزم الأمر.
-- [ ] وجود حقول تتبع المراجعة (Audit Trail) للبيانات الهامة (تاريخ الإنشاء، المُنشئ، تاريخ التعديل).
-- [ ] تم تغطية جميع الحالات الأساسية باختبارات الوحدة (Unit Tests).
+### Code & Build | الكود والبناء
+- [ ] Build succeeds without any errors.
+  *(عملية البناء تنجح تماماً بدون أي أخطاء.)*
+- [ ] No new warnings introduced in this PR.
+  *(لا يوجد أي تحذيرات جديدة تم إضافتها في هذا البول ريكويست.)*
+- [ ] All automated tests (Unit/Integration) pass (100%).
+  *(جميع الاختبارات الآلية تعمل بنجاح.)*
+- [ ] No orphaned commented-out code or `// TODO: FIX` left behind.
+  *(لا يوجد تعليقات برمجية مهجورة أو عبارات `// TODO: FIX` متروكة في الكود المكتوب.)*
+- [ ] No debug print statements (e.g., `console.log`, `print`) left in the final code.
+  *(لا يوجد جمل الطباعة المخصصة للاختبار متروكة في الكود النهائي.)*
 
 ---
 
-## 🎨 واجهات المستخدم وتجربة المستخدم (Frontend / UI / UX)
+## 🆕 Before Adding a New Feature/Entity | قبل إضافة ميزة أو كائن جديد
 
-### الجودة والاعتمادية
-- [ ] الواجهة تستجيب لجميع أحجام الشاشات المعتمدة (Responsive Design).
-- [ ] التعامل السليم مع حالات الـ Loading (وجود مؤشرات تحميل أثناء جلب البيانات أو الإرسال).
-- [ ] التعامل السليم مع الأخطاء وإظهار رسائل واضحة ومفهومة للمستخدم بدلاً من ترك واجهة فارغة أو رسائل تقنية.
-- [ ] التعامل مع حالات الـ "البيانات الفارغة" (Empty States).
-- [ ] العمل المعماري خالي من أخطاء الـ TypeScript أو المتصفح.
+### Architecture Basics | الأساسيات المعمارية
+- [ ] Adheres to the approved project architecture (Clean Architecture, MVC, etc.).
+  *(التقيد بهيكلية المشروع المعتمدة.)*
+- [ ] DTOs are present for proper abstraction between APIs and databases.
+  *(وجود ملفات DTOs للفصل الاستيعابي بين واجهات الـ API وقواعد البيانات.)*
+- [ ] Complex functions/methods are properly documented.
+  *(توثيق الدوال المعقدة بالشكل السليم.)*
 
----
-
-## 🔒 قائمة التحقق الأمنية (Security Checklist)
-
-- [ ] واجهات الـ API المفتوحة محمية بصلاحيات مرور مناسبة (Authentication/Authorization).
-- [ ] التحقق من جميع المُدخلات القادمة من المستخدم (Input Validation) من جهة السيرفر (Server-side).
-- [ ] التشفير الآمن للمعلومات الحساسة (كلمات المرور، التوكنات).
-- [ ] عدم وجود تسريب لبيانات أو أخطاء السيرفر (Stack Trace) للعميل العادي (Frontend).
-- [ ] حماية الواجهات من الثغرات المعتادة المكتوبة مسبقا مثل الـ (XSS).
-
----
-
-## 🌐 دعم اللغات والمحلية (Localization & i18n)
-
-- [ ] لا تستخدم نصوص ثابتة (Hardcoded strings) في الواجهات؛ استخدم ملفات الترجمة.
-- [ ] الميزة الجديدة تعمل بشكل صحيح عند تغيير لغة العرض وتدعم الاتجاهات (RTL/LTR) حسب اللغات المطلوبة بالمشروع.
-- [ ] رسائل الأخطاء القادمة من الـ API مدعومة بترجمة صحيحة.
+### Database & Data | قواعد البيانات والبيانات
+- [ ] Relevant DB migration is created if needed.
+  *(تم إنشاء ملف التهجير الخاص بالميزة إن لزم الأمر.)*
+- [ ] Audit trail fields (CreatedDate, Creator, ModifiedDate) are present for core data.
+  *(وجود حقول تتبع المراجعة للبيانات الهامة.)*
+- [ ] Core paths are covered by Unit Tests.
+  *(تم تغطية جميع الحالات الأساسية باختبارات الوحدة.)*
 
 ---
 
-## 🚀 ما قبل النشر لبيئة الإنتاج (Pre-Production Deployment)
+## 🎨 UI/UX & Frontend | واجهات المستخدم وتجربة المستخدم
 
-- [ ] الإعدادات الخاصة ببيئة الإنتاج (Environment Variables) مضبوطة ولا تحتوي على بيانات تجريبية (Test Data).
-- [ ] الـ API Endpoints تشير للخوادم والمنافذ الصحيحة للإنتاج.
-- [ ] اختبارات الدخول، تسجيل الخروج، واستعادة الحساب تعمل بشكل سليم.
-- [ ] التاكد من بناء (Production Build) محسّن الأداء (Minified/Uglified).
-- [ ] التأكد من تشغيل أداة المراقبة وإدارة سجلات الأخطاء (Error Logging System).
+### Quality & Reliability | الجودة والاعتمادية
+- [ ] UI is fully responsive across supported screen sizes.
+  *(الواجهة تستجيب لجميع أحجام الشاشات المعتمدة.)*
+- [ ] Proper loading states (spinners/skeletons) during data fetching or form submission.
+  *(التعامل السليم مع حالات الـ Loading.)*
+- [ ] Proper error handling with clear, user-friendly messages instead of technical traces or blank screens.
+  *(التعامل السليم مع الأخطاء وإظهار رسائل واضحة ومفهومة للمستخدم.)*
+- [ ] "Empty states" are properly handled when no data exists.
+  *(التعامل مع حالات "البيانات الفارغة".)*
+- [ ] Console is free of TypeScript/browser runtime errors.
+  *(العمل المعماري خالي من أخطاء الـ TypeScript أو المتصفح.)*
 
 ---
 
-*ملحوظة: يُفضل دائماً مراجعة هذا الملف قبل رفع طلب الاعتماد (Pull Request) الخاص بك.*
+## 🔒 Security Checklist | قائمة التحقق الأمنية
+
+- [ ] Exposed APIs are protected by proper Authentication/Authorization.
+  *(واجهات الـ API المفتوحة محمية بصلاحيات مرور مناسبة.)*
+- [ ] Server-side input validation is implemented for all user inputs.
+  *(التحقق من جميع المُدخلات القادمة من المستخدم من جهة السيرفر.)*
+- [ ] Secure components (passwords, tokens) are appropriately encrypted/hashed.
+  *(التشفير الآمن للمعلومات الحساسة.)*
+- [ ] No sensitive data or server stack traces are leaked to the client.
+  *(عدم وجود تسريب لبيانات أو أخطاء السيرفر للعميل العادي.)*
+- [ ] UI is protected against common vulnerabilities (e.g., XSS).
+  *(حماية الواجهات من الثغرات المعتادة المكتوبة مسبقا مثل الـ XSS.)*
+
+---
+
+## 🌐 Localization & i18n | دعم اللغات والمحلية
+
+- [ ] No hardcoded strings in the UI; use translation/localization files.
+  *(لا تستخدم نصوص ثابتة في الواجهات؛ استخدم ملفات الترجمة.)*
+- [ ] New feature works correctly when switching languages and supports RTL/LTR layouts if required.
+  *(الميزة الجديدة تعمل بشكل صحيح عند تغيير لغة العرض وتدعم الاتجاهات.)*
+- [ ] API error messages are backed by proper translations.
+  *(رسائل الأخطاء القادمة من الـ API مدعومة بترجمة صحيحة.)*
+
+---
+
+## 🚀 Pre-Production Deployment | ما قبل النشر لبيئة الإنتاج
+
+- [ ] Production environment variables are correctly set and contain no test data.
+  *(الإعدادات الخاصة ببيئة الإنتاج مضبوطة ولا تحتوي على بيانات تجريبية.)*
+- [ ] API endpoints point to correct production servers/ports.
+  *(الـ API Endpoints تشير للخوادم والمنافذ الصحيحة للإنتاج.)*
+- [ ] Core authentication flows (Login, Logout, Account Recovery) function correctly.
+  *(اختبارات الدخول، تسجيل الخروج، واستعادة الحساب تعمل بشكل سليم.)*
+- [ ] Verified that a minified/uglified production build is generated.
+  *(التاكد من بناء الإنتاج محسّن الأداء.)*
+- [ ] Error Logging System / monitoring tools are active.
+  *(التأكد من تشغيل أداة المراقبة وإدارة سجلات الأخطاء.)*
+
+---
+
+*Note: Always review this checklist before submitting a Pull Request.*
+*(ملحوظة: يُفضل دائماً مراجعة هذا الملف قبل رفع طلب الاعتماد PR الخاص بك.)*
