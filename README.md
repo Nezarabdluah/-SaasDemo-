@@ -65,7 +65,7 @@ Every feature is tested through a **6-step process**:
 |------|--------|--------|
 | 1 | Execute structured test scenarios (P0 → P1 → P2) | Test results |
 | 2 | Capture screenshots at every major step | `evidence/testing/[feature]/*.png` |
-| 3 | Record full session video | `evidence/testing/[feature]/session-video.webp` |
+| 3 | Record full browser test session | Documented test flow |
 | 4 | Generate official QA report | `evidence/testing/qa-report-[feature]-[date].md` |
 | 5 | Write reusable Playwright E2E spec | `tests/e2e/[feature].spec.ts` |
 | 6 | Archive all evidence in organized folders | Full audit trail |
@@ -88,7 +88,7 @@ Every feature is tested through a **6-step process**:
     ├── 06-email-settings.png     → SMTP configuration
     ├── 07-final-save.png         → Full save test
     ├── 08-reload-verify.png      → Data persistence check
-    └── session-video.webp        → Full session recording 🎬
+    └── ...                       → Additional evidence as needed
 
 📁 tests/e2e/
 └── site-settings.spec.ts                       ← Playwright E2E Spec
@@ -97,7 +97,7 @@ Every feature is tested through a **6-step process**:
      Social Links, Email, Persistence)
 ```
 
-> 💡 **All 8 screenshots + session video + QA report are available** in the [`evidence/testing/`](./evidence/testing/) folder for full transparency.
+> 💡 **All 8 screenshots + QA report are available** in the [`evidence/testing/`](./evidence/testing/) folder for full transparency.
 
 ---
 

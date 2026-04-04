@@ -37,7 +37,6 @@ All screenshots saved to: `evidence/testing/site-settings/`
 | `06-email-settings.png` | تعبئة إعدادات SMTP |
 | `07-final-save.png` | الحفظ النهائي |
 | `08-reload-verify.png` | تأكيد بقاء البيانات بعد Reload |
-| `session-video.webp` | تسجيل فيديو كامل للجلسة 🎬 |
 
 ## 🐛 Bugs Found
 لا توجد أخطاء مكتشفة.
