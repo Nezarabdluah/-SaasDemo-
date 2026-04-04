@@ -64,7 +64,7 @@ public class SaasDemoDbContext :
     public DbSet<SlugRedirect> SlugRedirects { get; set; }
     public DbSet<BlogPostVersion> BlogPostVersions { get; set; }
     public DbSet<SaasDemo.MediaLibrary.MediaFile> MediaFiles { get; set; }
-
+    public DbSet<SaasDemo.Settings.SiteSettings> SiteSettings { get; set; }
 
 
     public SaasDemoDbContext(DbContextOptions<SaasDemoDbContext> options)
@@ -165,6 +165,27 @@ public class SaasDemoDbContext :
             b.Property(x => x.ContentType).IsRequired().HasMaxLength(128);
             b.Property(x => x.BlobName).IsRequired().HasMaxLength(256);
             b.HasIndex(x => x.BlobName).IsUnique();
+        });
+
+        builder.Entity<SaasDemo.Settings.SiteSettings>(b =>
+        {
+            b.ToTable(SaasDemoConsts.DbTablePrefix + "SiteSettings", SaasDemoConsts.DbSchema);
+            b.ConfigureByConvention();
+            
+            b.Property(x => x.SiteName).IsRequired().HasMaxLength(128);
+            b.Property(x => x.PrimaryColor).IsRequired().HasMaxLength(32);
+            b.Property(x => x.SecondaryColor).IsRequired().HasMaxLength(32);
+            
+            b.Property(x => x.FacebookUrl).HasMaxLength(256);
+            b.Property(x => x.TwitterUrl).HasMaxLength(256);
+            b.Property(x => x.InstagramUrl).HasMaxLength(256);
+            b.Property(x => x.LinkedInUrl).HasMaxLength(256);
+            
+            b.Property(x => x.SmtpHost).HasMaxLength(256);
+            b.Property(x => x.SmtpUserName).HasMaxLength(256);
+            b.Property(x => x.SmtpPassword).HasMaxLength(256);
+            b.Property(x => x.SenderEmail).HasMaxLength(256);
+            b.Property(x => x.SenderName).HasMaxLength(128);
         });
 
     }

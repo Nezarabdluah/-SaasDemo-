@@ -61,8 +61,8 @@
 ### الأسبوع 4–5 | ~60 ساعة
 
 ### Planned Features | المقرر سابقاً ✅
-- [ ] SiteSettings Entity (اسم، ألوان، شعار)
-- [ ] SocialLinks + EmailSettings
+- [x] SiteSettings Entity (اسم، ألوان، شعار)
+- [x] SocialLinks + EmailSettings
 - [ ] Dynamic Footer
 - [ ] Theme Token System بـ CSS Variables
 

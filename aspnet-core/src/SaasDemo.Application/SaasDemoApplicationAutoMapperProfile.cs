@@ -17,6 +17,8 @@ public class SaasDemoApplicationAutoMapperProfile : Profile
 
         CreateMap<BlogTag, BlogTagDto>();
 
+        CreateMap<SaasDemo.Settings.SiteSettings, SaasDemo.Settings.Dtos.SiteSettingsDto>();
+
         // ========== DTO -> Entity (Required by CrudAppService DI validation) ==========
         // ABP's CrudAppService requires these mappings to exist in its DI container,
         // but we NEVER use them — our AppServices override Create/Update

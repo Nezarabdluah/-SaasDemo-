@@ -38,6 +38,13 @@ function configureRoutes(routesService: RoutesService) {
         order: 4,
         layout: eLayoutType.application,
         // requiredPolicy: 'SaasDemo.MediaLibrary', // Uncomment when ready
+      },
+      {
+        path: '/settings',
+        name: 'إعدادات الموقع',
+        iconClass: 'fas fa-cogs',
+        order: 5,
+        layout: eLayoutType.application,
       }]);
   };
 }

@@ -36,4 +36,8 @@ export const appRoutes: Routes = [
     path: 'blog-tags',
     loadChildren: () => import('./blog-tags/blog-tags.routes').then(m => m.blogTagsRoutes),
   },
+  {
+    path: 'settings',
+    loadChildren: () => import('./settings/settings.module').then(m => m.SettingsModule),
+  },
 ];

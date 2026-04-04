@@ -16,6 +16,7 @@
 - **Completed:** Media Library Integration (Copy URL + Cover Picker + Quill Image Insert + Drag & Drop) ✅
 - **Completed:** Article Statistics (Views, Comments, Reactions via CmsKit) ✅
 - **Completed:** SEO Meta Tags (Title + OG:title + OG:description + OG:image) in BlogDetailComponent ✅
+- **Completed:** SiteSettings Entity (SiteName, Colors, Logo, SocialLinks, EmailSettings) + Angular UI ✅
 - **Blocked:** Angular SSR ⛔ (ABP Lepton-X غير متوافق — DOM manipulation in DI)
 - **Pending:** Sitemap.xml, Robots.txt
 

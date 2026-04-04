@@ -11,6 +11,7 @@
 | `SlugRedirect` | BlogPosts | Belongs to BlogPost (old slugs for 301 redirect) |
 | `BlogPostVersion` | BlogPosts | Belongs to BlogPost (snapshot of post at each edit) |
 | `MediaFile` | MediaLibrary | Standalone entity. Tracks file metadata + BlobName in IBlobContainer |
+| `SiteSettings` | Settings | Singleton entity. SiteName, Colors, Logo, SocialLinks, EmailSettings |
 
 ## DbContext/DbSets
 | DbSet | Context | Description |
@@ -23,6 +24,7 @@
 | `SlugRedirects` | SaasDemoDbContext | Unique index on `OldSlug`, FK to BlogPost |
 | `BlogPostVersions` | SaasDemoDbContext | Unique index on `(BlogPostId, VersionNumber)`, FK to BlogPost |
 | `MediaFiles` | SaasDemoDbContext | `FileName`, `BlobName`, `ContentType`, `FileSize`, `FolderPath`, `AltText` |
+| `SiteSettings` | SaasDemoDbContext | Singleton. `SiteName`, `PrimaryColor`, `SecondaryColor`, `LogoMediaId`, Social + SMTP |
 
 ## Key Service Methods
 | Service | Method | Functionality |
@@ -39,6 +41,8 @@
 | `MediaFileAppService` | `GetListAsync(input)` | Paginated list with filter by name/folder |
 | `MediaFileAppService` | `GetContentAsync(id)` | Returns raw byte[] from blob storage |
 | `MediaFileAppService` | `DeleteAsync(id)` | Deletes blob + DB record |
+| `SiteSettingsAppService` | `GetAsync()` | Returns singleton settings or defaults |
+| `SiteSettingsAppService` | `UpdateAsync(dto)` | Creates or updates singleton settings |
 
 ## Controllers (Custom, non-ABP auto-generated)
 | Controller | Route | Purpose |
@@ -63,6 +67,7 @@
 |---|---|---|
 | `/blogs` | BlogPostComponent | Blogs |
 | `/media-library` | MediaLibraryComponent | مكتبة الوسائط |
+| `/settings` | SiteSettingsComponent | إعدادات الموقع |
 
 ## Permissions
 | Permission Key | Description | Seeded? |
