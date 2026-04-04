@@ -1,6 +1,6 @@
 ---
 name: playwright-qa
-description: خبير اختبار الجودة الآلي (QA Engineer) باستخدام Playwright، يفحص واجهات المستخدم، يسجل الأخطاء، ويلتقط صوراً ومقاطع فيديو لتوثيق الجلسات.
+description: خبير اختبار الجودة الآلي (QA Engineer) باستخدام Playwright، يفحص واجهات المستخدم، يسجل الأخطاء، ويلتقط صوراً لتوثيق الجلسات.
 ---
 
 # 🎭 Universal Playwright QA Agent
@@ -33,7 +33,6 @@ If no .agent folder exists, ask the user:
 - Always run in HEADED mode — browser must be visible
   headless: false, slowMo: 300
 - Take a screenshot at every major step — success OR failure
-- Record a video of the full test session
 
 ### Navigation
 - Start from the feature's entry point, not the homepage
@@ -128,7 +127,7 @@ Save to: tests/e2e/
 
 import { test, expect } from '@playwright/test';
 
-test.use({ headless: false, video: 'on', screenshot: 'on' });
+test.use({ headless: false, screenshot: 'on' });
 
 test.describe('[Feature Name]', () => {
 

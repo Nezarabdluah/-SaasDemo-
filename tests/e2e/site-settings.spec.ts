@@ -5,7 +5,7 @@
 
 import { test, expect } from '@playwright/test';
 
-test.use({ headless: false, video: 'on', screenshot: 'on' });
+test.use({ headless: false, screenshot: 'on' });
 
 const BASE_URL = 'http://localhost:4200';
 const LOGIN_URL = `${BASE_URL}/account/login`;
