@@ -2,6 +2,7 @@
 
 [![Build](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/)
 [![Tests](https://img.shields.io/badge/tests-19%20passing-green)](https://github.com/)
+[![QA](https://img.shields.io/badge/QA-7%2F7%20scenarios%20passed-blue)](./evidence/testing/)
 [![ABP Framework](https://img.shields.io/badge/ABP_Framework-9.3.6-blue.svg)](https://abp.io/)
 [![Angular](https://img.shields.io/badge/Angular-17.0%2B-red.svg)](https://angular.dev/)
 [![.NET Core](https://img.shields.io/badge/.NET_Core-8.0-purple.svg)](https://dotnet.microsoft.com/)
@@ -10,24 +11,45 @@
 > **A production-grade open-source boilerplate built on ABP Framework + Angular, demonstrating enterprise patterns in a real working codebase.** 
 > *(مشروع احترافي مفتوح المصدر مبني على بيئة عمل ABP Framework + Angular، يستعرض تصميمات وتطبيقات هيكلية معمارية قوية للأنظمة المؤسسية في بيئة حقيقية.)*
 
+---
+
 ## 📖 About The Project
 
 **SaasDemo** is a custom enterprise-grade boilerplate project built on top of the [ABP Framework](https://abp.io/) and Angular. It goes beyond standard scaffolding by manually implementing advanced enterprise patterns, proving that theoretical concepts can be beautifully translated into working code.
 
-This project demonstrates how to properly integrate complex features like SEO, Media Libraries, Content Versioning, and dynamic Site Settings into a strict DDD environment.
+This project demonstrates how to properly integrate complex features like SEO, Media Libraries, Content Versioning, and dynamic Site Settings into a strict DDD environment — with **every feature tested and documented** like a real enterprise product.
 
-## 📸 Screenshots & Showcase
-- **Advanced Blog Editor (QuillJS + Media)**:
-  <img src="./docs/screenshots/blog-editor.png" width="800" alt="Blog Editor Demo" />
+---
 
-- **Centralized Media Library (Drag & Drop)**:
-  <img src="./docs/screenshots/media-library.png" width="800" alt="Media Library Demo" />
+## 📸 Feature Showcase
 
-- **Nested Comments & SEO Integration**:
-  <img src="./docs/screenshots/comments.png" width="800" alt="Nested Comments Demo" />
+### 🖼️ Centralized Media Library — Drag & Drop with Live Preview
+<img src="./docs/screenshots/media-library.png" width="800" alt="Media Library with Drag & Drop" />
 
-- **Dynamic Site Settings (NEW ✨)**:
-  <img src="./evidence/testing/site-settings/01-page-load.png" width="800" alt="Site Settings Management" />
+> Headless BlobStoring integration. Upload, search, copy URLs, and picker modals — all from one centralized library.
+
+---
+
+### ⚙️ Dynamic Site Settings — Full Admin Panel
+<img src="./evidence/testing/site-settings/01-page-load.png" width="800" alt="Site Settings Admin Panel" />
+
+> Singleton Entity pattern. Site branding, colors, logo from Media Library, social links, and SMTP configuration — all in one page.
+
+---
+
+### ✅ Real-Time Validation — Professional Error Handling
+<img src="./evidence/testing/site-settings/04-empty-validation.png" width="800" alt="Form Validation" />
+
+> Every form has client-side validation with Arabic localization. Required fields, max length, and format errors — all handled gracefully.
+
+---
+
+### 🎉 Save Confirmation — Success Toast Feedback
+<img src="./evidence/testing/site-settings/03-save-result.png" width="800" alt="Save Success Toast" />
+
+> After saving, users see instant visual feedback with a styled toast notification. Data persists after page reload (verified via QA).
+
+---
 
 ## ✨ Key Technical Achievements
 
@@ -41,24 +63,71 @@ This project demonstrates how to properly integrate complex features like SEO, M
   - Drag & Drop uploading with visual feedback and hover animations.
   - Headless `BlobStoring` integration (locally stored, ready to swap to Azure/AWS).
   - Cross-module integration (Cover Image Picker Modal, custom Quill Editor image handlers, "Copy URL" features).
-- ⚙️ **Dynamic Site Settings Engine** (NEW):
+- ⚙️ **Dynamic Site Settings Engine**:
   - Singleton Entity pattern (one row in DB, auto-created on first save).
   - Site branding: Name, Primary/Secondary Colors, Logo from Media Library.
   - Social Links management (Facebook, Twitter, Instagram, LinkedIn).
   - Email/SMTP configuration with secure password handling.
   - Professional Angular admin interface with real-time validation.
-- 🎭 **Automated QA Testing** (NEW):
-  - Custom `/playwright-qa` skill for structured E2E testing.
-  - Evidence-based testing: screenshots, videos, and QA reports per feature.
-  - Organized `evidence/testing/` folder with full audit trail.
 - 🔧 **Debugging & Stability Techniques**:
   - Documented workarounds for ABP Lepton-X SSR incompatibilities directly in the project logs.
   - Manual permission seeding via `DbMigrator` eliminating caching and 403 authorization bugs.
+
+---
+
+## 🎭 Quality Assurance — Enterprise-Grade Testing
+
+> **Every feature is tested and documented before it's considered "done".** This project follows an enterprise QA workflow using a custom `/playwright-qa` skill that enforces structured testing with evidence collection.
+
+### 📊 QA Process Per Feature
+```
+1. 🧪 Execute test scenarios (P0: Auth → P1: Core → P2: Edge Cases)
+2. 📸 Capture screenshots at every major step (success + failure)
+3. 🎬 Record full session video (.webp)
+4. 📋 Generate official QA report (.md)
+5. 🧾 Write Playwright E2E spec (.spec.ts)
+6. 📁 Organize everything in evidence/testing/[feature]/
+```
+
+### 📂 Evidence Structure (Real Example)
+```
+evidence/testing/
+├── qa-report-site-settings-2026-04-04.md    ← Official QA Report
+└── site-settings/
+    ├── 01-page-load.png                     ← Initial page state
+    ├── 02-form-filled.png                   ← Form data entry
+    ├── 03-save-result.png                   ← Success toast ✅
+    ├── 04-empty-validation.png              ← Validation error ❌
+    ├── 05-social-links.png                  ← Social section
+    ├── 06-email-settings.png                ← SMTP section
+    ├── 07-final-save.png                    ← Final save
+    ├── 08-reload-verify.png                 ← Data persistence check
+    └── session-video.webp                   ← Full session recording 🎬
+
+tests/e2e/
+└── site-settings.spec.ts                    ← Playwright E2E (6 scenarios)
+```
+
+### 📈 Latest QA Results
+```
+╔══════════════════════════════════╗
+║     QA SESSION REPORT            ║
+╠══════════════════════════════════╣
+║ Feature : Site Settings          ║
+║ Date    : 2026-04-04             ║
+║ Result  : ✅ PASS                ║
+║ Tests   : 7/7 Passed             ║
+║ Bugs    : 0 Found                ║
+╚══════════════════════════════════╝
+```
+
+---
 
 ## 🛠️ Tech Stack
 
 - **Backend**: C#, ASP.NET Core 8, Entity Framework Core, SQL Server (Express).
 - **Frontend**: Angular 17, TypeScript, ABP Lepton-X Lite Theme.
+- **Testing**: Playwright, Custom QA Skill, Structured Evidence Collection.
 - **Libraries**: QuillJS, Serilog, Swashbuckle, Node.js.
 
 ## 🚀 Getting Started
@@ -92,36 +161,45 @@ npm start
 ```
 The app will be available at `http://localhost:4200` by default.
 
-## 💡 Inside The `.agent` Folder
-This repository includes a special `.agent` directory containing a goldmine of bilingual (English/Arabic) documentation tracking the entire learning journey. This is how the AI and I communicate and maintain context:
+---
 
-| File | Purpose |
-|---|---|
-| `task.md` | The massive project roadmap (350+ hours), divided into phases and detailed checklists. |
-| `project-memory.md` | Core framework patterns, completed modules, and critical technical "gotchas". |
-| `decision-log.md` | A historical log of every major architectural decision (Why we did X instead of Y). |
-| `current-context.md` | The active session state, recent accomplishments, and current focus/blockers. |
-| `code-nodes.md` | A map of the database entities, DbSets, key services, and Angular components. |
-| `standards.md` | The strict coding standards, Clean Architecture rules, and UI/UX guidelines we follow. |
-| `testing-checklist.md` | A universal pre-deployment checklist validated before any merge. |
-| `pair-programming.md` | The communication rules bridging the gap between human logic and AI execution. |
-| `prompts-library.md` | Saved, highly-effective AI prompts used for scaffolding or complex logic generation. |
-| `workflows/` | Specific step-by-step guides (e.g., SEO Meta Tags, SSR workarounds, Git workflows, Playwright QA). |
-
-## 🤖 AI-Augmented Architecture
-This project leverages advanced AI pair-programming methodologies to strictly enforce **Clean Architecture** and **DDD** boundaries. All architectural decisions, custom workflows, and prompts are documented transparently in the `.agent/` directory to share our AI-engineering approach with the community.
-
-## 📁 Project Structure Highlights
+## 📁 Project Structure
 
 ```
 SaasDemo/
-├── aspnet-core/           → Backend (ABP + .NET 8 + EF Core)
-├── angular/               → Frontend (Angular 17 + Lepton-X)
-├── .agent/                → AI Context & Documentation (Bilingual)
-├── evidence/testing/      → QA Reports, Screenshots & Videos
-├── tests/e2e/             → Playwright E2E Specs
-└── docs/                  → Project Documentation & Screenshots
+├── aspnet-core/                → Backend (ABP + .NET 8 + EF Core)
+│   ├── src/
+│   │   ├── SaasDemo.Domain/           → Entities, Repositories, Domain Services
+│   │   ├── SaasDemo.Application/      → AppServices, AutoMapper Profiles
+│   │   ├── SaasDemo.EntityFrameworkCore/ → DbContext, Migrations, EF Repos
+│   │   └── SaasDemo.HttpApi.Host/     → API Host, Controllers, Swagger
+│   └── test/                          → Unit Tests (Domain + AppService)
+│
+├── angular/                    → Frontend (Angular 17 + Lepton-X)
+│   └── src/app/
+│       ├── blogs/                     → Blog CRUD + Detail + Editor
+│       ├── media-library/             → Upload, Search, Picker Modal
+│       ├── settings/                  → Site Settings Admin Panel
+│       └── shared/                    → Reusable Components & Services
+│
+├── .agent/                     → AI Context & Documentation (Bilingual 🇬🇧🇸🇦)
+│   ├── project-memory.md              → Module registry & architecture notes
+│   ├── current-context.md             → Active session state & focus
+│   ├── decision-log.md                → Architectural decisions history
+│   ├── code-nodes.md                  → Entity/DbSet/Service reference map
+│   ├── standards.md                   → Clean Architecture & DDD rules
+│   ├── task.md                        → Project roadmap (350+ hours)
+│   └── workflows/                     → 12 custom skills (29 total)
+│
+├── evidence/testing/           → QA Reports, Screenshots & Videos
+├── tests/e2e/                  → Playwright E2E Specs
+└── docs/                       → Project Documentation
 ```
+
+---
+
+## 🤖 AI-Augmented Architecture
+This project leverages advanced AI pair-programming methodologies to strictly enforce **Clean Architecture** and **DDD** boundaries. All architectural decisions, custom workflows (29 skills), and prompts are documented transparently in the `.agent/` directory to share our AI-engineering approach with the community.
 
 ## 📄 License
 Distributed under the MIT License. Feel free to clone, explore, fork, and learn from it!
