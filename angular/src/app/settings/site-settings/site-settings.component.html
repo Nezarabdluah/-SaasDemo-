@@ -25,11 +25,17 @@
               <div class="row">
                 <div class="col-6 mb-3">
                   <label class="form-label" for="primaryColor">اللون الأساسي *</label>
-                  <input type="color" id="primaryColor" formControlName="primaryColor" class="form-control form-control-color w-100" />
+                  <div class="input-group">
+                    <input type="color" id="primaryColor" formControlName="primaryColor" class="form-control form-control-color" style="max-width: 60px; cursor: pointer;" title="اختر اللون" />
+                    <input type="text" formControlName="primaryColor" class="form-control text-uppercase" placeholder="#000000" />
+                  </div>
                 </div>
                 <div class="col-6 mb-3">
                   <label class="form-label" for="secondaryColor">اللون الثانوي *</label>
-                  <input type="color" id="secondaryColor" formControlName="secondaryColor" class="form-control form-control-color w-100" />
+                  <div class="input-group">
+                    <input type="color" id="secondaryColor" formControlName="secondaryColor" class="form-control form-control-color" style="max-width: 60px; cursor: pointer;" title="اختر اللون" />
+                    <input type="text" formControlName="secondaryColor" class="form-control text-uppercase" placeholder="#000000" />
+                  </div>
                 </div>
               </div>
 

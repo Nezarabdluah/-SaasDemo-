@@ -3,10 +3,10 @@
 ## ⏳ Current Phase: Phase 2 (Settings Engine & Theme)
 - **Session Date:** 2026-04-04
 - **Status**: 🟢 SiteSettings Feature COMPLETE — Tested & Documented
-- **Focus**: Theme Token System (CSS variables mapped to SiteSettings Colors)
+- **Focus**: Email Template Engine (design and dispatch mechanics)
 
 ### Current Focus (Phase 2 - Continued)
-**Objective**: Implementing Theme Token System (CSS variables mapped to SiteSettings Colors).
+**Objective**: Implementing Email Template Engine utilizing the SMTP settings saved dynamically.
 
 ### Recent Accomplishments
 1. **Dynamic Footer (UI/UX)**:
@@ -14,7 +14,11 @@
    - Replaced Lepton-X default footer seamlessly via `ReplaceableComponentsService`.
    - Displays real-time Site Name, copyright year, and social links.
    - Tested successfully via Playwright browser subagent.
-2. **Video Recording Removed from QA**:
+2. **Theme Token System (Global Dynamic CSS)**:
+   - Configured `ThemeTokenService` for Angular.
+   - Tied backend primary/secondary colors directly to `:root` level Lepton-X variables.
+   - Dynamic global styling updates flawlessly on load.
+3. **Video Recording Removed from QA**:
    - Dropped `.webp` videos in favor of just Screenshots in the unified `/playwright-qa` workflow.
 3. **Site Settings Feature Completed** (Backend, UI, Persistence, Image Upload, E2E Testing).
 
@@ -24,8 +28,8 @@
 | 1 | SiteSettings Entity (Name, Colors, Logo) | ✅ Done + QA Passed |
 | 1 | SocialLinks + EmailSettings (merged in SiteSettings) | ✅ Done + QA Passed |
 | 2 | Dynamic Footer | ✅ Done + QA Passed |
-| 3 | Theme Token System (CSS Variables) | ⬜ Next |
-| 4 | Email Template Engine | ⬜ Pending |
+| 3 | Theme Token System (CSS Variables) | ✅ Done |
+| 4 | Email Template Engine | ⬜ Next |
 | 5 | Announcement System | ⬜ Pending |
 | 6 | Maintenance Mode | ⬜ Pending |
 
