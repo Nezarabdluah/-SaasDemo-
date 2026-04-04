@@ -1,0 +1,52 @@
+.app-dynamic-footer {
+  background-color: var(--lpx-footer-bg, #f8f9fa);
+  color: var(--lpx-footer-text, #6c757d);
+  
+  .site-name-link {
+    transition: opacity 0.3s ease;
+    &:hover {
+      opacity: 0.8;
+      text-decoration: underline !important;
+    }
+  }
+
+  .social-links {
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: rgba(0, 0, 0, 0.05);
+      color: inherit;
+      transition: all 0.3s ease;
+
+      i {
+        font-size: 1.1rem;
+      }
+
+      &:hover {
+        transform: translateY(-3px);
+        color: white;
+
+        &.facebook { background-color: #1877f2; }
+        &.twitter { background-color: #000000; }
+        &.instagram { 
+          background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); 
+        }
+        &.linkedin { background-color: #0a66c2; }
+      }
+    }
+  }
+}
+
+/* Dark mode support if Lepton-X switches to dark */
+:host-context([data-theme="dark"]) .app-dynamic-footer {
+  background-color: var(--lpx-footer-bg, #1e1e1e);
+  color: var(--lpx-footer-text, #adb5bd);
+  
+  .social-links .social-link {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+}
