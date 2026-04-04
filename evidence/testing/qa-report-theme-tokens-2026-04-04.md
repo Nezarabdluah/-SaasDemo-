@@ -28,6 +28,10 @@ The Theme Tokens System was successfully deployed and verified. The system uses 
 All visual evidence for the Deep Theme overrides is verified via the recorded sessions. The site identity successfully transitioned to the targeted `PrimaryColor`.
 _Screenshots saved to:_ `evidence/testing/theme-tokens/`
 
+![Deep Theme Override Evidence](file:///E:/%D9%85%D8%B4%D8%B1%D9%88%D8%B9%20%D8%AA%D8%AC%D8%B1%D9%8A%D8%A8%D9%8A/evidence/testing/theme-tokens/qa_final_theme_override.png)
+
+![Deep Theme Override Evidence](file:///E:/%D9%85%D8%B4%D8%B1%D9%88%D8%B9%20%D8%AA%D8%AC%D8%B1%D9%8A%D8%A8%D9%8A/evidence/testing/theme-tokens/qa_final_theme_override.png)
+
 ## 🐛 Bugs Found
 ### BUG-002 — OS Color Picker Blocking Automation
 - **Severity:** Medium
