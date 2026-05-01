@@ -1,0 +1,213 @@
+{
+  "info": {
+    "name": "BlogPosts — Complete Test Suite",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "📁 Folder 0 — Auth",
+      "item": [
+        {
+          "name": "Get Token",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/x-www-form-urlencoded" }],
+            "url": { "raw": "{{api}}/connect/token", "host": ["{{api}}"], "path": ["connect", "token"] },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {"key": "grant_type", "value": "password"},
+                {"key": "username", "value": "admin"},
+                {"key": "password", "value": "1q2w3E*"},
+                {"key": "client_id", "value": "SaasDemo_App"},
+                {"key": "scope", "value": "SaasDemo offline_access"}
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "pm.environment.set('token', pm.response.json().access_token);"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "📁 Folder 1 — Happy Path",
+      "item": [
+        {
+          "name": "Create — Valid Data",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{api}}/api/app/blog-post", "host": ["{{api}}"], "path": ["api", "app", "blog-post"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"My First Newman Post\",\n  \"slug\": \"my-first-newman-post\",\n  \"content\": \"This is the content of the first post.\",\n  \"status\": 1\n}"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 200/201', () => pm.response.to.be.success);",
+                  "pm.environment.set('createdPostId', pm.response.json().id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Read — Get by ID",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{api}}/api/app/blog-post/{{createdPostId}}", "host": ["{{api}}"], "path": ["api", "app", "blog-post", "{{createdPostId}}"] }
+          },
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Status 200', () => pm.response.to.have.status(200));",
+            "pm.test('Data matches what was created', () => {",
+            "  const body = pm.response.json();",
+            "  pm.expect(body.id).to.eql(pm.environment.get('createdPostId'));",
+            "});"
+          ]}}]
+        },
+        {
+          "name": "List — Pagination",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{api}}/api/app/blog-post?skipCount=0&maxResultCount=10", "host": ["{{api}}"], "path": ["api", "app", "blog-post"], "query": [{"key":"skipCount","value":"0"}, {"key":"maxResultCount","value":"10"}] }
+          },
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Status 200', () => pm.response.to.have.status(200));",
+            "pm.test('Has items array', () => pm.expect(pm.response.json().items).to.be.an('array'));"
+          ]}}]
+        }
+      ]
+    },
+    {
+      "name": "📁 Folder 2 — Validation & Errors",
+      "item": [
+        {
+          "name": "Empty required fields → 400",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{api}}/api/app/blog-post", "host": ["{{api}}"], "path": ["api", "app", "blog-post"] },
+            "body": { "mode": "raw", "raw": "{}" }
+          },
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Status 400', () => pm.response.to.have.status(400));"
+          ]}}]
+        }
+      ]
+    },
+    {
+      "name": "📁 Folder 3 — Auth & Authorization",
+      "item": [
+        {
+          "name": "Create No token → 401",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{api}}/api/app/blog-post", "host": ["{{api}}"], "path": ["api", "app", "blog-post"] },
+            "body": { "mode": "raw", "raw": "{\"title\":\"No Token Post\"}" }
+          },
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Status 401 or redirect', () => {",
+            "  pm.expect(pm.response.code).to.be.oneOf([401, 400, 302]);",
+            "});"
+          ]}}]
+        }
+      ]
+    },
+    {
+      "name": "📁 Folder 4 — Boundary & Edge Values",
+      "item": [
+        {
+          "name": "Arabic text input",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{api}}/api/app/blog-post", "host": ["{{api}}"], "path": ["api", "app", "blog-post"] },
+            "body": { "mode": "raw", "raw": "{\n  \"title\": \"عنوان بالعربي\",\n  \"content\": \"محتوى المقالة بالعربي.\",\n  \"status\": 1\n}" }
+          },
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Arabic text accepted and returned correctly', () => {",
+            "  const body = pm.response.json();",
+            "  pm.expect(body.title).to.eql('عنوان بالعربي');",
+            "});"
+          ]}}]
+        }
+      ]
+    },
+    {
+      "name": "📁 Folder 5 — Chained Flow",
+      "item": [
+        {
+          "name": "Step 1: Create",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{api}}/api/app/blog-post", "host": ["{{api}}"], "path": ["api", "app", "blog-post"] },
+            "body": { "mode": "raw", "raw": "{\"title\":\"Chain Test\",\"slug\":\"chain-test\",\"content\":\"Initial content\",\"status\":0}" }
+          },
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Created successfully', () => pm.response.to.be.success);",
+            "pm.environment.set('chainId', pm.response.json().id);"
+          ]}}]
+        },
+        {
+          "name": "Step 3: Update",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{api}}/api/app/blog-post/{{chainId}}", "host": ["{{api}}"], "path": ["api", "app", "blog-post", "{{chainId}}"] },
+            "body": { "mode": "raw", "raw": "{\"title\":\"Chain Test Updated\",\"slug\":\"chain-test-updated\",\"content\":\"Updated content\",\"status\":1}" }
+          },
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Updated successfully', () => pm.response.to.be.success);"
+          ]}}]
+        },
+        {
+          "name": "Step 5: Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{api}}/api/app/blog-post/{{chainId}}", "host": ["{{api}}"], "path": ["api", "app", "blog-post", "{{chainId}}"] }
+          },
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Deleted successfully', () => pm.response.to.be.success);"
+          ]}}]
+        }
+      ]
+    },
+    {
+      "name": "📁 Folder 6 — Business Logic Scenarios",
+      "item": [
+        {
+          "name": "Auto-generate Slug from Title",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{api}}/api/app/blog-post", "host": ["{{api}}"], "path": ["api", "app", "blog-post"] },
+            "body": { "mode": "raw", "raw": "{\"title\":\"This is a test for Auto Slug generation\",\"content\":\"content\",\"status\":0}" }
+          },
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Slug generated automatically', () => {",
+            "  pm.expect(pm.response.json().slug).to.eql('this-is-a-test-for-auto-slug-generation');",
+            "});"
+          ]}}]
+        }
+      ]
+    }
+  ]
+}

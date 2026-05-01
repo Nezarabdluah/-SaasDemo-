@@ -1,0 +1,11 @@
+{
+  "id": "local-env",
+  "name": "local",
+  "values": [
+    {
+      "key": "api",
+      "value": "https://localhost:44368",
+      "enabled": true
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "project": "SaasDemo",
+  "skillVersion": "3.2",
+  "environment": {
+    "local":   { "ui": "http://localhost:4200", "api": "https://localhost:44368" },
+    "staging": { "ui": "", "api": "" }
+  },
+  "credentials": {
+    "roles": ["admin", "user"]
+  },
+  "execution": {
+    "dev": { "headless": false, "slowMo": 150, "workers": 1, "video": "on-failure" },
+    "ci":  { "headless": true,  "slowMo": 0,   "workers": 4, "video": "on-failure" }
+  },
+  "performanceBudgets": {
+    "pageLoad":    3000,
+    "apiResponse": 1000,
+    "search":      500,
+    "formSubmit":  1500
+  },
+  "documentation": {
+    "screenshots": {
+      "mode": "outcomes-only",
+      "captureOn": ["final-pass", "any-fail", "system-proof"]
+    },
+    "video": { "mode": "on-failure-only" },
+    "criticalFlows": []
+  },
+  "a11yLevel": "wcag21aa",
+  "browsers": ["chromium", "firefox"]
+}

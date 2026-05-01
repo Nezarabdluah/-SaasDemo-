@@ -20,7 +20,11 @@
    - Dynamic global styling updates flawlessly on load.
 3. **Video Recording Removed from QA**:
    - Dropped `.webp` videos in favor of just Screenshots in the unified `/playwright-qa` workflow.
-3. **Site Settings Feature Completed** (Backend, UI, Persistence, Image Upload, E2E Testing).
+4. **Site Settings Feature Completed** (Backend, UI, Persistence, Image Upload, E2E Testing).
+5. **BlogPosts QA Master v3.2 Execution**:
+   - Implemented rigorous Layer 0, Layer 1, and Layer 2 testing.
+   - Updated `REGRESSION-REGISTRY.md` and `ANALYTICS.md`.
+   - Setup Newman complete API collection and Playwright automated Auth flow.
 
 ## 📊 Phase 2 Progress
 | Batch | Feature | Status |
