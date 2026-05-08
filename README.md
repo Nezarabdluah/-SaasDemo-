@@ -2,7 +2,7 @@
 
 [![Build](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/)
 [![E2E Tests](https://img.shields.io/badge/E2E_Tests-19%20passing-green)](./tests/e2e/)
-[![DevOps QA](https://img.shields.io/badge/DevOps_QA-13%2F20%20Tests_Run-orange)](./evidence/testing/)
+[![DevOps QA](https://img.shields.io/badge/DevOps_QA-13%2F20%20Tests_Run-orange)](./evidence/qa-automation/)
 [![Security](https://img.shields.io/badge/OWASP_Top_10-86%25_Pass-yellow)](./tests/api/security-owasp.collection.json)
 [![ABP Framework](https://img.shields.io/badge/ABP_Framework-9.3.6-blue.svg)](https://abp.io/)
 [![Angular](https://img.shields.io/badge/Angular-20.0-red.svg)](https://angular.dev/)
@@ -66,16 +66,16 @@ Every feature is tested through a **6-step process**:
 | Step | Action | Output |
 |------|--------|--------|
 | 1 | Execute structured test scenarios (P0 → P1 → P2) | Test results |
-| 2 | Capture screenshots at every major step | `evidence/testing/[feature]/*.png` |
+| 2 | Capture screenshots at every major step | `evidence/qa-automation/06-feature-reports/[feature]/*.png` |
 | 3 | Record full browser test session | Documented test flow |
-| 4 | Generate official QA report | `evidence/testing/qa-report-[feature]-[date].md` |
+| 4 | Generate official QA report | `evidence/qa-automation/06-feature-reports/qa-report-[feature]-[date].md` |
 | 5 | Write reusable Playwright E2E spec | `tests/e2e/[feature].spec.ts` |
 | 6 | Archive all evidence in organized folders | Full audit trail |
 
 ### Testing Evidence Structure
 
 ```
-📁 evidence/testing/
+📁 evidence/qa-automation/06-feature-reports/
 │
 ├── 📋 qa-report-site-settings-2026-04-04.md    ← Official QA Report
 │   Contains: test scenarios, pass/fail status,
@@ -99,7 +99,7 @@ Every feature is tested through a **6-step process**:
      Social Links, Email, Persistence)
 ```
 
-> 💡 **All 8 screenshots + QA report are available** in the [`evidence/testing/`](./evidence/testing/) folder for full transparency.
+> 💡 **All 8 screenshots + QA report are available** in the [`evidence/qa-automation/06-feature-reports/`](./evidence/qa-automation/06-feature-reports/) folder for full transparency.
 
 ---
 
@@ -180,7 +180,7 @@ SaasDemo/
 │       ├── settings/             → Site Settings Admin Panel
 │       └── shared/               → Reusable Components & Services
 │
-├── evidence/testing/           → 📊 QA Reports + Screenshots + Videos
+├── evidence/qa-automation/     → 📊 QA Reports + Performance + Security Scans
 ├── tests/e2e/                  → 🧪 Playwright E2E Specs
 │
 ├── .agent/                     → 🤖 AI Context & Documentation

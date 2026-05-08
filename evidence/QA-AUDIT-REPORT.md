@@ -68,14 +68,14 @@ The system was evaluated across 10 enterprise DevOps steps using the `devops-qa-
 | Step | Name | Status | Evidence Link |
 |:----:|:-----|:------:|:--------------|
 | 1 | Project Classification | ✅ | [QA-STATUS.md](../.agent/QA-STATUS.md) |
-| 2 | Four Golden Signals | ✅ | [step2-monitoring/](testing/step2-monitoring/) |
-| 3 | 20-Test Pyramid (65%) | ⏳ | [step3-test-pyramid/](testing/step3-test-pyramid/) |
+| 2 | Four Golden Signals | ✅ | [01-observability/](qa-automation/01-observability/) |
+| 3 | 20-Test Pyramid (65%) | ⏳ | [02-performance/](qa-automation/02-performance/) |
 | 4 | Bug Classification | ✅ | [This report](./QA-AUDIT-REPORT.md) |
-| 5 | SLO/SLI/SLA Framework | ✅ | [STEP5-SLO-FRAMEWORK.md](testing/STEP5-SLO-FRAMEWORK.md) |
-| 6 | Security Testing | ✅ | [security-scans/](testing/security-scans/) |
+| 5 | SLO/SLI/SLA Framework | ✅ | [STEP5-SLO-FRAMEWORK.md](qa-automation/04-reliability/STEP5-SLO-FRAMEWORK.md) |
+| 6 | Security Testing | ✅ | [03-security/](qa-automation/03-security/) |
 | 7 | Database Performance | ✅ | [tests/database/](../../tests/database/) |
-| 8 | Production Readiness (21/60) | ✅ | [STEP8-PRODUCTION-READINESS-SCORECARD.md](testing/STEP8-PRODUCTION-READINESS-SCORECARD.md) |
-| 9 | DORA Metrics (LOW) | ✅ | [STEP9-DORA-METRICS.md](testing/STEP9-DORA-METRICS.md) |
+| 8 | Production Readiness (21/60) | ✅ | [STEP8-PRODUCTION-READINESS-SCORECARD.md](qa-automation/05-readiness/STEP8-PRODUCTION-READINESS-SCORECARD.md) |
+| 9 | DORA Metrics (LOW) | ✅ | [STEP9-DORA-METRICS.md](qa-automation/05-readiness/STEP9-DORA-METRICS.md) |
 | 10 | Final QA Report | ✅ | [STEP10-FINAL-QA-REPORT.md](./STEP10-FINAL-QA-REPORT.md) |
 
 ---
