@@ -1,0 +1,227 @@
+(node:28260) [DEP0176] DeprecationWarning: fs.F_OK is deprecated, use fs.constants.F_OK instead
+(Use `node --trace-deprecation ...` to show where the warning was created)
+newman
+
+BlogPosts ظ¤ Complete Test Suite
+
+ظûة ≡اô Folder 0 ظ¤ Auth
+ظ¤¤ Get Token
+  POST {{api}}/connect/token [errored]
+     getaddrinfo ENOTFOUND {{api}}
+  2. Status 200
+  3ظب JSONError in test-script
+
+ظûة ≡اô Folder 1 ظ¤ Happy Path
+ظ¤¤ Create ظ¤ Valid Data
+  POST {{api}}/api/app/blog-post [errored]
+     getaddrinfo ENOTFOUND {{api}}
+  5. Status 200/201
+  6ظب JSONError in test-script
+
+ظ¤¤ Read ظ¤ Get by ID
+  GET {{api}}/api/app/blog-post/{{createdPostId}} [errored]
+     getaddrinfo ENOTFOUND {{api}}
+  8. Status 200
+  9. Data matches what was created
+
+ظ¤¤ List ظ¤ Pagination
+  GET {{api}}/api/app/blog-post?skipCount=0&maxResultCount=10 [errored]
+     getaddrinfo ENOTFOUND {{api}}
+ 11. Status 200
+ 12. Has items array
+
+ظûة ≡اô Folder 2 ظ¤ Validation & Errors
+ظ¤¤ Empty required fields ظْ 400
+  POST {{api}}/api/app/blog-post [errored]
+     getaddrinfo ENOTFOUND {{api}}
+ 14. Status 400
+
+ظûة ≡اô Folder 3 ظ¤ Auth & Authorization
+ظ¤¤ Create No token ظْ 401
+  POST {{api}}/api/app/blog-post [errored]
+     getaddrinfo ENOTFOUND {{api}}
+ 16. Status 401 or redirect
+
+ظûة ≡اô Folder 4 ظ¤ Boundary & Edge Values
+ظ¤¤ Arabic text input
+  POST {{api}}/api/app/blog-post [errored]
+     getaddrinfo ENOTFOUND {{api}}
+ 18. Arabic text accepted and returned correctly
+
+ظûة ≡اô Folder 5 ظ¤ Chained Flow
+ظ¤¤ Step 1: Create
+  POST {{api}}/api/app/blog-post [errored]
+     getaddrinfo ENOTFOUND {{api}}
+ 20. Created successfully
+ 21ظب JSONError in test-script
+
+ظ¤¤ Step 3: Update
+  PUT {{api}}/api/app/blog-post/{{chainId}} [errored]
+     getaddrinfo ENOTFOUND {{api}}
+ 23. Updated successfully
+
+ظ¤¤ Step 5: Delete
+  DELETE {{api}}/api/app/blog-post/{{chainId}} [errored]
+     getaddrinfo ENOTFOUND {{api}}
+ 25. Deleted successfully
+
+ظûة ≡اô Folder 6 ظ¤ Business Logic Scenarios
+ظ¤¤ Auto-generate Slug from Title
+  POST {{api}}/api/app/blog-post [errored]
+     getaddrinfo ENOTFOUND {{api}}
+ 27. Slug generated automatically
+
+ظ¤îظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤شظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤شظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤
+ظ¤é                         ظ¤é executed ظ¤é   failed ظ¤é
+ظ¤£ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤╝ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤╝ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ج
+ظ¤é              iterations ظ¤é        1 ظ¤é        0 ظ¤é
+ظ¤£ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤╝ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤╝ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ج
+ظ¤é                requests ظ¤é       11 ظ¤é       11 ظ¤é
+ظ¤£ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤╝ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤╝ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ج
+ظ¤é            test-scripts ظ¤é       11 ظ¤é        3 ظ¤é
+ظ¤£ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤╝ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤╝ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ج
+ظ¤é      prerequest-scripts ظ¤é        0 ظ¤é        0 ظ¤é
+ظ¤£ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤╝ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤╝ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ج
+ظ¤é              assertions ظ¤é       13 ظ¤é       13 ظ¤é
+ظ¤£ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤┤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤┤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ج
+ظ¤é total run duration: 1521ms                    ظ¤é
+ظ¤£ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ج
+ظ¤é total data received: 0B (approx)              ظ¤é
+ظ¤¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ء
+
+[31m   # [39m[31m failure        [39m[31m detail                                                                          [39m
+[90m     [39m[90m                [39m[90m                                                                                 [39m
+ 01.  Error                                                                                           
+                      getaddrinfo ENOTFOUND {{api}}                                                   
+                      at request                                                                      
+                      inside ""                                                                       
+[90m     [39m[90m                [39m[90m                                                                                 [39m
+ 02.  AssertionError  Status 200                                                                      
+                      expected PostmanResponse{ ظخ(5) } to have property 'code'                        
+                      at assertion:0 in test-script                                                   
+                      inside "≡اô Folder 0 ظ¤ Auth / Get Token"                                         
+[90m     [39m[90m                [39m[90m                                                                                 [39m
+ 03.  JSONError                                                                                       
+                      "undefined" is not valid JSON                                                   
+                      at test-script                                                                  
+                      inside "≡اô Folder 0 ظ¤ Auth / Get Token"                                         
+[90m     [39m[90m                [39m[90m                                                                                 [39m
+ 04.  Error                                                                                           
+                      getaddrinfo ENOTFOUND {{api}}                                                   
+                      at request                                                                      
+                      inside ""                                                                       
+[90m     [39m[90m                [39m[90m                                                                                 [39m
+ 05.  AssertionError  Status 200/201                                                                  
+                      expected PostmanResponse{ ظخ(5) } to have property 'code'                        
+                      at assertion:0 in test-script                                                   
+                      inside "≡اô Folder 1 ظ¤ Happy Path / Create ظ¤ Valid Data"                         
+[90m     [39m[90m                [39m[90m                                                                                 [39m
+ 06.  JSONError                                                                                       
+                      "undefined" is not valid JSON                                                   
+                      at test-script                                                                  
+                      inside "≡اô Folder 1 ظ¤ Happy Path / Create ظ¤ Valid Data"                         
+[90m     [39m[90m                [39m[90m                                                                                 [39m
+ 07.  Error                                                                                           
+                      getaddrinfo ENOTFOUND {{api}}                                                   
+                      at request                                                                      
+                      inside ""                                                                       
+[90m     [39m[90m                [39m[90m                                                                                 [39m
+ 08.  AssertionError  Status 200                                                                      
+                      expected PostmanResponse{ ظخ(5) } to have property 'code'                        
+                      at assertion:0 in test-script                                                   
+                      inside "≡اô Folder 1 ظ¤ Happy Path / Read ظ¤ Get by ID"                            
+[90m     [39m[90m                [39m[90m                                                                                 [39m
+ 09.  JSONError       Data matches what was created                                                   
+                      "undefined" is not valid JSON                                                   
+                      at assertion:1 in test-script                                                   
+                      inside "≡اô Folder 1 ظ¤ Happy Path / Read ظ¤ Get by ID"                            
+[90m     [39m[90m                [39m[90m                                                                                 [39m
+ 10.  Error                                                                                           
+                      getaddrinfo ENOTFOUND {{api}}                                                   
+                      at request                                                                      
+                      inside ""                                                                       
+[90m     [39m[90m                [39m[90m                                                                                 [39m
+ 11.  AssertionError  Status 200                                                                      
+                      expected PostmanResponse{ ظخ(5) } to have property 'code'                        
+                      at assertion:0 in test-script                                                   
+                      inside "≡اô Folder 1 ظ¤ Happy Path / List ظ¤ Pagination"                           
+[90m     [39m[90m                [39m[90m                                                                                 [39m
+ 12.  JSONError       Has items array                                                                 
+                      "undefined" is not valid JSON                                                   
+                      at assertion:1 in test-script                                                   
+                      inside "≡اô Folder 1 ظ¤ Happy Path / List ظ¤ Pagination"                           
+[90m     [39m[90m                [39m[90m                                                                                 [39m
+ 13.  Error                                                                                           
+                      getaddrinfo ENOTFOUND {{api}}                                                   
+                      at request                                                                      
+                      inside ""                                                                       
+[90m     [39m[90m                [39m[90m                                                                                 [39m
+ 14.  AssertionError  Status 400                                                                      
+                      expected PostmanResponse{ ظخ(5) } to have property 'code'                        
+                      at assertion:0 in test-script                                                   
+                      inside "≡اô Folder 2 ظ¤ Validation & Errors / Empty required fields ظْ 400"        
+[90m     [39m[90m                [39m[90m                                                                                 [39m
+ 15.  Error                                                                                           
+                      getaddrinfo ENOTFOUND {{api}}                                                   
+                      at request                                                                      
+                      inside ""                                                                       
+[90m     [39m[90m                [39m[90m                                                                                 [39m
+ 16.  AssertionError  Status 401 or redirect                                                          
+                      expected undefined to be one of [ 401, 400, 302 ]                               
+                      at assertion:0 in test-script                                                   
+                      inside "≡اô Folder 3 ظ¤ Auth & Authorization / Create No token ظْ 401"             
+[90m     [39m[90m                [39m[90m                                                                                 [39m
+ 17.  Error                                                                                           
+                      getaddrinfo ENOTFOUND {{api}}                                                   
+                      at request                                                                      
+                      inside ""                                                                       
+[90m     [39m[90m                [39m[90m                                                                                 [39m
+ 18.  JSONError       Arabic text accepted and returned correctly                                     
+                      "undefined" is not valid JSON                                                   
+                      at assertion:0 in test-script                                                   
+                      inside "≡اô Folder 4 ظ¤ Boundary & Edge Values / Arabic text input"               
+[90m     [39m[90m                [39m[90m                                                                                 [39m
+ 19.  Error                                                                                           
+                      getaddrinfo ENOTFOUND {{api}}                                                   
+                      at request                                                                      
+                      inside ""                                                                       
+[90m     [39m[90m                [39m[90m                                                                                 [39m
+ 20.  AssertionError  Created successfully                                                            
+                      expected PostmanResponse{ ظخ(5) } to have property 'code'                        
+                      at assertion:0 in test-script                                                   
+                      inside "≡اô Folder 5 ظ¤ Chained Flow / Step 1: Create"                            
+[90m     [39m[90m                [39m[90m                                                                                 [39m
+ 21.  JSONError                                                                                       
+                      "undefined" is not valid JSON                                                   
+                      at test-script                                                                  
+                      inside "≡اô Folder 5 ظ¤ Chained Flow / Step 1: Create"                            
+[90m     [39m[90m                [39m[90m                                                                                 [39m
+ 22.  Error                                                                                           
+                      getaddrinfo ENOTFOUND {{api}}                                                   
+                      at request                                                                      
+                      inside ""                                                                       
+[90m     [39m[90m                [39m[90m                                                                                 [39m
+ 23.  AssertionError  Updated successfully                                                            
+                      expected PostmanResponse{ ظخ(5) } to have property 'code'                        
+                      at assertion:0 in test-script                                                   
+                      inside "≡اô Folder 5 ظ¤ Chained Flow / Step 3: Update"                            
+[90m     [39m[90m                [39m[90m                                                                                 [39m
+ 24.  Error                                                                                           
+                      getaddrinfo ENOTFOUND {{api}}                                                   
+                      at request                                                                      
+                      inside ""                                                                       
+[90m     [39m[90m                [39m[90m                                                                                 [39m
+ 25.  AssertionError  Deleted successfully                                                            
+                      expected PostmanResponse{ ظخ(5) } to have property 'code'                        
+                      at assertion:0 in test-script                                                   
+                      inside "≡اô Folder 5 ظ¤ Chained Flow / Step 5: Delete"                            
+[90m     [39m[90m                [39m[90m                                                                                 [39m
+ 26.  Error                                                                                           
+                      getaddrinfo ENOTFOUND {{api}}                                                   
+                      at request                                                                      
+                      inside ""                                                                       
+[90m     [39m[90m                [39m[90m                                                                                 [39m
+ 27.  JSONError       Slug generated automatically                                                    
+                      "undefined" is not valid JSON                                                   
+                      at assertion:0 in test-script                                                   
+                      inside "≡اô Folder 6 ظ¤ Business Logic Scenarios / Auto-generate Slug from Title" 

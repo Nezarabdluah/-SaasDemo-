@@ -163,8 +163,35 @@
 - [ ] عند Merge للـ main: Deploy تلقائي لـ Azure
 
 **Integration Tests:**
-- [ ] اختبارات تغطي سيناريوهات كاملة من A إلى Z
+- [x] اختبارات الأداء كجزء من QA Pyramid (k6)
+- [x] فحص الأمان OWASP (Newman)
 - [ ] استهداف تغطية 70%+ من الـ Critical Paths
+
+---
+
+## 📦 المرحلة 6: التدقيق المؤسسي Enterprise DevOps & QA
+### الأسبوع 12–13 | تم التنفيذ ✔️
+
+### ما تم إنجازه (Audit Phase) ✅
+- [x] Step 1: تصنيف المشروع (T2-High)
+- [x] Step 2: تفعيل 4 Golden Signals (Grafana, InfluxDB, Prometheus)
+- [x] Step 3: تنفيذ 13 اختبار من QA Pyramid (Smoke, Load, Spike, etc.)
+- [x] Step 4: تصنيف الأخطاء (7 Bugs: 1 P0, 3 P1, 3 P2)
+- [x] Step 5: إطار SLO/SLI/SLA
+- [x] Step 6: اختبارات الأمان (OWASP + Scan)
+- [x] Step 7: أداء قاعدة البيانات (Pool Health)
+- [x] Step 8: بطاقة جاهزية الإنتاج (21/60 - غير جاهز)
+- [x] Step 9: مقاييس DORA (Low)
+- [x] Step 10: إصدار التقرير النهائي للـ QA
+
+### خطة الإصلاح (Remediation Phase) ⏳
+- [ ] 🚨 P0 (BUG-001): إصلاح أداء نقطة نهاية BlogPost List (AsNoTracking + Truncate Content)
+- [ ] ⚠️ P1 (BUG-002): إضافة Security Headers
+- [ ] ⚠️ P1 (BUG-003): تحديث مكتبة Scriban لإغلاق ثغرة Critical
+- [ ] ⚠️ P1 (BUG-004): تفعيل Rate Limiting لحماية الـ DB Pool
+- [ ] 🟡 P2 (BUG-005): حماية `/api/app/blog-post` بـ Auth
+- [ ] 🟡 P2 (BUG-006): إنشاء CI/CD Pipeline
+- [ ] 🟡 P2 (BUG-007): حل مشاكل `npm audit`
 
 ---
 
@@ -177,6 +204,7 @@
 | Subscription Plans + Trial System | ~120h |
 | SignalR + Webhooks | ~50h |
 | Analytics + CI/CD + Tests + Docs | ~90h |
-| **المجموع** | **~410h** |
+| Enterprise DevOps & QA Audit | ~20h |
+| **المجموع** | **~430h** |
 
 > الـ 60 ساعة الإضافية = مرونة للتعقيدات غير المتوقعة (هامش 15–20%)

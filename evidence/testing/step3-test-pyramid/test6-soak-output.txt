@@ -1,0 +1,251 @@
+
+         /\      Grafana   /ظ╛ظ╛/  
+    /\  /  \     |\  __   /  /   
+   /  \/    \    | |/ /  /   ظ╛ظ╛\ 
+  /          \   |   (  |  (ظ╛)  |
+ / __________ \  |_|\_\  \_____/ 
+
+
+     execution: local
+        script: tests/performance/soak-test.js
+        output: json (evidence/testing/step3-test-pyramid/test6-soak-results.json)
+
+     scenarios: (100.00%) 1 scenario, 15 max VUs, 1h0m30s max duration (incl. graceful stop):
+              * default: Up to 15 looping VUs for 1h0m0s over 3 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+time="2026-05-04T11:33:59+03:00" level=warning msg="Request Failed" error="Post \"https://localhost:44368/connect/token\": dial tcp 127.0.0.1:44368: connectex: No connection could be made because the target machine actively refused it."
+time="2026-05-04T11:33:59+03:00" level=info msg="≡ا¤ Login attempt: 0" source=console
+time="2026-05-04T11:33:59+03:00" level=error msg="ظإî Authentication failed: 0" source=console
+time="2026-05-04T11:33:59+03:00" level=error msg="Response: null" source=console
+time="2026-05-04T11:33:59+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+
+running (0h00m01.0s), 01/15 VUs, 0 complete and 0 interrupted iterations
+default   [   0% ] 01/15 VUs  0h00m01.0s/1h00m00.0s
+time="2026-05-04T11:34:00+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+
+running (0h00m02.0s), 01/15 VUs, 1 complete and 0 interrupted iterations
+default   [   0% ] 01/15 VUs  0h00m02.0s/1h00m00.0s
+time="2026-05-04T11:34:01+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+
+running (0h00m03.0s), 01/15 VUs, 2 complete and 0 interrupted iterations
+default   [   0% ] 01/15 VUs  0h00m03.0s/1h00m00.0s
+time="2026-05-04T11:34:02+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+
+running (0h00m04.0s), 01/15 VUs, 3 complete and 0 interrupted iterations
+default   [   0% ] 01/15 VUs  0h00m04.0s/1h00m00.0s
+time="2026-05-04T11:34:03+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+
+running (0h00m05.0s), 01/15 VUs, 4 complete and 0 interrupted iterations
+default   [   0% ] 01/15 VUs  0h00m05.0s/1h00m00.0s
+time="2026-05-04T11:34:04+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+
+running (0h00m06.0s), 01/15 VUs, 5 complete and 0 interrupted iterations
+default   [   0% ] 01/15 VUs  0h00m06.0s/1h00m00.0s
+time="2026-05-04T11:34:05+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+
+running (0h00m07.0s), 01/15 VUs, 6 complete and 0 interrupted iterations
+default   [   0% ] 01/15 VUs  0h00m07.0s/1h00m00.0s
+time="2026-05-04T11:34:06+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+
+running (0h00m08.0s), 01/15 VUs, 7 complete and 0 interrupted iterations
+default   [   0% ] 01/15 VUs  0h00m08.0s/1h00m00.0s
+time="2026-05-04T11:34:07+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+
+running (0h00m09.0s), 01/15 VUs, 8 complete and 0 interrupted iterations
+default   [   0% ] 01/15 VUs  0h00m09.0s/1h00m00.0s
+time="2026-05-04T11:34:08+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+
+running (0h00m10.0s), 01/15 VUs, 9 complete and 0 interrupted iterations
+default   [   0% ] 01/15 VUs  0h00m10.0s/1h00m00.0s
+time="2026-05-04T11:34:09+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+
+running (0h00m11.0s), 01/15 VUs, 10 complete and 0 interrupted iterations
+default   [   0% ] 01/15 VUs  0h00m11.0s/1h00m00.0s
+time="2026-05-04T11:34:10+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+
+running (0h00m12.0s), 01/15 VUs, 11 complete and 0 interrupted iterations
+default   [   0% ] 01/15 VUs  0h00m12.0s/1h00m00.0s
+time="2026-05-04T11:34:11+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+
+running (0h00m13.0s), 01/15 VUs, 12 complete and 0 interrupted iterations
+default   [   0% ] 01/15 VUs  0h00m13.0s/1h00m00.0s
+time="2026-05-04T11:34:12+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+
+running (0h00m14.0s), 01/15 VUs, 13 complete and 0 interrupted iterations
+default   [   0% ] 01/15 VUs  0h00m14.0s/1h00m00.0s
+time="2026-05-04T11:34:13+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+
+running (0h00m15.0s), 01/15 VUs, 14 complete and 0 interrupted iterations
+default   [   0% ] 01/15 VUs  0h00m15.0s/1h00m00.0s
+time="2026-05-04T11:34:14+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+
+running (0h00m16.0s), 01/15 VUs, 15 complete and 0 interrupted iterations
+default   [   0% ] 01/15 VUs  0h00m16.0s/1h00m00.0s
+time="2026-05-04T11:34:15+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+
+running (0h00m17.0s), 01/15 VUs, 16 complete and 0 interrupted iterations
+default   [   0% ] 01/15 VUs  0h00m17.0s/1h00m00.0s
+time="2026-05-04T11:34:16+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+
+running (0h00m18.0s), 01/15 VUs, 17 complete and 0 interrupted iterations
+default   [   0% ] 01/15 VUs  0h00m18.0s/1h00m00.0s
+time="2026-05-04T11:34:17+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+
+running (0h00m19.0s), 01/15 VUs, 18 complete and 0 interrupted iterations
+default   [   1% ] 01/15 VUs  0h00m19.0s/1h00m00.0s
+time="2026-05-04T11:34:18+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+
+running (0h00m20.0s), 01/15 VUs, 19 complete and 0 interrupted iterations
+default   [   1% ] 01/15 VUs  0h00m20.0s/1h00m00.0s
+time="2026-05-04T11:34:19+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+
+running (0h00m21.0s), 01/15 VUs, 20 complete and 0 interrupted iterations
+default   [   1% ] 01/15 VUs  0h00m21.0s/1h00m00.0s
+time="2026-05-04T11:34:20+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+time="2026-05-04T11:34:20+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+
+running (0h00m22.0s), 02/15 VUs, 21 complete and 0 interrupted iterations
+default   [   1% ] 02/15 VUs  0h00m22.0s/1h00m00.0s
+time="2026-05-04T11:34:21+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+time="2026-05-04T11:34:21+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+
+running (0h00m23.0s), 02/15 VUs, 23 complete and 0 interrupted iterations
+default   [   1% ] 02/15 VUs  0h00m23.0s/1h00m00.0s
+time="2026-05-04T11:34:22+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+time="2026-05-04T11:34:22+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+
+running (0h00m24.0s), 02/15 VUs, 25 complete and 0 interrupted iterations
+default   [   1% ] 02/15 VUs  0h00m24.0s/1h00m00.0s
+time="2026-05-04T11:34:23+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+time="2026-05-04T11:34:23+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+
+running (0h00m25.0s), 02/15 VUs, 27 complete and 0 interrupted iterations
+default   [   1% ] 02/15 VUs  0h00m25.0s/1h00m00.0s
+time="2026-05-04T11:34:24+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+time="2026-05-04T11:34:24+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+
+running (0h00m26.0s), 02/15 VUs, 29 complete and 0 interrupted iterations
+default   [   1% ] 02/15 VUs  0h00m26.0s/1h00m00.0s
+time="2026-05-04T11:34:25+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+time="2026-05-04T11:34:25+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+
+running (0h00m27.0s), 02/15 VUs, 31 complete and 0 interrupted iterations
+default   [   1% ] 02/15 VUs  0h00m27.0s/1h00m00.0s
+time="2026-05-04T11:34:26+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+time="2026-05-04T11:34:26+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+
+running (0h00m28.0s), 02/15 VUs, 33 complete and 0 interrupted iterations
+default   [   1% ] 02/15 VUs  0h00m28.0s/1h00m00.0s
+time="2026-05-04T11:34:27+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+time="2026-05-04T11:34:27+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+
+running (0h00m29.0s), 02/15 VUs, 35 complete and 0 interrupted iterations
+default   [   1% ] 02/15 VUs  0h00m29.0s/1h00m00.0s
+time="2026-05-04T11:34:28+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+time="2026-05-04T11:34:28+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+
+running (0h00m30.0s), 02/15 VUs, 37 complete and 0 interrupted iterations
+default   [   1% ] 02/15 VUs  0h00m30.0s/1h00m00.0s
+time="2026-05-04T11:34:29+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+time="2026-05-04T11:34:29+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+
+running (0h00m31.0s), 02/15 VUs, 39 complete and 0 interrupted iterations
+default   [   1% ] 02/15 VUs  0h00m31.0s/1h00m00.0s
+time="2026-05-04T11:34:30+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+time="2026-05-04T11:34:30+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+
+running (0h00m32.0s), 02/15 VUs, 41 complete and 0 interrupted iterations
+default   [   1% ] 02/15 VUs  0h00m32.0s/1h00m00.0s
+time="2026-05-04T11:34:31+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+time="2026-05-04T11:34:31+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+
+running (0h00m33.0s), 02/15 VUs, 43 complete and 0 interrupted iterations
+default   [   1% ] 02/15 VUs  0h00m33.0s/1h00m00.0s
+time="2026-05-04T11:34:32+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+time="2026-05-04T11:34:32+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+
+running (0h00m34.0s), 02/15 VUs, 45 complete and 0 interrupted iterations
+default   [   1% ] 02/15 VUs  0h00m34.0s/1h00m00.0s
+time="2026-05-04T11:34:33+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+time="2026-05-04T11:34:33+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+
+running (0h00m35.0s), 02/15 VUs, 47 complete and 0 interrupted iterations
+default   [   1% ] 02/15 VUs  0h00m35.0s/1h00m00.0s
+time="2026-05-04T11:34:34+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+time="2026-05-04T11:34:34+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+
+running (0h00m36.0s), 02/15 VUs, 49 complete and 0 interrupted iterations
+default   [   1% ] 02/15 VUs  0h00m36.0s/1h00m00.0s
+time="2026-05-04T11:34:35+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+time="2026-05-04T11:34:35+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+
+running (0h00m37.0s), 02/15 VUs, 51 complete and 0 interrupted iterations
+default   [   1% ] 02/15 VUs  0h00m37.0s/1h00m00.0s
+time="2026-05-04T11:34:36+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+time="2026-05-04T11:34:36+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+
+running (0h00m38.0s), 02/15 VUs, 53 complete and 0 interrupted iterations
+default   [   1% ] 02/15 VUs  0h00m38.0s/1h00m00.0s
+time="2026-05-04T11:34:37+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+time="2026-05-04T11:34:37+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+
+running (0h00m39.0s), 02/15 VUs, 55 complete and 0 interrupted iterations
+default   [   1% ] 02/15 VUs  0h00m39.0s/1h00m00.0s
+time="2026-05-04T11:34:38+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+time="2026-05-04T11:34:38+03:00" level=error msg="ظإî No auth token available - skipping iteration" source=console
+time="2026-05-04T11:34:38+03:00" level=info msg="ظ£à Soak test completed" source=console
+time="2026-05-04T11:34:38+03:00" level=info msg="ظ▒ي╕  Total duration: 0.7 minutes" source=console
+time="2026-05-04T11:34:38+03:00" level=info msg="≡اôè Analysis checklist:" source=console
+time="2026-05-04T11:34:38+03:00" level=info msg="   1. Check if p95 latency INCREASED over time (memory leak indicator)" source=console
+time="2026-05-04T11:34:38+03:00" level=info msg="   2. Check if error rate INCREASED over time (connection pool issue)" source=console
+time="2026-05-04T11:34:38+03:00" level=info msg="   3. Monitor SQL Server memory usage (should be stable)" source=console
+time="2026-05-04T11:34:38+03:00" level=info msg="   4. Check transaction log size (should not grow excessively)" source=console
+time="2026-05-04T11:34:38+03:00" level=info msg="   5. Verify backend process memory (should be stable)" source=console
+time="2026-05-04T11:34:38+03:00" level=info source=console
+time="2026-05-04T11:34:38+03:00" level=info msg="ظأبي╕  If p95 latency grows steadily ظْ MEMORY LEAK detected" source=console
+time="2026-05-04T11:34:38+03:00" level=info msg="ظأبي╕  If errors spike after X minutes ظْ CONNECTION POOL exhaustion" source=console
+time="2026-05-04T11:34:38+03:00" level=info msg="ظأبي╕  If both stable ظْ System is PRODUCTION READY for endurance" source=console
+
+
+  ظûê THRESHOLDS 
+
+    errors
+    ظ£ù 'rate<0.01' rate=100.00%
+
+    http_req_duration
+    ظ£ô 'p(95)<300' p(95)=0s
+
+    http_req_failed
+    ظ£ù 'rate<0.01' rate=100.00%
+
+    latency
+    ظ£ô 'p(95)<300' p(95)=0
+
+
+  ظûê TOTAL RESULTS 
+
+    CUSTOM
+    errors...............: 100.00% 59 out of 59
+    failed_requests......: 59      1.494403/s
+    latency..............: avg=0  min=0  med=0  max=0  p(90)=0  p(95)=0 
+
+    HTTP
+    http_req_duration....: avg=0s min=0s med=0s max=0s p(90)=0s p(95)=0s
+    http_req_failed......: 100.00% 1 out of 1
+    http_reqs............: 1       0.025329/s
+
+    EXECUTION
+    iteration_duration...: avg=1s min=1s med=1s max=1s p(90)=1s p(95)=1s
+    iterations...........: 57      1.443746/s
+    vus..................: 2       min=1        max=2 
+    vus_max..............: 15      min=15       max=15
+
+    NETWORK
+    data_received........: 0 B     0 B/s
+    data_sent............: 0 B     0 B/s
+
+
+
+
+running (0h00m39.5s), 00/15 VUs, 57 complete and 2 interrupted iterations
+default ظ£ù [   1% ] 02/15 VUs  0h00m39.5s/1h00m00.0s

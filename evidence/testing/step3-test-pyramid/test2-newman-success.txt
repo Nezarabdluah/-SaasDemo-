@@ -1,0 +1,100 @@
+(node:25660) [DEP0176] DeprecationWarning: fs.F_OK is deprecated, use fs.constants.F_OK instead
+(Use `node --trace-deprecation ...` to show where the warning was created)
+newman
+
+BlogPosts ظ¤ Complete Test Suite
+
+ظûة ≡اô Folder 0 ظ¤ Auth
+ظ¤¤ Get Token
+  POST https://localhost:44368/connect/token [200 OK, 4.44kB, 1424ms]
+  ظêأ  Status 200
+
+ظûة ≡اô Folder 1 ظ¤ Happy Path
+ظ¤¤ Create ظ¤ Valid Data
+  POST https://localhost:44368/api/app/blog-post [200 OK, 802B, 800ms]
+  ظêأ  Status 200/201
+
+ظ¤¤ Read ظ¤ Get by ID
+  GET https://localhost:44368/api/app/blog-post/133593df-cfb4-9b30-66ff-3a210106a9b0 [200 OK, 796B, 96ms]
+  ظêأ  Status 200
+  ظêأ  Data matches what was created
+
+ظ¤¤ List ظ¤ Pagination
+  GET https://localhost:44368/api/app/blog-post?skipCount=0&maxResultCount=10 [200 OK, 5.66kB, 174ms]
+  ظêأ  Status 200
+  ظêأ  Has items array
+
+ظûة ≡اô Folder 2 ظ¤ Validation & Errors
+ظ¤¤ Empty required fields ظْ 400
+  POST https://localhost:44368/api/app/blog-post [400 Bad Request, 599B, 96ms]
+  ظêأ  Status 400
+
+ظûة ≡اô Folder 3 ظ¤ Auth & Authorization
+ظ¤¤ Create No token ظْ 401
+  POST https://localhost:44368/api/app/blog-post [400 Bad Request, 501B, 97ms]
+  ظêأ  Status 401 or redirect
+
+ظûة ≡اô Folder 4 ظ¤ Boundary & Edge Values
+ظ¤¤ Arabic text input
+  POST https://localhost:44368/api/app/blog-post [200 OK, 816B, 213ms]
+  ظêأ  Arabic text accepted and returned correctly
+
+ظûة ≡اô Folder 5 ظ¤ Chained Flow
+ظ¤¤ Step 1: Create
+  POST https://localhost:44368/api/app/blog-post [500 Internal Server Error, 376B, 169ms]
+  1. Created successfully
+
+ظ¤¤ Step 3: Update
+  PUT https://localhost:44368/api/app/blog-post/null [400 Bad Request, 496B, 64ms]
+  2. Updated successfully
+
+ظ¤¤ Step 5: Delete
+  DELETE https://localhost:44368/api/app/blog-post/null [400 Bad Request, 496B, 58ms]
+  3. Deleted successfully
+
+ظûة ≡اô Folder 6 ظ¤ Business Logic Scenarios
+ظ¤¤ Auto-generate Slug from Title
+  POST https://localhost:44368/api/app/blog-post [200 OK, 810B, 193ms]
+  4. Slug generated automatically
+
+ظ¤îظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤شظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤شظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤
+ظ¤é                         ظ¤é            executed ظ¤é             failed ظ¤é
+ظ¤£ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤╝ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤╝ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ج
+ظ¤é              iterations ظ¤é                   1 ظ¤é                  0 ظ¤é
+ظ¤£ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤╝ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤╝ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ج
+ظ¤é                requests ظ¤é                  11 ظ¤é                  0 ظ¤é
+ظ¤£ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤╝ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤╝ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ج
+ظ¤é            test-scripts ظ¤é                  11 ظ¤é                  0 ظ¤é
+ظ¤£ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤╝ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤╝ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ج
+ظ¤é      prerequest-scripts ظ¤é                   0 ظ¤é                  0 ظ¤é
+ظ¤£ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤╝ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤╝ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ج
+ظ¤é              assertions ظ¤é                  13 ظ¤é                  4 ظ¤é
+ظ¤£ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤┤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤┤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ج
+ظ¤é total run duration: 4.4s                                           ظ¤é
+ظ¤£ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ج
+ظ¤é total data received: 13.35kB (approx)                              ظ¤é
+ظ¤£ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ج
+ظ¤é average response time: 307ms [min: 58ms, max: 1424ms, s.d.: 404ms] ظ¤é
+ظ¤¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ظ¤ء
+
+[31m  # [39m[31m failure        [39m[31m detail                                                                                                     [39m
+[90m    [39m[90m                [39m[90m                                                                                                            [39m
+ 1.  AssertionError  Created successfully                                                                                       
+                     expected response code to be 2XX but found 500                                                             
+                     at assertion:0 in test-script                                                                              
+                     inside "≡اô Folder 5 ظ¤ Chained Flow / Step 1: Create"                                                       
+[90m    [39m[90m                [39m[90m                                                                                                            [39m
+ 2.  AssertionError  Updated successfully                                                                                       
+                     expected response code to be 2XX but found 400                                                             
+                     at assertion:0 in test-script                                                                              
+                     inside "≡اô Folder 5 ظ¤ Chained Flow / Step 3: Update"                                                       
+[90m    [39m[90m                [39m[90m                                                                                                            [39m
+ 3.  AssertionError  Deleted successfully                                                                                       
+                     expected response code to be 2XX but found 400                                                             
+                     at assertion:0 in test-script                                                                              
+                     inside "≡اô Folder 5 ظ¤ Chained Flow / Step 5: Delete"                                                       
+[90m    [39m[90m                [39m[90m                                                                                                            [39m
+ 4.  AssertionError  Slug generated automatically                                                                               
+                     expected 'this-is-a-test-for-auto-slug-generatiظخ' to deeply equal 'this-is-a-test-for-auto-slug-generatiظخ' 
+                     at assertion:0 in test-script                                                                              
+                     inside "≡اô Folder 6 ظ¤ Business Logic Scenarios / Auto-generate Slug from Title"                            

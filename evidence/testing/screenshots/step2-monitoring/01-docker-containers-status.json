@@ -1,0 +1,213 @@
+[
+  {
+    "Command": "\"/run.sh\"",
+    "CreatedAt": "2026-05-03 17:01:20 +0300 +03",
+    "ExitCode": 0,
+    "Health": "",
+    "ID": "cb89014cfb24",
+    "Image": "grafana/grafana:latest",
+    "Labels": "com.docker.compose.project=saasdemo,com.docker.compose.project.working_dir=E:\\┘à╪┤╪▒┘ê╪╣ ╪ز╪ش╪▒┘è╪ذ┘è,desktop.docker.io/ports.scheme=v2,desktop.docker.io/binds/1/Target=/etc/grafana/provisioning,com.docker.compose.version=5.1.0,desktop.docker.io/binds/1/Source=E:\\┘à╪┤╪▒┘ê╪╣ ╪ز╪ش╪▒┘è╪ذ┘è\\monitoring\\grafana\\provisioning,com.docker.compose.image=sha256:83749231c3835e390a3144e5e940203e42b9589761f20ef3169c716e734ad505,com.docker.compose.project.config_files=E:\\┘à╪┤╪▒┘ê╪╣ ╪ز╪ش╪▒┘è╪ذ┘è\\docker-compose.monitoring.yml,desktop.docker.io/ports/3000/tcp=:3000,com.docker.compose.config-hash=ad9c23e31addd0e4e7a3bef5e932f8d78188f6f2d7463a20f6c20057e2f8b584,com.docker.compose.container-number=1,com.docker.compose.depends_on=influxdb:service_healthy:false,com.docker.compose.oneoff=False,com.docker.compose.service=grafana,desktop.docker.io/binds/1/SourceKind=hostFile,maintainer=Grafana Labs <hello@grafana.com>,org.opencontainers.image.source=https://github.com/grafana/grafana",
+    "LocalVolumes": "1",
+    "Mounts": "/run/desktop/mظخ,saasdemo_grafaظخ",
+    "Name": "saasdemo_grafana",
+    "Names": "saasdemo_grafana",
+    "Networks": "saasdemo_monitoring_net",
+    "Ports": "0.0.0.0:3000->3000/tcp, [::]:3000->3000/tcp",
+    "Project": "saasdemo",
+    "Publishers": [
+      {
+        "URL": "0.0.0.0",
+        "TargetPort": 3000,
+        "PublishedPort": 3000,
+        "Protocol": "tcp"
+      },
+      {
+        "URL": "::",
+        "TargetPort": 3000,
+        "PublishedPort": 3000,
+        "Protocol": "tcp"
+      }
+    ],
+    "RunningFor": "21 minutes ago",
+    "Service": "grafana",
+    "Size": "0B",
+    "State": "running",
+    "Status": "Up 21 minutes"
+  },
+  {
+    "Command": "\"/entrypoint.sh inflظخ\"",
+    "CreatedAt": "2026-05-03 17:01:19 +0300 +03",
+    "ExitCode": 0,
+    "Health": "healthy",
+    "ID": "6afc5c3c236b",
+    "Image": "influxdb:1.8",
+    "Labels": "com.docker.compose.config-hash=30e33fcd859315b9d145166037e287ac64b234adf8d0ed8657864954acce0ad0,com.docker.compose.container-number=1,com.docker.compose.image=sha256:299ebda2c7e308dbef42e26ac9b8fd1d9b3bcb8a0aee80c6509aa0219c1d0290,com.docker.compose.oneoff=False,com.docker.compose.project=saasdemo,com.docker.compose.service=influxdb,com.docker.compose.depends_on=,com.docker.compose.project.config_files=E:\\┘à╪┤╪▒┘ê╪╣ ╪ز╪ش╪▒┘è╪ذ┘è\\docker-compose.monitoring.yml,com.docker.compose.project.working_dir=E:\\┘à╪┤╪▒┘ê╪╣ ╪ز╪ش╪▒┘è╪ذ┘è,com.docker.compose.version=5.1.0,desktop.docker.io/ports.scheme=v2,desktop.docker.io/ports/8086/tcp=:8086",
+    "LocalVolumes": "1",
+    "Mounts": "saasdemo_influظخ",
+    "Name": "saasdemo_influxdb",
+    "Names": "saasdemo_influxdb",
+    "Networks": "saasdemo_monitoring_net",
+    "Ports": "0.0.0.0:8086->8086/tcp, [::]:8086->8086/tcp",
+    "Project": "saasdemo",
+    "Publishers": [
+      {
+        "URL": "0.0.0.0",
+        "TargetPort": 8086,
+        "PublishedPort": 8086,
+        "Protocol": "tcp"
+      },
+      {
+        "URL": "::",
+        "TargetPort": 8086,
+        "PublishedPort": 8086,
+        "Protocol": "tcp"
+      }
+    ],
+    "RunningFor": "21 minutes ago",
+    "Service": "influxdb",
+    "Size": "0B",
+    "State": "running",
+    "Status": "Up 21 minutes (healthy)"
+  },
+  {
+    "Command": "\"/go/bin/all-in-one-ظخ\"",
+    "CreatedAt": "2026-05-03 17:01:19 +0300 +03",
+    "ExitCode": 0,
+    "Health": "",
+    "ID": "1428d1376a4e",
+    "Image": "jaegertracing/all-in-one:latest",
+    "Labels": "desktop.docker.io/ports/6831/udp=:6831,desktop.docker.io/ports/16686/tcp=:16686,desktop.docker.io/ports/4317/tcp=:4317,com.docker.compose.config-hash=e16b7e63276ccbea999199211a8f3721f9aafab53e5ff8cd542d65db83bcd758,com.docker.compose.depends_on=,com.docker.compose.oneoff=False,com.docker.compose.project=saasdemo,com.docker.compose.version=5.1.0,com.docker.compose.container-number=1,com.docker.compose.image=sha256:ab6f1a1f0fb49ea08bcd19f6b84f6081d0d44b364b6de148e1798eb5816bacac,com.docker.compose.service=jaeger,com.docker.compose.project.config_files=E:\\┘à╪┤╪▒┘ê╪╣ ╪ز╪ش╪▒┘è╪ذ┘è\\docker-compose.monitoring.yml,com.docker.compose.project.working_dir=E:\\┘à╪┤╪▒┘ê╪╣ ╪ز╪ش╪▒┘è╪ذ┘è,desktop.docker.io/ports.scheme=v2,desktop.docker.io/ports/4318/tcp=:4318",
+    "LocalVolumes": "1",
+    "Mounts": "1654e9f92cda71ظخ",
+    "Name": "saasdemo_jaeger",
+    "Names": "saasdemo_jaeger",
+    "Networks": "saasdemo_monitoring_net",
+    "Ports": "0.0.0.0:4317-4318->4317-4318/tcp, [::]:4317-4318->4317-4318/tcp, 0.0.0.0:16686->16686/tcp, [::]:16686->16686/tcp, 0.0.0.0:6831->6831/udp, [::]:6831->6831/udp",
+    "Project": "saasdemo",
+    "Publishers": [
+      {
+        "URL": "0.0.0.0",
+        "TargetPort": 4317,
+        "PublishedPort": 4317,
+        "Protocol": "tcp"
+      },
+      {
+        "URL": "::",
+        "TargetPort": 4317,
+        "PublishedPort": 4317,
+        "Protocol": "tcp"
+      },
+      {
+        "URL": "0.0.0.0",
+        "TargetPort": 4318,
+        "PublishedPort": 4318,
+        "Protocol": "tcp"
+      },
+      {
+        "URL": "::",
+        "TargetPort": 4318,
+        "PublishedPort": 4318,
+        "Protocol": "tcp"
+      },
+      {
+        "URL": "0.0.0.0",
+        "TargetPort": 6831,
+        "PublishedPort": 6831,
+        "Protocol": "udp"
+      },
+      {
+        "URL": "::",
+        "TargetPort": 6831,
+        "PublishedPort": 6831,
+        "Protocol": "udp"
+      },
+      {
+        "URL": "0.0.0.0",
+        "TargetPort": 16686,
+        "PublishedPort": 16686,
+        "Protocol": "tcp"
+      },
+      {
+        "URL": "::",
+        "TargetPort": 16686,
+        "PublishedPort": 16686,
+        "Protocol": "tcp"
+      }
+    ],
+    "RunningFor": "21 minutes ago",
+    "Service": "jaeger",
+    "Size": "0B",
+    "State": "running",
+    "Status": "Up 21 minutes"
+  },
+  {
+    "Command": "\"/bin/prometheus --cظخ\"",
+    "CreatedAt": "2026-05-03 17:01:19 +0300 +03",
+    "ExitCode": 0,
+    "Health": "",
+    "ID": "4a63b7e04a2f",
+    "Image": "prom/prometheus:latest",
+    "Labels": "com.docker.compose.config-hash=4777035335c50559e59df401feb8633abbcc383e7f094da8a257a8c2a295cf71,com.docker.compose.project.working_dir=E:\\┘à╪┤╪▒┘ê╪╣ ╪ز╪ش╪▒┘è╪ذ┘è,desktop.docker.io/ports/9090/tcp=:9090,org.opencontainers.image.source=https://github.com/prometheus/prometheus,org.opencontainers.image.title=Prometheus,org.opencontainers.image.vendor=Prometheus,desktop.docker.io/binds/0/Source=E:\\┘à╪┤╪▒┘ê╪╣ ╪ز╪ش╪▒┘è╪ذ┘è\\monitoring\\prometheus\\prometheus.yml,maintainer=The Prometheus Authors <prometheus-developers@googlegroups.com>,org.opencontainers.image.authors=The Prometheus Authors,org.opencontainers.image.licenses=Apache License 2.0,com.docker.compose.image=sha256:e4254400b85610324913f0dc4acf92603d9984e7519414c5a12811aa6146acc3,com.docker.compose.oneoff=False,com.docker.compose.project=saasdemo,com.docker.compose.service=prometheus,com.docker.compose.version=5.1.0,desktop.docker.io/binds/0/SourceKind=hostFile,io.prometheus.image.variant=busybox,com.docker.compose.container-number=1,com.docker.compose.depends_on=,com.docker.compose.project.config_files=E:\\┘à╪┤╪▒┘ê╪╣ ╪ز╪ش╪▒┘è╪ذ┘è\\docker-compose.monitoring.yml,desktop.docker.io/binds/0/Target=/etc/prometheus/prometheus.yml,org.opencontainers.image.description=The Prometheus monitoring system and time series database,org.opencontainers.image.documentation=https://prometheus.io/docs,org.opencontainers.image.url=https://github.com/prometheus/prometheus,desktop.docker.io/ports.scheme=v2",
+    "LocalVolumes": "1",
+    "Mounts": "/run/desktop/mظخ,saasdemo_promeظخ",
+    "Name": "saasdemo_prometheus",
+    "Names": "saasdemo_prometheus",
+    "Networks": "saasdemo_monitoring_net",
+    "Ports": "0.0.0.0:9090->9090/tcp, [::]:9090->9090/tcp",
+    "Project": "saasdemo",
+    "Publishers": [
+      {
+        "URL": "0.0.0.0",
+        "TargetPort": 9090,
+        "PublishedPort": 9090,
+        "Protocol": "tcp"
+      },
+      {
+        "URL": "::",
+        "TargetPort": 9090,
+        "PublishedPort": 9090,
+        "Protocol": "tcp"
+      }
+    ],
+    "RunningFor": "21 minutes ago",
+    "Service": "prometheus",
+    "Size": "0B",
+    "State": "running",
+    "Status": "Up 21 minutes"
+  },
+  {
+    "Command": "\"/bin/seqentry\"",
+    "CreatedAt": "2026-05-03 17:01:19 +0300 +03",
+    "ExitCode": 0,
+    "Health": "",
+    "ID": "c7532d46a449",
+    "Image": "datalust/seq:latest",
+    "Labels": "com.docker.compose.version=5.1.0,Description=Seq,Vendor=Datalust Pty Ltd,com.docker.compose.oneoff=False,com.docker.compose.service=seq,com.docker.compose.image=sha256:c211452d7f9b7c124a6883d8fa1ad833f276e4aaee3b626beab1eb9675364708,desktop.docker.io/ports.scheme=v2,desktop.docker.io/ports/80/tcp=:5341,com.docker.compose.config-hash=5bfe980ddae92ce35f6eaac0a865fce3868253847a4af210099b3453cf36ff8a,com.docker.compose.depends_on=,com.docker.compose.project.config_files=E:\\┘à╪┤╪▒┘ê╪╣ ╪ز╪ش╪▒┘è╪ذ┘è\\docker-compose.monitoring.yml,com.docker.compose.project.working_dir=E:\\┘à╪┤╪▒┘ê╪╣ ╪ز╪ش╪▒┘è╪ذ┘è,org.opencontainers.image.version=22.04,com.docker.compose.container-number=1,com.docker.compose.project=saasdemo,org.opencontainers.image.ref.name=ubuntu",
+    "LocalVolumes": "1",
+    "Mounts": "saasdemo_seq_dظخ",
+    "Name": "saasdemo_seq",
+    "Names": "saasdemo_seq",
+    "Networks": "saasdemo_monitoring_net",
+    "Ports": "0.0.0.0:5341->80/tcp, [::]:5341->80/tcp",
+    "Project": "saasdemo",
+    "Publishers": [
+      {
+        "URL": "0.0.0.0",
+        "TargetPort": 80,
+        "PublishedPort": 5341,
+        "Protocol": "tcp"
+      },
+      {
+        "URL": "::",
+        "TargetPort": 80,
+        "PublishedPort": 5341,
+        "Protocol": "tcp"
+      }
+    ],
+    "RunningFor": "21 minutes ago",
+    "Service": "seq",
+    "Size": "0B",
+    "State": "running",
+    "Status": "Up 2 seconds"
+  }
+]

@@ -1,0 +1,168 @@
+﻿node.exe : (node:26008) [DEP0176] DeprecationWarning: fs.F_OK is deprecated, use fs.constants.F_OK instead
+At C:\Users\farha\AppData\Roaming\npm\newman.ps1:24 char:5
++     & "node$exe"  "$basedir/node_modules/newman/bin/newman.js" $args
++     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ((node:26008) [D...ts.F_OK instead:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+(Use `node --trace-deprecation ...` to show where the warning was created)
+newman
+
+OWASP Top 10 Security Suite - SaasDemo
+
+→ 00 - Auth: Get Token
+  POST  [errored]
+     runtime:extensions~request: request url is empty
+  2. Auth OK
+  3⠄ JSONError in test-script
+
+→ A01 - IDOR: Access other user resource
+  GET  [errored]
+     runtime:extensions~request: request url is empty
+  5. A01: No IDOR - must not return 200 for fake ID
+
+→ A01 - Path Traversal attempt
+  GET  [errored]
+     runtime:extensions~request: request url is empty
+  7. A01: Path traversal blocked
+
+→ A03 - SQL Injection in list filter
+  GET  [errored]
+     runtime:extensions~request: request url is empty
+  9. A03: SQL injection blocked - no DB error exposed
+
+→ A03 - XSS payload in title
+  POST  [errored]
+     runtime:extensions~request: request url is empty
+  √  A03: XSS payload handled safely
+
+→ A05 - Debug endpoint elmah.axd
+  GET  [errored]
+     runtime:extensions~request: request url is empty
+ 12. A05: Debug endpoint not exposed
+
+→ A05 - appsettings.json not exposed
+  GET  [errored]
+     runtime:extensions~request: request url is empty
+ 14. A05: appsettings.json not exposed
+
+→ A07 - No token returns 401
+  GET  [errored]
+     runtime:extensions~request: request url is empty
+ 16. A07: Unauthenticated request rejected
+
+→ Security Headers — Check
+  GET  [errored]
+     runtime:extensions~request: request url is empty
+ 18. Security: X-Content-Type-Options present
+  √  Security: No X-Powered-By header
+
+┌─────────────────────────┬──────────┬──────────┐
+│                         │ executed │   failed │
+├─────────────────────────┼──────────┼──────────┤
+│              iterations │        1 │        0 │
+├─────────────────────────┼──────────┼──────────┤
+│                requests │        9 │        9 │
+├─────────────────────────┼──────────┼──────────┤
+│            test-scripts │        9 │        1 │
+├─────────────────────────┼──────────┼──────────┤
+│      prerequest-scripts │        0 │        0 │
+├─────────────────────────┼──────────┼──────────┤
+│              assertions │       10 │        8 │
+├─────────────────────────┴──────────┴──────────┤
+│ total run duration: 776ms                     │
+├───────────────────────────────────────────────┤
+│ total data received: 0B (approx)              │
+└───────────────────────────────────────────────┘
+
+[31m   # [39m[31m failure        [39m[31m detail                                                                                                                                                                             [39m
+[90m     [39m[90m                [39m[90m                                                                                                                                                                                    [39m
+ 01.  Error                                                                                                                                                                                              
+                      runtime:extensions~request: request url is empty                                                                                                                                   
+                      at request                                                                                                                                                                         
+                      inside ""                                                                                                                                                                          
+[90m     [39m[90m                [39m[90m                                                                                                                                                                                    [39m
+ 02.  AssertionError  Auth OK                                                                                                                                                                            
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                                                                                           
+                      at assertion:0 in test-script                                                                                                                                                      
+                      inside "00 - Auth: Get Token"                                                                                                                                                      
+[90m     [39m[90m                [39m[90m                                                                                                                                                                                    [39m
+ 03.  JSONError                                                                                                                                                                                          
+                      "undefined" is not valid JSON                                                                                                                                                      
+                      at test-script                                                                                                                                                                     
+                      inside "00 - Auth: Get Token"                                                                                                                                                      
+[90m     [39m[90m                [39m[90m                                                                                                                                                                                    [39m
+ 04.  Error                                                                                                                                                                                              
+                      runtime:extensions~request: request url is empty                                                                                                                                   
+                      at request                                                                                                                                                                         
+                      inside ""                                                                                                                                                                          
+[90m     [39m[90m                [39m[90m                                                                                                                                                                                    [39m
+ 05.  AssertionError  A01: No IDOR - must not return 200 for fake ID                                                                                                                                     
+                      expected undefined to be one of [ 400, 403, 404 ]                                                                                                                                  
+                      at assertion:0 in test-script                                                                                                                                                      
+                      inside "A01 - IDOR: Access other user resource"                                                                                                                                    
+[90m     [39m[90m                [39m[90m                                                                                                                                                                                    [39m
+ 06.  Error                                                                                                                                                                                              
+                      runtime:extensions~request: request url is empty                                                                                                                                   
+                      at request                                                                                                                                                                         
+                      inside ""                                                                                                                                                                          
+[90m     [39m[90m                [39m[90m                                                                                                                                                                                    [39m
+ 07.  AssertionError  A01: Path traversal blocked                                                                                                                                                        
+                      expected undefined to be one of [ 400, 403, 404 ]                                                                                                                                  
+                      at assertion:0 in test-script                                                                                                                                                      
+                      inside "A01 - Path Traversal attempt"                                                                                                                                              
+[90m     [39m[90m                [39m[90m                                                                                                                                                                                    [39m
+ 08.  Error                                                                                                                                                                                              
+                      runtime:extensions~request: request url is empty                                                                                                                                   
+                      at request                                                                                                                                                                         
+                      inside ""                                                                                                                                                                          
+[90m     [39m[90m                [39m[90m                                                                                                                                                                                    [39m
+ 09.  AssertionError  A03: SQL injection blocked - no DB error exposed                                                                                                                                   
+                      the given combination of arguments (undefined and string) is invalid for this assertion. You can use an array, a map, an object, a set, a string, or a weakset instead of a string 
+                      at assertion:0 in test-script                                                                                                                                                      
+                      inside "A03 - SQL Injection in list filter"                                                                                                                                        
+[90m     [39m[90m                [39m[90m                                                                                                                                                                                    [39m
+ 10.  Error                                                                                                                                                                                              
+                      runtime:extensions~request: request url is empty                                                                                                                                   
+                      at request                                                                                                                                                                         
+                      inside ""                                                                                                                                                                          
+[90m     [39m[90m                [39m[90m                                                                                                                                                                                    [39m
+ 11.  Error                                                                                                                                                                                              
+                      runtime:extensions~request: request url is empty                                                                                                                                   
+                      at request                                                                                                                                                                         
+                      inside ""                                                                                                                                                                          
+[90m     [39m[90m                [39m[90m                                                                                                                                                                                    [39m
+ 12.  AssertionError  A05: Debug endpoint not exposed                                                                                                                                                    
+                      expected undefined to be one of [ 404, 401, 403 ]                                                                                                                                  
+                      at assertion:0 in test-script                                                                                                                                                      
+                      inside "A05 - Debug endpoint elmah.axd"                                                                                                                                            
+[90m     [39m[90m                [39m[90m                                                                                                                                                                                    [39m
+ 13.  Error                                                                                                                                                                                              
+                      runtime:extensions~request: request url is empty                                                                                                                                   
+                      at request                                                                                                                                                                         
+                      inside ""                                                                                                                                                                          
+[90m     [39m[90m                [39m[90m                                                                                                                                                                                    [39m
+ 14.  AssertionError  A05: appsettings.json not exposed                                                                                                                                                  
+                      expected undefined to be one of [ 404, 403 ]                                                                                                                                       
+                      at assertion:0 in test-script                                                                                                                                                      
+                      inside "A05 - appsettings.json not exposed"                                                                                                                                        
+[90m     [39m[90m                [39m[90m                                                                                                                                                                                    [39m
+ 15.  Error                                                                                                                                                                                              
+                      runtime:extensions~request: request url is empty                                                                                                                                   
+                      at request                                                                                                                                                                         
+                      inside ""                                                                                                                                                                          
+[90m     [39m[90m                [39m[90m                                                                                                                                                                                    [39m
+ 16.  AssertionError  A07: Unauthenticated request rejected                                                                                                                                              
+                      expected undefined to be one of [ 401, 403 ]                                                                                                                                       
+                      at assertion:0 in test-script                                                                                                                                                      
+                      inside "A07 - No token returns 401"                                                                                                                                                
+[90m     [39m[90m                [39m[90m                                                                                                                                                                                    [39m
+ 17.  Error                                                                                                                                                                                              
+                      runtime:extensions~request: request url is empty                                                                                                                                   
+                      at request                                                                                                                                                                         
+                      inside ""                                                                                                                                                                          
+[90m     [39m[90m                [39m[90m                                                                                                                                                                                    [39m
+ 18.  AssertionError  Security: X-Content-Type-Options present                                                                                                                                           
+                      expected false to be true                                                                                                                                                          
+                      at assertion:0 in test-script                                                                                                                                                      
+                      inside "Security Headers — Check"                                                                                                                                                  

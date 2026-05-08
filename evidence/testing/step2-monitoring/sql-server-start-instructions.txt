@@ -1,0 +1,13 @@
+# ============================================
+# تعليمات تشغيل SQL Server
+# ============================================
+
+يجب تشغيل هذا الأمر في PowerShell كـ Administrator:
+
+Start-Service 'MSSQL$SQLEXPRESS'
+
+# للتحقق من الحالة:
+Get-Service 'MSSQL$SQLEXPRESS'
+
+# المفروض تشوف:
+# Status: Running

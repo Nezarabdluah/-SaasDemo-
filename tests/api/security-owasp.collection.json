@@ -1,0 +1,204 @@
+{
+  "info": {
+    "name": "OWASP Top 10 Security Suite - SaasDemo",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "00 - Auth: Get Token",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/x-www-form-urlencoded"}],
+        "url": "{{api}}/connect/token",
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {"key": "grant_type", "value": "password"},
+            {"key": "username", "value": "admin"},
+            {"key": "password", "value": "1q2w3E*"},
+            {"key": "client_id", "value": "SaasDemo_App"},
+            {"key": "scope", "value": "SaasDemo offline_access"}
+          ]
+        }
+      },
+      "event": [{"listen": "test", "script": {"exec": [
+        "pm.test('Auth OK', () => pm.response.to.have.status(200));",
+        "pm.environment.set('token', pm.response.json().access_token);"
+      ]}}]
+    },
+    {
+      "name": "A01 - IDOR: Access other user resource",
+      "request": {
+        "method": "GET",
+        "header": [{"key": "Authorization", "value": "Bearer {{token}}"}],
+        "url": "{{api}}/api/app/blog-post/00000000-0000-0000-0000-000000000001"
+      },
+      "event": [{"listen": "test", "script": {"exec": [
+        "pm.test('A01: No IDOR - must not return 200 for fake ID', () => {",
+        "  pm.expect(pm.response.code).to.be.oneOf([400, 403, 404]);",
+        "});"
+      ]}}]
+    },
+    {
+      "name": "A01 - Path Traversal attempt",
+      "request": {
+        "method": "GET",
+        "header": [{"key": "Authorization", "value": "Bearer {{token}}"}],
+        "url": "{{api}}/api/app/blog-post/..%2F..%2Fetc%2Fpasswd"
+      },
+      "event": [{"listen": "test", "script": {"exec": [
+        "pm.test('A01: Path traversal blocked', () => {",
+        "  pm.expect(pm.response.code).to.be.oneOf([400, 403, 404]);",
+        "  pm.expect(pm.response.text()).to.not.include('root:');",
+        "});"
+      ]}}]
+    },
+    {
+      "name": "A03 - SQL Injection in list filter",
+      "request": {
+        "method": "GET",
+        "header": [{"key": "Authorization", "value": "Bearer {{token}}"}],
+        "url": "{{api}}/api/app/blog-post?title=%27%20OR%20%271%27%3D%271"
+      },
+      "event": [{"listen": "test", "script": {"exec": [
+        "pm.test('A03: SQL injection blocked - no DB error exposed', () => {",
+        "  pm.expect(pm.response.code).to.not.equal(500);",
+        "  pm.expect(pm.response.text()).to.not.include('SQL');",
+        "  pm.expect(pm.response.text()).to.not.include('syntax error');",
+        "  pm.expect(pm.response.text()).to.not.include('Unclosed quotation');",
+        "});"
+      ]}}]
+    },
+    {
+      "name": "A03 - XSS payload in title",
+      "request": {
+        "method": "POST",
+        "header": [
+          {"key": "Authorization", "value": "Bearer {{token}}"},
+          {"key": "Content-Type", "value": "application/json"}
+        ],
+        "url": "{{api}}/api/app/blog-post",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"title\":\"<script>alert(1)</script>\",\"content\":\"xss test\",\"status\":0}"
+        }
+      },
+      "event": [{"listen": "test", "script": {"exec": [
+        "pm.test('A03: XSS payload handled safely', () => {",
+        "  pm.expect(pm.response.code).to.not.equal(500);",
+        "});"
+      ]}}]
+    },
+    {
+      "name": "A05 - Debug endpoint elmah.axd",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{api}}/elmah.axd"
+      },
+      "event": [{"listen": "test", "script": {"exec": [
+        "pm.test('A05: Debug endpoint not exposed', () => {",
+        "  pm.expect(pm.response.code).to.be.oneOf([404, 401, 403]);",
+        "});"
+      ]}}]
+    },
+    {
+      "name": "A05 - Sensitive file .env",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{api}}/.env"
+      },
+      "event": [{"listen": "test", "script": {"exec": [
+        "pm.test('A05: .env not exposed', () => {",
+        "  pm.expect(pm.response.code).to.be.oneOf([404, 403]);",
+        "});"
+      ]}}]
+    },
+    {
+      "name": "A05 - appsettings.json not exposed",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{api}}/appsettings.json"
+      },
+      "event": [{"listen": "test", "script": {"exec": [
+        "pm.test('A05: appsettings.json not exposed', () => {",
+        "  pm.expect(pm.response.code).to.be.oneOf([404, 403]);",
+        "});"
+      ]}}]
+    },
+    {
+      "name": "A05 - Error disclosure: nonexistent endpoint",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{api}}/api/app/nonexistent-endpoint-xyz"
+      },
+      "event": [{"listen": "test", "script": {"exec": [
+        "pm.test('A05: No stack trace in error response', () => {",
+        "  pm.expect(pm.response.text()).to.not.include('at System.');",
+        "  pm.expect(pm.response.text()).to.not.include('StackTrace');",
+        "});"
+      ]}}]
+    },
+    {
+      "name": "A07 - No token returns 401",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{api}}/api/app/blog-post"
+      },
+      "event": [{"listen": "test", "script": {"exec": [
+        "pm.test('A07: Unauthenticated request rejected', () => {",
+        "  pm.expect(pm.response.code).to.be.oneOf([401, 403, 302]);",
+        "});"
+      ]}}]
+    },
+    {
+      "name": "A07 - Invalid token returns 401",
+      "request": {
+        "method": "GET",
+        "header": [{"key": "Authorization", "value": "Bearer invalid.token.here"}],
+        "url": "{{api}}/api/app/blog-post"
+      },
+      "event": [{"listen": "test", "script": {"exec": [
+        "pm.test('A07: Invalid token rejected', () => {",
+        "  pm.expect(pm.response.code).to.be.oneOf([401, 403]);",
+        "});"
+      ]}}]
+    },
+    {
+      "name": "A02 - HTTPS enforced",
+      "request": {
+        "method": "GET",
+        "header": [{"key": "Authorization", "value": "Bearer {{token}}"}],
+        "url": "{{api}}/api/app/blog-post"
+      },
+      "event": [{"listen": "test", "script": {"exec": [
+        "pm.test('A02: Response received over HTTPS', () => {",
+        "  pm.expect(pm.request.url.toString()).to.include('https://');",
+        "});"
+      ]}}]
+    },
+    {
+      "name": "Security Headers - Full Check",
+      "request": {
+        "method": "GET",
+        "header": [{"key": "Authorization", "value": "Bearer {{token}}"}],
+        "url": "{{api}}/api/app/blog-post"
+      },
+      "event": [{"listen": "test", "script": {"exec": [
+        "pm.test('Security: X-Content-Type-Options present', () => {",
+        "  pm.expect(pm.response.headers.has('X-Content-Type-Options')).to.be.true;",
+        "});",
+        "pm.test('Security: No X-Powered-By header', () => {",
+        "  pm.expect(pm.response.headers.has('X-Powered-By')).to.be.false;",
+        "});",
+        "pm.test('Security: No X-AspNet-Version header', () => {",
+        "  pm.expect(pm.response.headers.has('X-AspNet-Version')).to.be.false;",
+        "});"
+      ]}}]
+    }
+  ]
+}

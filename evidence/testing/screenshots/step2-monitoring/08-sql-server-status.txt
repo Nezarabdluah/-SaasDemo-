@@ -1,0 +1,11 @@
+
+Name                : MSSQL$SQLEXPRESS
+DisplayName         : SQL Server (SQLEXPRESS)
+Status              : Stopped
+DependentServices   : {SQLAgent$SQLEXPRESS}
+ServicesDependedOn  : {KEYISO}
+CanPauseAndContinue : False
+CanShutdown         : False
+CanStop             : False
+ServiceType         : Win32OwnProcess
+

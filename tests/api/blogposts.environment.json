@@ -1,0 +1,27 @@
+{
+  "id": "saas-demo-local-env",
+  "name": "SaasDemo Local Environment",
+  "values": [
+    {
+      "key": "api",
+      "value": "https://localhost:44368",
+      "enabled": true
+    },
+    {
+      "key": "token",
+      "value": "",
+      "enabled": true
+    },
+    {
+      "key": "createdPostId",
+      "value": "",
+      "enabled": true
+    },
+    {
+      "key": "chainId",
+      "value": "",
+      "enabled": true
+    }
+  ],
+  "_postman_variable_scope": "environment"
+}
