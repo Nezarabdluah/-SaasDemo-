@@ -65,18 +65,18 @@ The system was evaluated across 10 enterprise DevOps steps using the `devops-qa-
 
 ## 5. Completed Steps (DevOps Skill Framework)
 
-| Step | Name | Status | Evidence |
-|:----:|:-----|:------:|:---------|
-| 1 | Project Classification | ✅ | `.agent/QA-STATUS.md` |
-| 2 | Four Golden Signals | ✅ | `step2-monitoring/` |
-| 3 | 20-Test Pyramid (65%) | ⏳ | `step3-test-pyramid/` |
-| 4 | Bug Classification | ✅ | This report |
-| 5 | SLO/SLI/SLA Framework | ✅ | `STEP5-SLO-FRAMEWORK.md` |
-| 6 | Security Testing | ✅ | `security-owasp.collection.json` + scans |
-| 7 | Database Performance | ✅ | `connection-pool-health.sql` |
-| 8 | Production Readiness (21/60) | ✅ | `STEP8-PRODUCTION-READINESS-SCORECARD.md` |
-| 9 | DORA Metrics (LOW) | ✅ | `STEP9-DORA-METRICS.md` |
-| 10 | Final QA Report | ✅ | `STEP10-FINAL-QA-REPORT.md` |
+| Step | Name | Status | Evidence Link |
+|:----:|:-----|:------:|:--------------|
+| 1 | Project Classification | ✅ | [QA-STATUS.md](../.agent/QA-STATUS.md) |
+| 2 | Four Golden Signals | ✅ | [step2-monitoring/](testing/step2-monitoring/) |
+| 3 | 20-Test Pyramid (65%) | ⏳ | [step3-test-pyramid/](testing/step3-test-pyramid/) |
+| 4 | Bug Classification | ✅ | [This report](./QA-AUDIT-REPORT.md) |
+| 5 | SLO/SLI/SLA Framework | ✅ | [STEP5-SLO-FRAMEWORK.md](testing/STEP5-SLO-FRAMEWORK.md) |
+| 6 | Security Testing | ✅ | [security-scans/](testing/security-scans/) |
+| 7 | Database Performance | ✅ | [tests/database/](../../tests/database/) |
+| 8 | Production Readiness (21/60) | ✅ | [STEP8-PRODUCTION-READINESS-SCORECARD.md](testing/STEP8-PRODUCTION-READINESS-SCORECARD.md) |
+| 9 | DORA Metrics (LOW) | ✅ | [STEP9-DORA-METRICS.md](testing/STEP9-DORA-METRICS.md) |
+| 10 | Final QA Report | ✅ | [STEP10-FINAL-QA-REPORT.md](./STEP10-FINAL-QA-REPORT.md) |
 
 ---
 
