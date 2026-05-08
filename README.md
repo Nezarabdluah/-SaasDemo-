@@ -197,7 +197,14 @@ SaasDemo/
 │       ├── settings/             → Site Settings Admin Panel
 │       └── shared/               → Reusable Components & Services
 │
-├── evidence/qa-automation/     → 📊 QA Reports + Performance + Security Scans
+├── evidence/qa-automation/     → 📊 Enterprise DevOps & QA Evidence
+│   ├── 01-observability/         → Golden Signals (Grafana, InfluxDB, logs)
+│   ├── 02-performance/           → k6 Load/Spike test reports
+│   ├── 03-security/              → OWASP Top 10 + Dependency Scans
+│   ├── 04-reliability/           → SLO Framework + Regression logs
+│   ├── 05-readiness/             → DORA Metrics + Prod Scorecard
+│   └── 06-feature-reports/       → Visual UI screenshots & flows
+│
 ├── tests/e2e/                  → 🧪 Playwright E2E Specs
 │
 ├── .agent/                     → 🤖 AI Context & Documentation
