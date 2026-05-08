@@ -121,6 +121,23 @@ We execute a rigorous performance and security pyramid using `k6` and `Newman`:
 
 All diagnostic output, SQL connection pool health checks, and vulnerability scans (`npm audit`, `.NET package` scans) are archived in [`evidence/QA-AUDIT-REPORT.md`](./evidence/QA-AUDIT-REPORT.md).
 
+### DevOps Evidence Structure
+
+```text
+📁 evidence/
+│
+├── 📋 QA-AUDIT-REPORT.md          ← Master DevOps Index & Exec Summary
+├── 📋 STEP10-FINAL-QA-REPORT.md   ← Detailed System Final State
+│
+└── 📂 qa-automation/
+    ├── 📂 01-observability/       ← Grafana/Docker logs & Golden Signals
+    ├── 📂 02-performance/         ← k6 raw results, load & spike tests
+    ├── 📂 03-security/            ← OWASP Top 10 + npm/.NET vulnerability scans
+    ├── 📂 04-reliability/         ← SLO/SLI Framework + Regression tracking
+    ├── 📂 05-readiness/           ← DORA Metrics + Production Readiness Scorecard
+    └── 📂 06-feature-reports/     ← UI Screenshots + Playwright feature reports
+```
+
 ## 🛠️ Tech Stack
 
 | Layer | Technology |
